@@ -1,3 +1,5 @@
+❌ Não iniciado 
+
 ## 6. Conclusão
 
 <span style="color:red">Pré-requisitos: <a href="6-Interface-Sistema.md"> Projeto da Solução</a></span>

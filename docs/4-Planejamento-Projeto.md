@@ -1,3 +1,5 @@
+❌ Não iniciado
+
 # Planejamento do Projeto
 
 > Aqui será feito o gerenciamento das tarefas de implementação do projeto.
