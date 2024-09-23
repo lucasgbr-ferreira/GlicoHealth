@@ -1,19 +1,22 @@
+✔️ Terminado
 # Informações do Projeto
-`TÍTULO DO PROJETO`  
+Glico Health 
 
 Trabalho Interdisciplinar - Aplicacões Web
 
-`CURSO`
+Sistemas de Informação
 
-`SEMESTRE`
+1° Período
 
 ## Participantes
 
 Os membros do grupo são: 
-- Fulano da Silva
-- Ciclano Albuquerque
+- Pedro Henrique Canuto
+- João Victor Soares Souza
+- Guilherme Henrique Silva Souza
+- Lucas Gabriel Ferreira Da SIlva
+- João Vitor Canuto
 
-> Inclua a lista dos membros da equipe com seus nomes completos.
 
 # Estrutura do Projeto
 
@@ -32,7 +35,7 @@ Os membros do grupo são:
 Esta pasta arquiva a documentação dos projetos.
 
 
-Na pasta `docs`, há uma subpasta `images` que deve arquivar todas as
+Na pasta docs, há uma subpasta images que deve arquivar todas as
 imagens utilizadas para a elaboração do documento.
 
 
@@ -42,10 +45,3 @@ Este diretório armazena o código fonte do projeto e adota uma hierarquia
 básica de projetos Web simples, que utilizam as tecnologias HTML, CSS e
 JavaScript.
 
-### Links Úteis:
-
-Aprenda Markdown e use-o para documentar o projeto  
-
-> [Sintaxe básica de gravação e formatação no GitHub](https://guides.github.com/features/mastering-markdown/)
-
-> [Suporte Github](https://help.github.com/pt/github/writing-on-github/getting-started-with-writing-and-formatting-on-github)

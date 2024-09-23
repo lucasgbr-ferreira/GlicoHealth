@@ -1,3 +1,5 @@
+❌ Não iniciado
+
 # Referências
 
 > Inclua todas as referências (livros, artigos, sites, etc) utilizados

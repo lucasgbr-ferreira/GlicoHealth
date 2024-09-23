@@ -1,36 +1,25 @@
-
+📝 Em execução
 # Projeto de Interface
+- De acordo com nossos pré-requisitos funcionais e análises das nossas personas, desginados na <a href="2-Especificação.md">Documentação de Especificação</a>, elaboramos nosso projeto para que o mesmo atenda todas nossas demandas primárias, otmizando ao máximo a interaface do usuário de modo que o mesmo seja capaz de desenvolver todas suas pendências dentro de nossa plataforma.
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação.md"> Documentação de Especificação</a></span>
+- Ademais, desenvolimentos envolvendo nossos pré-requisitos não funcionais ainda não foram feitos.
 
-> Apresente as principais a interface da plataforma. Discuta como ela
-> foi elaborada de forma a atender os requisitos funcionais, não
-> funcionais e histórias de usuário abordados nas [Especificações do
-> Projeto](2-Especificação.md).
+## UserFlow e Wireframes
+- Página principal do site com artigos, curiosidades, informações e opção de login ao clicar no ícone de perfil.
+![Telas](images/TelasInterfacePC/grupo%203-5.png)
 
-## User Flow
+- Página de Login e cadastro do nosso cliente, especificando o mesmo como paciente, tipo de condição ou médico.
+![Telas](images/TelasInterfacePC/grupo%203-6.png)
 
-![Exemplo de UserFlow](images/userflow.jpg)
+- Página de interação do paciente para registro alimentar e de atividades físicas, junto ao cálculo de seus índices e recomendações.
+![Telas](images/TelasInterfacePC/grupo%203-7.png)
 
-> Fluxo de usuário (User Flow) é uma técnica que permite ao desenvolvedor
-> mapear todo fluxo de telas do site ou app. Essa técnica funciona
-> para alinhar os caminhos e as possíveis ações que o usuário pode
-> fazer junto com os membros de sua equipe.
->
-> **Links Úteis**:
-> - [User Flow: O Quê É e Como Fazer?](https://medium.com/7bits/fluxo-de-usu%C3%A1rio-user-flow-o-que-%C3%A9-como-fazer-79d965872534)
-> - [User Flow vs Site Maps](http://designr.com.br/sitemap-e-user-flow-quais-as-diferencas-e-quando-usar-cada-um/)
+- Página de interação do paciente com acesso a suas colsultas agendadas e agendamento de novas consultas.
+![Telas](images/TelasInterfacePC/grupo%203-8.png)
 
+- Página de chat, tanto do paciente com o médico responsável, quanto do médico com seu paciente designado.
+![Telas](images/TelasInterfacePC/grupo%203-9.png)
 
-## Wireframes
+- Página de interação do médico para acompanhamento de seus pacientes, consultas e prontuários.
+![Telas](images/TelasInterfacePC/grupo%203-10.png)
 
-![Exemplo de Wireframe](images/wireframe-example.png)
-
-> São protótipos usados em design de interface para sugerir a
-> estrutura de um site web e seu relacionamentos entre suas
-> páginas. Um wireframe web é uma ilustração semelhante do
-> layout de elementos fundamentais na interface.
-> 
-> **Links Úteis**:
-> - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
-> - [MarvelApp](https://marvelapp.com/developers/documentation/tutorials/)

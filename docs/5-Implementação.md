@@ -1,3 +1,5 @@
+❌ Não iniciado
+
 # Projeto da Solução
 
 <span style="color:red">Pré-requisitos: <a href="4-Gestão-Configuração.md"> Ambiente e Ferramentas de Trabalho</a></span>
