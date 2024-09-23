@@ -1,4 +1,4 @@
-📝 Em execução
+✔️ Terminado
 # Apresentação
 
 ## Slides
