@@ -1,0 +1,44 @@
+<!-- HTML -->
+<div>
+    <label for="alimento">Alimento:</label>
+    <select id="alimento"></select>
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" value="1" min="1">
+    <button id="calcular">Calcular</button>
+    <p>Índice glicêmico total: <span id="indice-glicemico-total">0</span> mg/dL</p>
+    <p>Você atingiu <span id="progresso">0</span>% do seu limite diário ideal</p>
+</div>
+
+<!-- jQuery e JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    let alimentos = [];
+    const limiteDiarioIdeal = 100; // Limite diário ideal de glicose
+
+    // Carregar dados do JSON
+    $.getJSON('alimentos.json', function(data) {
+        alimentos = data;
+        // Popular o dropdown com os alimentos
+        $.each(alimentos, function(index, alimento) {
+            $('#alimento').append(`<option value="${index}">${alimento.nome}</option>`);
+        });
+    });
+
+    // Função para calcular o índice glicêmico
+    $('#calcular').click(function() {
+        const indiceSelecionado = $('#alimento').val();
+        const quantidade = parseInt($('#quantidade').val());
+
+        if (indiceSelecionado !== null && quantidade > 0) {
+            const alimento = alimentos[indiceSelecionado];
+            const indiceGlicemicoTotal = alimento.indice_glicemico * quantidade;
+
+            // Atualizar o índice glicêmico total e o progresso
+            $('#indice-glicemico-total').text(indiceGlicemicoTotal);
+            const progresso = Math.min((indiceGlicemicoTotal / limiteDiarioIdeal) * 100, 100);
+            $('#progresso').text(progresso.toFixed(0));
+        }
+    });
+});
+</script>

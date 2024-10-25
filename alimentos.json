@@ -1,0 +1,8 @@
+{
+    "alimentos": [
+        { "nome": "Ovo", "indiceGlicemico": 0 },
+        { "nome": "Pão", "indiceGlicemico": 75 },
+        { "nome": "Arroz", "indiceGlicemico": 85 },
+        { "nome": "Outro", "indiceGlicemico": 50 }
+    ]
+}
