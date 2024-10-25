@@ -118,14 +118,9 @@
                             <div class="row p-3">
                                 <div class="col-12 col-sm-6">
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="inputGroupSelect01" >Alimento</label>
+                                        <label class="input-group-text" for="inputGroupSelect01">Alimento</label>
                                         <select class="form-select" id="inputGroupSelect01">
                                             <option selected>Escolher...</option>
-                                            <option value="1">Ovo</option>
-                                            <option value="2">Pão</option>
-                                            <option value="3">Arroz</option>
-                                            <option value="3">Outro...</option>
-
                                         </select>
                                     </div>
                                     <div class="input-group mb-3">
@@ -137,7 +132,7 @@
                                 </div>
                                 <div class="col-12 col-sm-6 text-center">
                                     <h5>Índice Glicêmico</h5>
-                                    <div class="alert alert-info fs-5" role="alert">
+                                    <div class="alert alert-info fs-5" id="indice_cafe" role="alert">
                                         <b>0mg/d</b>
                                     </div>
 
@@ -180,7 +175,7 @@
                                     </div>
                                     <div class="col-12 col-sm-6 text-center">
                                         <h5>Índice Glicêmico</h5>
-                                        <div class="alert alert-info fs-5" role="alert">
+                                        <div class="alert alert-info fs-5" id="indice_almoco" role="alert">
                                             <b>0mg/d</b>
                                         </div>
                                     </div>
@@ -224,7 +219,7 @@
                                     </div>
                                     <div class="col-12 col-sm-6 text-center">
                                         <h5>Índice Glicêmico</h5>
-                                        <div class="alert alert-info fs-5" role="alert">
+                                        <div class="alert alert-info fs-5" id="indice_jantar" role="alert">
                                             <b>0mg/d</b>
                                         </div>
                                     </div>
@@ -241,11 +236,12 @@
                 </div>
                 <div class="col align-content-center text-center ps-lg-5">
                     <h1 class="pb-3 text-primary">Você atingiu</h1>
-                    <div class="progress bg-primary bg-opacity-25" role="progressbar" aria-label="Example with label"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                    <div class="progress bg-primary bg-opacity-25" id="progressBar" role="progressbar"
+                        aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
                         style="height: 40px; border-radius:4vh;">
-                        <div class="progress-bar fs-5" style="width: 25%">25%</div>
+                        <div class="progress-bar fs-5" style="width: 0%"></div>
                     </div>
+
                     <h1 class="pt-3 text-primary">De seu limite diário ideal</h1>
                 </div>
             </div>
