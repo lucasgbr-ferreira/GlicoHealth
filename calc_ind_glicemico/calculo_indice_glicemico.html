@@ -94,10 +94,10 @@
         <div class="container">
             <ul class="nav nav-underline">
                 <li class="nav-item">
-                    <a class="nav-link active fs-5" aria-current="page" href="#">Controle Glicêmico</a>
+                    <a class="nav-link active fs-5" aria-current="page" href="../calc_ind_glicemico/calculo_indice_glicemico.html">Controle Glicêmico</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black fs-5" href="#">Controle de Práticas Físicas</a>
+                    <a class="nav-link text-black fs-5" href="../calc_atv_fisicas/calculo_atividades_fisicas.html">Controle de Práticas Físicas</a>
                 </li>
             </ul>
         </div>
@@ -112,7 +112,7 @@
                                 <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapseOne">
-                                    <b>Café da Manhã&nbsp;</b> - <i> &nbsp;Alimento 1</i>
+                                    <b>Café da Manhã</b>
                                 </button>
                             </h2>
                             <div class="row p-3">
@@ -133,14 +133,14 @@
                                 <div class="col-12 col-sm-6 text-center">
                                     <h5>Índice Glicêmico</h5>
                                     <div class="alert alert-info fs-5" id="indice_cafe" role="alert">
-                                        <b>0mg/d</b>
+                                        <b>0mg/dL</b>
                                     </div>
 
                                 </div>
                                 <div class="col text-end">
-                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        data-bs-title="Adicionar Alimento">
-                                        <i class="fa-solid fa-plus fs-3"></i>
+                                    <button id="zerarIndice" type="button" class="btn" data-bs-toggle="tooltip"
+                                        data-bs-placement="left" data-bs-title="Zerar Índice Glicêmico">
+                                        <i class="fa-solid fa-trash fs-3"></i>
                                     </button>
                                 </div>
                             </div>
@@ -160,10 +160,6 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Alimento</label>
                                             <select class="form-select" id="inputGroupSelect01">
                                                 <option selected>Escolher...</option>
-                                                <option value="1">Ovo</option>
-                                                <option value="2">Pão</option>
-                                                <option value="3">Arroz</option>
-                                                <option value="3">Outro...</option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
@@ -176,13 +172,13 @@
                                     <div class="col-12 col-sm-6 text-center">
                                         <h5>Índice Glicêmico</h5>
                                         <div class="alert alert-info fs-5" id="indice_almoco" role="alert">
-                                            <b>0mg/d</b>
+                                            <b>0mg/dL</b>
                                         </div>
                                     </div>
                                     <div class="col text-end">
-                                        <button type="button" class="btn" data-bs-toggle="tooltip"
-                                            data-bs-placement="left" data-bs-title="Adicionar Alimento">
-                                            <i class="fa-solid fa-plus fs-3"></i>
+                                        <button id="zerarIndice" type="button" class="btn" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" data-bs-title="Zerar Índice Glicêmico">
+                                            <i class="fa-solid fa-trash fs-3"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -203,11 +199,6 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Alimento</label>
                                             <select class="form-select" id="inputGroupSelect01">
                                                 <option selected>Escolher...</option>
-                                                <option value="1">Ovo</option>
-                                                <option value="2">Pão</option>
-                                                <option value="3">Arroz</option>
-                                                <option value="3">Outro...</option>
-
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
@@ -220,13 +211,13 @@
                                     <div class="col-12 col-sm-6 text-center">
                                         <h5>Índice Glicêmico</h5>
                                         <div class="alert alert-info fs-5" id="indice_jantar" role="alert">
-                                            <b>0mg/d</b>
+                                            <b>0mg/dL</b>
                                         </div>
                                     </div>
                                     <div class="col text-end">
-                                        <button type="button" class="btn" data-bs-toggle="tooltip"
-                                            data-bs-placement="left" data-bs-title="Adicionar Alimento">
-                                            <i class="fa-solid fa-plus fs-3"></i>
+                                        <button id="zerarIndice" type="button" class="btn" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" data-bs-title="Zerar Índice Glicêmico">
+                                            <i class="fa-solid fa-trash fs-3"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -242,7 +233,7 @@
                         <div class="progress-bar fs-5" style="width: 0%"></div>
                     </div>
 
-                    <h1 class="pt-3 text-primary">De seu limite diário ideal</h1>
+                    <h1 class="pt-3 text-primary">de seu limite diário ideal</h1>
                 </div>
             </div>
         </div>
