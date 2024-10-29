@@ -1,0 +1,22 @@
+[
+    {
+        "nome": "Caminhada",
+        "caloriasPorMinuto": 5
+    },
+    {
+        "nome": "Corrida",
+        "caloriasPorMinuto": 10
+    },
+    {
+        "nome": "Ciclismo",
+        "caloriasPorMinuto": 8
+    },
+    {
+        "nome": "Natação",
+        "caloriasPorMinuto": 12
+    },
+    {
+        "nome": "Yoga",
+        "caloriasPorMinuto": 4
+    }
+]
