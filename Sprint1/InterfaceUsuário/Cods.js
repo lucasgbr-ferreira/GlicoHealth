@@ -138,7 +138,7 @@ function alterarmodal(username) {
     } else {
         modalBody.innerHTML = `
             <h2 class="text-center text-danger">Erro ao carregar informações!</h2>
-            <p class="text-muted text-center">Usuário não encontrado no banco de dados.</p>`;
+            <p class="text-danger text-center">Usuário não encontrado no banco de dados.</p>`;
     }
 }
 // Ocultador de senha
