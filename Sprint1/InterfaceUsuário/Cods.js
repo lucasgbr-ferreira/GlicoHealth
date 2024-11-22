@@ -142,17 +142,28 @@ function alterarmodal(username) {
     }
 }
 // Ocultador de senha
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
     if (event.target.id === "togglePassword") {
         const passwordField = document.getElementById("passwordField");
-        const user = getDatabase().find(user => user.username === loggedUsername);
+        const database = getDatabase();
+        const loggedUsername = localStorage.getItem("username");
+    
+        if (!loggedUsername) {
+            console.error("Nenhum usuário está logado.");
+            return;
+        }
+        const user = database.find(user => user.username === loggedUsername);
+        
+        if (!user) {
+            console.error("Usuário logado não encontrado no banco de dados.");
+            return;
+        }
 
+        // Alterarando a visibilidade da senha
         if (passwordField.textContent === "••••••••") {
-            
             passwordField.textContent = user.password;
             event.target.textContent = "Ocultar";
         } else {
-            
             passwordField.textContent = "••••••••";
             event.target.textContent = "Mostrar";
         }
@@ -208,7 +219,7 @@ function updateThemeStyles() {
         document.getElementById("exampleModalLabel").style.color = "white";
         document.getElementById("modalBody").style.backgroundColor = "#333";
         document.getElementById("modalFooter").style.backgroundColor = "#333";
-
+        
         const navItems = document.querySelectorAll('#ListaNav .nav-link');
         navItems.forEach(item => {
             item.style.color = "white";
@@ -381,16 +392,14 @@ document.getElementById("profilePicture").addEventListener("change", function(ev
         const reader = new FileReader();
 
         reader.onload = function(e) {
-            // Atualiza a imagem no offcanvas
+            // Atualizando a imagem no offcanvas
             document.getElementById("currentProfilePicture").src = e.target.result;
-
-            // Atualiza a imagem no modal
             const modalProfilePicture = document.getElementById("userProfilePicture");
             if (modalProfilePicture) {
                 modalProfilePicture.src = e.target.result;
             }
 
-            // Salva a imagem no localStorage
+            // Salvando a imagem no localStorage
             const loggedInUsername = localStorage.getItem("username");
             if (loggedInUsername) {
                 const database = localStorage.getItem("userDatabase");
