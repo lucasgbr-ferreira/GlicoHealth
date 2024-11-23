@@ -268,24 +268,33 @@ document.querySelector('#theme-switch').addEventListener('click', toggleTheme);
 //Controlador de acesso {SPRINT2}
 function showUsersInDOM() {
     const database = getDatabase();
-    const userList = document.getElementById("userList");
+    const userCardsContainer = document.getElementById("userCardsContainer");
 
-    userList.innerHTML = "";
+    userCardsContainer.innerHTML = "";
 
     if (database.length === 0) {
-        userList.innerHTML = "<li>Nenhum usuário registrado.</li>";
+        userCardsContainer.innerHTML = "<p class='text-center'>Nenhum usuário registrado.</p>";
     } else {
         database.forEach((user, index) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `Usuário ${index + 1}: ${user.username}`;
+            const card = document.createElement("div");
+            card.className = "col-md-4";
+            document.getElementById("toggleUsersButton").innerHTML ="Atualizar usuários"
 
-            // Botão de remoção
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Remover";
-            deleteButton.style.marginLeft = "10px";
-            deleteButton.onclick = () => removeUser(index);
-            listItem.appendChild(deleteButton);
-            userList.appendChild(listItem);
+            card.innerHTML = `
+            <div class="card d-flex flex-column" style="height: 100%; border-radius: 20px; max-width: 100%;">
+                <img src="${user.profilePicture || 'https://via.placeholder.com/100'}" alt="Foto do Usuário" style="max-width: 100px; height: 100px; object-fit: cover;" class="rounded-circle mb-2 mx-auto">
+                <h5 class="text-center">${user.username}</h5>
+                <p class="text-center"><strong>Nome:</strong> ${user.name || "Não informado"}</p>
+                <p class="text-center"><strong>Email:</strong> ${user.email || "Não informado"}</p>
+                <p class="text-center"><strong>Telefone:</strong> ${user.phone || "Não informado"}</p>
+                <p class="text-center"><strong>Senha:</strong> ${user.password || "Não informado"}</p>
+                <div class="d-flex justify-content-center mt-auto">
+                    <button class="btn btn-danger btn-sm" onclick="removeUser(${index})">Remover</button>
+                </div>
+            </div>
+        `;
+
+            userCardsContainer.appendChild(card);
         });
     }
 }
@@ -293,15 +302,25 @@ function showUsersInDOM() {
 function removeUser(index) {
     const database = getDatabase();
 
-    // Alerta de confirmação
     const confirmDelete = confirm(`Deseja realmente remover o usuário ${database[index].username}?`);
     if (!confirmDelete) return;
 
-    // Remove e atualiza
     database.splice(index, 1);
     saveDatabase(database);
     showUsersInDOM();
 }
+function showToastById() {
+    const toastElement = document.getElementById("updateToast");
+    if (toastElement) {
+        const toast = new bootstrap.Toast(toastElement, {
+            delay: 7000 
+        });
+        toast.show();
+    } else {
+        console.error("Toast não encontrado!");
+    }
+}
+
 
 // Editor de informações {SPRINT2}
 document.getElementById("profileEditForm").addEventListener("submit", function (event) {
@@ -416,3 +435,4 @@ document.getElementById("profilePicture").addEventListener("change", function(ev
         reader.readAsDataURL(file);
     }
 });
+    
