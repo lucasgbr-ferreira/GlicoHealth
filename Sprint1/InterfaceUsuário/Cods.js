@@ -39,14 +39,13 @@ function register() {
 
     if (username && password) {
         const database = getDatabase();
-
-        // Verifica existencia
+        
         const userExists = database.some(user => user.username === username);
         if (userExists) {
             alert("Usuário já registrado!");
             return;
         }
-        // Adiciona novo usuário
+        // Adicionando novo usuário
         database.push({ username, password });
         saveDatabase(database);
         console.log("Usuário registrado:", { username, password });
@@ -265,7 +264,7 @@ function updateThemeStyles() {
 }
 document.querySelector('#theme-switch').addEventListener('click', toggleTheme);
 
-//Controlador de acesso {SPRINT2}
+//Controlador de acesso: Usuários Pacientes {SPRINT2}
 function showUsersInDOM() {
     const database = getDatabase();
     const userCardsContainer = document.getElementById("userCardsContainer");
@@ -435,4 +434,3 @@ document.getElementById("profilePicture").addEventListener("change", function(ev
         reader.readAsDataURL(file);
     }
 });
-    
