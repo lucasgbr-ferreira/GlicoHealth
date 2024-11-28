@@ -18,5 +18,21 @@
     {
         "nome": "Yoga",
         "caloriasPorMinuto": 4
+    },
+    {
+        "nome": "Pular Corda",
+        "caloriasPorMinuto": 13
+    },
+    {
+        "nome": "Musculação",
+        "caloriasPorMinuto": 7
+    },
+    {
+        "nome": "Dança",
+        "caloriasPorMinuto": 6
+    },
+    {
+        "nome": "Futebol",
+        "caloriasPorMinuto": 11
     }
 ]

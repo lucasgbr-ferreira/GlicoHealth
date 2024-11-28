@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const limiteDiarioIdeal = 500; // Calorias ideais por dia
+    const limiteDiarioIdeal = 180;
     let totalCaloriasQueimadas = parseFloat(localStorage.getItem('totalCaloriasQueimadas')) || 0;
 
-    // Função para atualizar a barra de progresso
     function atualizarBarraProgresso() {
         const progresso = (totalCaloriasQueimadas / limiteDiarioIdeal) * 100;
         const progressBar = document.querySelector('.progress-bar');
@@ -10,12 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
         progressBar.textContent = `${Math.min(progresso, 100).toFixed(2)}%`;
     }
 
-    // Carregar atividades do arquivo JSON e preencher o select
     fetch('atividades_fisicas.json')
         .then(response => response.json())
         .then(data => {
             const selects = document.querySelectorAll('.form-select');
-            selects.forEach(select => {
+            selects.forEach((select, index) => {
                 data.forEach(atividade => {
                     const option = document.createElement('option');
                     option.value = atividade.nome;
@@ -23,61 +21,65 @@ document.addEventListener("DOMContentLoaded", () => {
                     option.textContent = atividade.nome;
                     select.appendChild(option);
                 });
+
+                const savedCalorias = parseFloat(localStorage.getItem(`caloriasQueimadasAtividade${index}`)) || 0;
+                const caloriasDiv = select.closest('.row').parentElement.querySelector('.alert');
+                caloriasDiv.innerHTML = `<b>${savedCalorias.toFixed(2)} Kcal</b>`;
             });
         })
         .catch(error => console.error('Erro ao carregar atividades:', error));
 
-    // Função para calcular calorias queimadas
-    function calcularCaloriasQueimadas(select, input, caloriasDiv) {
+    function calcularCaloriasQueimadas(select, input, caloriasDiv, index) {
         const atividade = select.options[select.selectedIndex];
-        const duracao = parseFloat(input.value);
+        const tempo = parseFloat(input.value);
         const caloriasPorMinuto = parseFloat(atividade.dataset.caloriasPorMinuto);
 
-        if (!duracao || !caloriasPorMinuto) {
-            alert("Selecione uma atividade e insira uma duração válida.");
+        if (!tempo || !caloriasPorMinuto) {
+            alert("Selecione uma atividade e insira um tempo válido.");
             return;
         }
 
-        const caloriasQueimadas = caloriasPorMinuto * duracao;
+        const resultado = caloriasPorMinuto * tempo;
         const caloriasAtuais = parseFloat(caloriasDiv.textContent) || 0;
-        const novasCaloriasQueimadas = caloriasAtuais + caloriasQueimadas;
+        const novasCaloriasQueimadas = caloriasAtuais + resultado;
         caloriasDiv.innerHTML = `<b>${novasCaloriasQueimadas.toFixed(2)} Kcal</b>`;
-        
-        totalCaloriasQueimadas += caloriasQueimadas;
+
+        totalCaloriasQueimadas += resultado;
         localStorage.setItem('totalCaloriasQueimadas', totalCaloriasQueimadas);
+        localStorage.setItem(`caloriasQueimadasAtividade${index}`, novasCaloriasQueimadas);
+
         atualizarBarraProgresso();
     }
 
-    // Associar eventos ao botão de calcular
-    document.querySelectorAll('.btn-outline-primary').forEach(button => {
+    document.querySelectorAll('.btn-outline-primary').forEach((button, index) => {
         button.addEventListener('click', () => {
             const inputGroup = button.closest('.row');
             const select = inputGroup.querySelector('.form-select');
             const input = inputGroup.querySelector('input[type="text"]');
             const caloriasDiv = inputGroup.parentElement.querySelector('.alert');
 
-            calcularCaloriasQueimadas(select, input, caloriasDiv);
+            calcularCaloriasQueimadas(select, input, caloriasDiv, index);
         });
     });
 
-    // Função para zerar calorias queimadas
-    function zerarCaloriasQueimadas(caloriasDiv) {
+    function zerarCaloriasQueimadas(caloriasDiv, index) {
         const caloriasAtuais = parseFloat(caloriasDiv.textContent) || 0;
         totalCaloriasQueimadas -= caloriasAtuais;
         localStorage.setItem('totalCaloriasQueimadas', totalCaloriasQueimadas);
+
+        localStorage.setItem(`caloriasQueimadasAtividade${index}`, 0);
         caloriasDiv.innerHTML = `<b>0 Kcal</b>`;
+
         atualizarBarraProgresso();
     }
 
-    // Associar eventos ao botão de zerar
-    document.querySelectorAll('#zerarIndice').forEach(button => {
+    document.querySelectorAll('#zerarIndice').forEach((button, index) => {
         button.addEventListener('click', () => {
             const inputGroup = button.closest('.row');
             const caloriasDiv = inputGroup.parentElement.querySelector('.alert');
-            zerarCaloriasQueimadas(caloriasDiv);
+            zerarCaloriasQueimadas(caloriasDiv, index);
         });
     });
 
-    // Atualizar barra de progresso ao carregar a página
     atualizarBarraProgresso();
 });

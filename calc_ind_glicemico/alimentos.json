@@ -18,5 +18,21 @@
     {
         "nome": "Arroz",
         "indiceGlicemico": 73
+    },
+    {
+        "nome": "Batata Doce",
+        "indiceGlicemico": 44
+    },
+    {
+        "nome": "Aveia",
+        "indiceGlicemico": 55
+    },
+    {
+        "nome": "Maçã",
+        "indiceGlicemico": 36
+    },
+    {
+        "nome": "Laranja",
+        "indiceGlicemico": 43
     }
 ]
