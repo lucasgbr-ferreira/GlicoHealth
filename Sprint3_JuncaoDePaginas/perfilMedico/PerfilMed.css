@@ -1,0 +1,137 @@
+
+/* Header */
+#navbar{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(183, 220, 253) !important;
+    color: rgb(183, 220, 253) !important;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 4px black; 
+}
+
+#Linha1Nav{
+    flex: auto;
+    justify-content: space-between;
+}
+.glico-health {
+    text-shadow: 0px 1px 1px black;
+}
+
+
+/* Body */
+body {
+    font-family: monospace; /* Mudando fonte */
+    height: 100%; /* ALtura do header */
+    overflow: hidden; /* para o texto não ultrapassar os limites do container */
+}
+
+
+/* Main Containers */
+.main-container {
+    margin-top: 15px; /* Espaçamento dos containers */
+    margin-bottom: 15px;
+    min-height: 520px; /* ALtura do COntainer */
+}
+
+/* Containers */
+.box {
+    border-radius: 15px; /* Aumentar o arredondamento */
+    padding: 20px; /* Aumentar o espaçamento interno */
+    border: 3px solid #4a90e2; /* Usar a cor de destaque */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); /* Sombra mais suave */
+    background-color: aliceblue; /* Fundo branco para os cartões */
+    overflow: hidden; /* para o texto não ultrapassar os limites do container */
+}    
+
+/* Botões de opcão */
+.bt-opcao {
+    background-color: rgb(100, 149, 255); /* Definindo a cor do botão para a mesma do header */
+    width: 100%; /* Definindo tamanho mínimo para os botões*/
+    height: 50px; /* Definindo altura mínima para os botões */
+    box-shadow: 0px 2px 4px black; /* sombra */
+    overflow: hidden; /* para o texto não ultrapassar os limites do container */
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: all 0.3s; /* Transição suave */
+}
+
+/* Botões de opção quando passa o mouse encima */
+.bt-opcao:hover {
+    background-color: rgb(72, 130, 255); /* Mudando a cor quando passa o mouse encima */
+    transition: 0.4s; /* Transição de cor suave quando passa o mouse */
+}
+
+/* Informações dentro da box de perfil */
+.perfil-info {
+    border: 3px solid #4a90e2; /* borda */
+    border-radius: 10px; /* borda arredondada */
+    padding: 15px; /* espaçamento */
+    background-color: rgb(100, 149, 255); /* Fundo mais claro */
+    margin-bottom: 20px; /* Espaçamento entre as seções */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); /* sombra */
+}
+
+.perfil-info:hover {
+    background-color: rgb(72, 130, 255); /* Mudando a cor quando passa o mouse encima */
+    transition: 0.4s; /* Transição de cor suave quando passa o mouse */
+}
+
+/* Footer */
+.footer {
+    background-color: aliceblue; /* fundo */
+    height: 20px; /* altura do footer */
+    width: 100%; /* largura total */
+    position: fixed; /* fixo na parte inferior da página */
+    bottom: 0; /* alinhando parte inferior */
+    left: 0; /* alinha na esquerda */
+    text-align: center; /* centraliza o conteúdo */
+    line-height: 60px; /* centraliza verticalmente o texto */
+    box-shadow: 0px -2px 4px black; /*sombra */
+}
+
+/* Garante que o layout permita scroll */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* Evita que contêineres extrapolem o limite da tela */
+.container {
+    max-width: 100%;
+}
+
+/* Imagens e botões responsivos */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ajusta a box para evitar problemas de layout */
+.box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaçamento no rodapé */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+
