@@ -25,35 +25,14 @@ function toggleSection() {
     loginSection.style.display = loginSection.style.display === "none" ? "block" : "none";
     registerSection.style.display = registerSection.style.display === "none" ? "block" : "none";
 }
-
 function getDatabase() {
-    return fetch('http://localhost:3000/api/db')  // Requisição GET para buscar dados
-        .then(response => response.json())
-        .catch(error => {
-            console.error('Erro ao buscar dados:', error);
-            return [];  // Retorna um array vazio em caso de erro
-        });
+    const database = localStorage.getItem("userDatabase");
+    return database ? JSON.parse(database) : [];
 }
-
 
 function saveDatabase(database) {
-    fetch('http://localhost:3000/api/db', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(database),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Dados salvos com sucesso!', data);
-    })
-    .catch(error => {
-        console.error('Erro ao salvar dados:', error);
-    });
+    localStorage.setItem("userDatabase", JSON.stringify(database));
 }
-
-
 function register() {
     const username = document.getElementById("registerUsername").value;
     const password = document.getElementById("registerPassword").value;
