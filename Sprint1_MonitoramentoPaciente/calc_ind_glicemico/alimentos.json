@@ -1,0 +1,38 @@
+[
+    {
+        "nome": "Pão Branco",
+        "indiceGlicemico": 75
+    },
+    {
+        "nome": "Pão Integral",
+        "indiceGlicemico": 74
+    },
+    {
+        "nome": "Lentilhas",
+        "indiceGlicemico": 29
+    },
+    {
+        "nome": "Iogurte Natural",
+        "indiceGlicemico": 75
+    },
+    {
+        "nome": "Arroz",
+        "indiceGlicemico": 73
+    },
+    {
+        "nome": "Batata Doce",
+        "indiceGlicemico": 44
+    },
+    {
+        "nome": "Aveia",
+        "indiceGlicemico": 55
+    },
+    {
+        "nome": "Maçã",
+        "indiceGlicemico": 36
+    },
+    {
+        "nome": "Laranja",
+        "indiceGlicemico": 43
+    }
+]

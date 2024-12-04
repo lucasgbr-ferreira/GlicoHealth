@@ -1,0 +1,51 @@
+#Nav{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(228, 247, 255, 0.829) !important;
+    color: #ffffff;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#Linha1Nav{
+    flex: auto;
+    justify-content: space-between;
+}
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+body {
+    background-color: #ffffff;
+    color: #121212;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.item {
+    padding: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.popup {
+    display: none; 
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+.close {
+    cursor: pointer;
+    float: right;
+}
+
+
+
