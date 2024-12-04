@@ -79,7 +79,7 @@ function login() {
     }
 }
 function logado(username) {
-    document.getElementById("botaologin").src = "Imagens/User-logado.png";
+    document.getElementById("botaologin").src = "/Sprint1/InterfaceUsuário/Imagens/User-logado.png";
     document.getElementById("botaofechar").addEventListener("click", logout);
     alterarmodal(username); 
 }
@@ -90,10 +90,10 @@ function logout() {
     localStorage.removeItem("loggedIn"); 
     localStorage.removeItem("username"); 
 
-    document.getElementById("botaologin").src = "Imagens/User.png"; 
+    document.getElementById("botaologin").src = "/Sprint1/InterfaceUsuário/Imagens/User.png"; 
     document.getElementById("botaofechar").innerText = "Login";
 
-    window.location.href = "Index.html"; 
+    window.location.href = "/Sprint1/InterfaceUsuário/Index.html"; 
 }
 
 // Coreções Modal
@@ -211,7 +211,7 @@ function updateThemeStyles() {
     const isDarkMode = document.body.classList.contains('dark-mode');
     if (isDarkMode) {
         // Tema Escuro
-        document.getElementById("Logo-GilcoHealth").src = 'Imagens/LogoHeader.png';
+        document.getElementById("Logo-GilcoHealth").src = '/Sprint1/InterfaceUsuário/Imagens/Logo-GilcoHealth.png';
         document.getElementById("Nav").style.backgroundColor = "#333";
         document.getElementById("offcanvasWithBothOptions").className = "offcanvas offcanvas-start text-bg-dark w-50";
         document.getElementById("modalHeader").style.backgroundColor = "#333";
@@ -237,7 +237,7 @@ function updateThemeStyles() {
         document.getElementById("AlertaTemaH").style.color = "white";
     } else {
         // Tema Claro
-        document.getElementById("Logo-GilcoHealth").src = 'Imagens/LogoHeader.png';
+        document.getElementById("Logo-GilcoHealth").src = '/Sprint1/InterfaceUsuário/Imagens/Logo-GilcoHealth.png';
         document.getElementById("Nav").style.backgroundColor = "aliceblue";
         document.getElementById("offcanvasWithBothOptions").className = "offcanvas offcanvas-start w-50";
         document.getElementById("modalHeader").style.backgroundColor = "white";
