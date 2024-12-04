@@ -1,0 +1,173 @@
+{
+  "pacientes": [
+    {
+      "id": "477d",
+      "nome": "André Luiz Oliveira Santos",
+      "nascimento": "2000-09-21",
+      "sexo": "masculino",
+      "altura": "180",
+      "peso": "80",
+      "dataConsulta": "2024-11-20",
+      "limites": {
+        "carboidratos": "120",
+        "caloriasQueimadas": "90",
+        "atividadeMinima": "Tipo 1"
+      },
+      "glicemias": {
+        "jejum": "12",
+        "posPrandial": "12",
+        "noturna": "21"
+      },
+      "alimentosRestritos": "",
+      "observacoes": {
+        "gerais": "",
+        "medicamentos": "",
+        "recomendacoes": ""
+      }
+    },
+    {
+      "id": "60ce",
+      "nome": "Maria Fernanda da Silva",
+      "nascimento": "1999-12-04",
+      "sexo": "feminino",
+      "altura": "160",
+      "peso": "50",
+      "dataConsulta": "2024-11-21",
+      "limites": {
+        "carboidratos": "120",
+        "caloriasQueimadas": "90",
+        "atividadeMinima": "Tipo 1"
+      },
+      "glicemias": {
+        "jejum": "12",
+        "posPrandial": "21",
+        "noturna": "21"
+      },
+      "alimentosRestritos": "",
+      "observacoes": {
+        "gerais": "",
+        "medicamentos": "",
+        "recomendacoes": ""
+      }
+    },
+    {
+      "id": "08e0",
+      "nome": "André Luiz Oliveira Santos",
+      "nascimento": "2024-10-28",
+      "sexo": "feminino",
+      "altura": "21",
+      "peso": "21",
+      "dataConsulta": "2024-11-05",
+      "limites": {
+        "carboidratos": "21",
+        "caloriasQueimadas": "21",
+        "atividadeMinima": "21"
+      },
+      "glicemias": {
+        "jejum": "21",
+        "posPrandial": "21",
+        "noturna": "21"
+      },
+      "alimentosRestritos": "da",
+      "observacoes": {
+        "gerais": "das",
+        "medicamentos": "das",
+        "recomendacoes": "das"
+      }
+    }
+  ],
+  "atividadesFisicas": [
+    {
+      "nome": "Caminhada",
+      "caloriasPorMinuto": 5,
+      "id": "1ccd"
+    },
+    {
+      "nome": "Corrida",
+      "caloriasPorMinuto": 10,
+      "id": "0cd0"
+    },
+    {
+      "nome": "Ciclismo",
+      "caloriasPorMinuto": 8,
+      "id": "870c"
+    },
+    {
+      "nome": "Natação",
+      "caloriasPorMinuto": 12,
+      "id": "558b"
+    },
+    {
+      "nome": "Yoga",
+      "caloriasPorMinuto": 4,
+      "id": "f6e6"
+    },
+    {
+      "nome": "Pular Corda",
+      "caloriasPorMinuto": 13,
+      "id": "0323"
+    },
+    {
+      "nome": "Musculação",
+      "caloriasPorMinuto": 7,
+      "id": "d766"
+    },
+    {
+      "nome": "Dança",
+      "caloriasPorMinuto": 6,
+      "id": "8cac"
+    },
+    {
+      "nome": "Futebol",
+      "caloriasPorMinuto": 11,
+      "id": "7d2a"
+    }
+  ],
+  "alimentos": [
+    {
+      "nome": "Pão Branco",
+      "indiceGlicemico": 75,
+      "id": "20ee"
+    },
+    {
+      "nome": "Pão Integral",
+      "indiceGlicemico": 74,
+      "id": "69b9"
+    },
+    {
+      "nome": "Lentilhas",
+      "indiceGlicemico": 29,
+      "id": "58bc"
+    },
+    {
+      "nome": "Iogurte Natural",
+      "indiceGlicemico": 75,
+      "id": "bf09"
+    },
+    {
+      "nome": "Arroz",
+      "indiceGlicemico": 73,
+      "id": "b109"
+    },
+    {
+      "nome": "Batata Doce",
+      "indiceGlicemico": 44,
+      "id": "c050"
+    },
+    {
+      "nome": "Aveia",
+      "indiceGlicemico": 55,
+      "id": "f0b0"
+    },
+    {
+      "nome": "Maçã",
+      "indiceGlicemico": 36,
+      "id": "5678"
+    },
+    {
+      "nome": "Laranja",
+      "indiceGlicemico": 43,
+      "id": "343e"
+    }
+  ]
+}
