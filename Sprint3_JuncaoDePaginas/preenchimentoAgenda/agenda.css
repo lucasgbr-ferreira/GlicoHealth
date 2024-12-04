@@ -1,0 +1,154 @@
+header {
+    width: 100%;
+    box-sizing: border-box;
+}
+#Nav{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background-color: aliceblue;
+    color: #ffffff;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#Linha1Nav{
+    flex: auto;
+    justify-content: space-between;
+}
+aside{
+    background-color: aliceblue;
+    max-width: 20%;
+    max-height: 100%;
+}
+
+.title {
+    padding: 15px;
+}
+.imgicon {
+    width: 50%;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+.imgcalendar {
+    
+    width: 100%;
+    
+}
+
+.popup{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(7px);
+    gap: 2px;
+    inset: 0;
+}
+.botaoagendar {
+    padding: 5px;
+    margin-top: 1%;
+    border-radius: 5px;
+    background-color: rgb(168, 221, 253);
+    color: black;
+    margin-left: 35%;
+    width: 20%;
+    border: none;
+    
+}
+p {
+    padding: 0;
+    margin: 0;
+    margin-top: 15px;
+}
+.primeirop {
+    padding: 0;
+    margin: 0;
+}
+
+
+.popup_container{
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(168, 221, 253);
+    border: px solid #4CAF50;
+    padding: 30px;
+    width: 700px;
+    color: black;
+    border-radius: 5%;
+}
+input{
+    border-radius: 10px;
+    height: 35px;
+    background-color:white;
+    color: black;
+    padding: 10px;
+    margin: 0%;
+    border: none;
+}
+select{
+    border-radius: 10px;
+    height: 35px;
+    background-color:white;
+    color: black;
+    padding: 5px;
+    margin: 0%;
+    border: none;
+}
+.botao_fechar{
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: rgb(52, 175, 252); 
+    border: none;
+}
+.btconfirma{
+  padding: 5px;
+  margin-top: 30px;
+  border-radius: 5px;
+  background-color: white;
+  color: rgb(52, 175, 252);
+  border: none;
+}
+#segundalinha .col-2 {
+    padding: 0;
+    margin: 0 auto;
+    justify-content: center;
+    
+    
+}
+.consultatitle {
+    margin-top: 12px;
+}
+
+.container-cards {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 16px; 
+    justify-content: center; 
+}
+
+.card {
+    flex: 1 1 calc(100% - 32px); 
+    max-width: 300px; 
+    min-width: 200px; 
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 16px); 
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; 
+    }
+}
+
+
+
