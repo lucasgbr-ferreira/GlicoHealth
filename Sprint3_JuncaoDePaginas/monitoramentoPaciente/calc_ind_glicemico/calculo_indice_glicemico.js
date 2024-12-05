@@ -137,6 +137,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Função para exibir o toast
+function showToast(message) {
+    const toastMessage = document.getElementById("toastMessage");
+    toastMessage.textContent = message;
+
+    const toastElement = new bootstrap.Toast(document.getElementById("loginToast"));
+    toastElement.show();
+}
+
 function checkLogin() {
     const loggedIn = localStorage.getItem("loggedIn");
 
@@ -144,10 +153,10 @@ function checkLogin() {
     if (!loggedIn) {
         window.location.href = "../../InterfaceUsuário/Index.html";
     } else {
-        // Se o usuário estiver logado, exibe um alerta informando que ele está logado
+        // Se o usuário estiver logado, exibe um toast informando o nome do usuário
         const username = localStorage.getItem("username");
         if (username) {
-            alert(`Você está logado como ${username}`);  // Exibe o alerta
+            showToast(`Exibibindo cálculo glicêmico para: ${username}`);  // Exibe o toast
             displayWelcomeMessage(username);  // Exibe a mensagem de boas-vindas
         }
     }
