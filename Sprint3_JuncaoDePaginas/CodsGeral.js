@@ -367,7 +367,7 @@ function showUsersInDOM() {
                             <p class="text-center"><strong>Email:</strong> ${user.email || "Não informado"}</p>
                             <p class="text-center"><strong>Telefone:</strong> ${user.phone || "Não informado"}</p>
                             <p class="text-center"><strong>Senha:</strong> ${user.password || "Não informado"}</p>
-                            <p class="text-center"><strong>Senha:</strong> ${user.cpf || "Não informado"}</p>
+                            <p class="text-center"><strong>CPF:</strong> ${user.cpf || "Não informado"}</p>
                             <div class="d-flex justify-content-center mt-auto">
                                 <button class="btn btn-danger btn-sm" onclick="removeUser('${user.id}')">Remover</button>
                             </div>
