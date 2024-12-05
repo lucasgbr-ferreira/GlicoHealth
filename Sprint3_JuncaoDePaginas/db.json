@@ -123,38 +123,7 @@
       "profilePicture": ""
     },
     {
-      "id": "8f2e",
-      "username": "33",
-      "password": "33",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "cpf": ""
-    },
-    {
-      "id": "c497",
-      "username": "33",
-      "password": "33",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
       "id": "4c23",
-      "username": "33",
-      "password": "33",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "bf7e",
       "username": "33",
       "password": "33",
       "role": "paciente",
@@ -172,6 +141,17 @@
       "email": "",
       "phone": "",
       "profilePicture": ""
+    },
+    {
+      "id": "1d23",
+      "username": "gustin3",
+      "password": "1234",
+      "role": "paciente",
+      "name": "",
+      "email": "",
+      "phone": "",
+      "profilePicture": "",
+      "cpf": ""
     }
   ],
   "atividadesFisicas": [

@@ -49,38 +49,58 @@ function register() {
         return;
     }
 
-    // Definindo o novo usuário como paciente
-    const newUser = {
-        username,
-        password,
-        role: "paciente",  // Todos são pacientes
-        name: "",
-        email: "",
-        phone: "",
-        profilePicture: ""
-    };
+    // Buscar usuários existentes no servidor para verificar se o username já existe
+    fetch('http://localhost:3000/pacientes')
+        .then(response => response.json())
+        .then(users => {
+            // Verifica se já existe um usuário com o mesmo username
+            const userExists = users.some(user => user.username === username);
 
-    // Enviar dados para o servidor JSON, agora para a chave "pacientes"
-    fetch('http://localhost:3000/pacientes', { // Alteração de "users" para "pacientes"
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Usuário registrado:', data);
-        alert("Cadastro realizado com sucesso!");
-        // Limpar campos ou fechar o modal se necessário
-        document.getElementById("registerUsername").value = '';
-        document.getElementById("registerPassword").value = '';
-    })
-    .catch(error => {
-        console.error('Erro ao registrar usuário:', error);
-        alert("Ocorreu um erro ao registrar o usuário.");
-    });
+            if (userExists) {
+                // Se o username já existe, exibe uma mensagem de erro
+                alert("Esse username já está em uso. Tente outro.");
+                return;  // Impede o registro
+            }
+
+            // Definindo o novo usuário
+            const newUser = {
+                username,
+                password,
+                role: "paciente",  // Todos são pacientes
+                name: "",
+                email: "",
+                phone: "",
+                profilePicture: "",
+                cpf: ""
+            };
+
+            // Enviar dados para o servidor JSON
+            fetch('http://localhost:3000/pacientes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuário registrado:', data);
+                alert("Cadastro realizado com sucesso!");
+                // Limpar campos após o sucesso do registro
+                document.getElementById("registerUsername").value = '';
+                document.getElementById("registerPassword").value = '';
+            })
+            .catch(error => {
+                console.error('Erro ao registrar usuário:', error);
+                alert("Ocorreu um erro ao registrar o usuário.");
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar usuários:', error);
+            alert("Erro ao verificar disponibilidade de username.");
+        });
 }
+
 
 function login() {
     const username = document.getElementById("loginUsername").value;
