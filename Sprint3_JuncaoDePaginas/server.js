@@ -1,57 +1,51 @@
 const express = require('express');
-const fs = require('fs');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
+const dbFile = path.join(__dirname, 'db.json');
 
-app.use(cors());  // Configura o CORS
-app.use(bodyParser.json());  // Configura o middleware para aceitar JSON
+app.use(bodyParser.json());
 
-// Endpoint GET para retornar os dados
-app.get('/api/db', (req, res) => {
-    fs.readFile('db.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).send('Erro ao ler o banco de dados.');
-        }
-        res.json(JSON.parse(data));  // Retorna o JSON do arquivo db.json
-    });
+// Função para carregar o banco de dados
+const getDatabase = () => {
+    if (!fs.existsSync(dbFile)) {
+        fs.writeFileSync(dbFile, JSON.stringify({ users: [] }, null, 2));
+    }
+    return JSON.parse(fs.readFileSync(dbFile, 'utf8'));
+};
+
+// Função para salvar o banco de dados
+const saveDatabase = (data) => {
+    fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
+};
+
+// Endpoint para registrar um novo usuário
+app.post('/users', (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Usuário e senha são obrigatórios.' });
+    }
+
+    const db = getDatabase();
+    const userExists = db.users.some(user => user.username === username);
+
+    if (userExists) {
+        return res.status(400).json({ error: 'Usuário já existe.' });
+    }
+
+    // Adiciona o novo usuário
+    db.users.push({ username, password });
+    saveDatabase(db);
+
+    res.status(201).json({ message: 'Usuário registrado com sucesso!', username });
 });
 
-// Endpoint POST para salvar dados
-app.post('/api/db', (req, res) => {
-    const newData = req.body;
-
-    // Lê o arquivo db.json e manipula os dados
-    fs.readFile('db.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).send('Erro ao ler o banco de dados.');
-        }
-
-        let db = JSON.parse(data);  // Converte os dados lidos em JSON
-
-        // Adiciona os dados recebidos ao array de "Pacientes"
-        if (!db.Usuários) {
-            db.Usuários = {};  // Caso não exista a chave "Usuários", cria uma
-        }
-        if (!db.Usuários.Pacientes) {
-            db.Usuários.Pacientes = [];  // Caso não exista a chave "Pacientes", cria um array vazio
-        }
-
-        // Adiciona os novos dados ao array de "Pacientes"
-        db.Usuários.Pacientes.push(newData);
-
-        // Salva os dados atualizados no arquivo db.json
-        fs.writeFile('db.json', JSON.stringify(db, null, 2), (err) => {
-            if (err) {
-                return res.status(500).send('Erro ao salvar os dados.');
-            }
-            res.status(200).send('Dados salvos com sucesso!');
-        });
-    });
-});
-
+// Inicia o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
