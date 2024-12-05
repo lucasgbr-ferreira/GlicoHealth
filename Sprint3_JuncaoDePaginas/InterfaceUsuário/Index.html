@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UsuárioPaciente</title>
+    <title>UsuárioPaciente(Desenvolvido)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="Cods.js" defer></script>
+    <script src="../CodsGeral.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -21,7 +21,7 @@
                 <nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0">
                     <div class="container-fluid" id="Nav">
                         <div class="col-md-8 d-flex" id="Linha1Nav">
-                            <a class="navbar-brand" href="Index.html"><img src="images/Logo-GilcoHealth.png" id="Logo-GilcoHealth" style="max-width: 70px;"></a>
+                            <a class="navbar-brand" href="Index.html"><img src="Imagens/LogoHeader.png" id="Logo-GilcoHealth" style="max-width: 70px;"></a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-md-4 d-flex justify-content-end align-items-center p-2">
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 70px;">
-                                <img src="images/User-nlogin.png" id="botaologin" style="width: 100%;">
+                                <img src="Imagens/User-nlogin.png" id="botaologin" style="width: 100%;">
                             </button>
                         
                             <!-- Mudança de tema -->
@@ -120,16 +120,30 @@
                                                         <label for="registerPassword" class="form-label" style="color: black;">Senha</label>
                                                         <input type="password" class="form-control" id="registerPassword" required>
                                                     </div>
-                                                    <button type="button" class="btn btn-primary" onclick="register()">Cadastrar</button>
+                                                    <button type="button" class="btn btn-primary" id="registerButton" onclick="register()">Cadastrar</button>
                                                     <p id="registerSuccess" style="color: green; display: none; text-align: center; margin-top: 10px;">Cadastro realizado com sucesso!</p>
                                                 </form>
                                             </div>
                                         </div>
                                         <div class="modal-footer" id="modalFooter">
                                             <a href="Index.html"><button type="button" onclick="logout()" class="btn btn-secondary" data-bs-dismiss="modal" id="botaofechar">Fechar</button></a>
-                                            <button class="btn btn-primary" type="button" id="botaoEdicao" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="display: none;" onclick="fecharModal()">Editar informações</button>
+                                            <button class="btn btn-primary" type="button" id="botaoEdicao" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="display: none;" onclick="fecharModal(); hideToastById('cpfRequiredToast')">Editar informações</button>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <!-- Toast de Sucesso -->
+                            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                                <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto">Notificação</strong>
+                                    <small>Agora</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    Cadastro realizado com sucesso! Você pode fazer login agora.
+                                    <a href="login.html" class="btn btn-primary btn-sm ms-2">Ir para o Login</a>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -151,14 +165,14 @@
                         <div class="carousel-item active">
                             <img src="https://amcclinic.ru/local/templates/amc/img/content/kd.jpeg" class="d-block w-100" alt="Série 1" style="max-height: 400px; object-fit: cover; border-radius: 50px;">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5><img src="images/Glico-Text.png" style="max-height: 100px;"></h5>
+                                <h5><img src="Imagens/Glico-Text.png" style="max-height: 100px;"></h5>
                                 <p style="text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8); color: aliceblue;"> Cuidando de você em cada passo da jornada com o diabetes, oferecendo suporte, inovação e bem-estar para uma vida mais saudável.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="https://media.real.gr/filesystem/images/20200207/low/ygeia-gia-oloys_252863_193142.JPG" class="d-block w-100" alt="Série 2" style="max-height: 400px; object-fit: cover; border-radius: 50px;">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5><img src="images/Glico-Text.png" style="max-height: 100px;"></h5>
+                                <h5><img src="Imagens/Glico-Text.png" style="max-height: 100px;"></h5>
                                 <p style="text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8); color: aliceblue;"> Cuidando de toda a família no controle do diabetes, com planos familiares que promovem saúde, acompanhamento dedicado e mais tranquilidade para quem você ama.</p>
                             </div>
                         </div>
@@ -178,39 +192,36 @@
      <!-- Cards funcionamentos -->
     <div class="container p-2">
         <div class="row">
-            <div class="col-md-3 p-4">
-                <div class="card" style="align-items: center; border-radius: 20px; height: 100%;; max-width: 100%;" id="card">
-                    <img src="images/calculator (2) (1).png" class="card-img-top" style="max-width: 50%; padding: 10px;">
+            <div class="col-md-4 p-4">
+                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card2">
+                    <a href="#" onclick="handleCardClick(event, '../monitoramentoPaciente/calc_atv_fisicas/calculo_atividades_fisicas.html')">
+                        <img src="Imagens/calculator (2) (1).png" class="card-img-top" style="max-width: 50%; padding: 10px; display: block; margin: 0 auto;">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title text-center">Acompanhamento alimentar</h5>
                         <p class="card-text text-center">Gerencie sua alimentação de maneira rápida e otimizada</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 p-4">
-                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card">
-                    <img src="images/diet (1).png" class="card-img-top" style="max-width: 50%; padding: 10px;">
+            <div class="col-md-4 p-4">
+                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card1">
+                    <a href="#" onclick="handleCardClick(event, '../monitoramentoPaciente/calc_ind_glicemico/calculo_indice_glicemico.html')">
+                        <img src="Imagens/diet (1).png" class="card-img-top" style="max-width: 50%; padding: 10px; display: block; margin: 0 auto;">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title text-center">Acompanhamento de atividades físicas</h5>
-                        <p class="card-text text-center">Gerencie suas práticas de exércicio para um melhor controle de sua saúde</p>
+                        <p class="card-text text-center">Gerencie suas práticas de exercício para um melhor controle de sua saúde</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 p-4">
+            <div class="col-md-4 p-4">
                 <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card">
-                    <img src="images/clipboard (1).png" class="card-img-top" style="max-width: 50%; padding: 10px;">
+                    <a href="#" onclick="handleCardClick(event, '../preenchimentoAgenda/agenda.html')">
+                        <img src="Imagens/clipboard (1).png" class="card-img-top" style="max-width: 50%; padding: 10px; display: block; margin: 0 auto;">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title text-center">Agendamento de consultas</h5>
                         <p class="card-text text-center">Organize seus agendamentos de maneiras rápida, fácil e prática, tudo no conforto de sua casa</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 p-4">
-                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card">
-                    <img src="images/chat (1).png" class="card-img-top" style="max-width: 50%; padding: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Chats interativos</h5>
-                        <p class="card-text text-center">Converse com seu médico, tire dúvidas e se organize melhor de maneira rápida, sem a necessidade de agendamentos</p>
                     </div>
                 </div>
             </div>
@@ -238,24 +249,25 @@
                                 <input type="file" class="form-control" id="profilePicture">
                             </div>
                             
-                            
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Nome Completo</label>
                                 <input type="text" class="form-control" id="userName" placeholder="Seu nome">
                             </div>
-                            
                             
                             <div class="mb-3">
                                 <label for="userEmail" class="form-label">E-mail</label>
                                 <input type="email" class="form-control" id="userEmail" placeholder="seuemail@exemplo.com">
                             </div>
                             
-                            
                             <div class="mb-3">
                                 <label for="userPhone" class="form-label">Celular</label>
                                 <input type="tel" class="form-control" id="userPhone" placeholder="(00) 00000-0000">
                             </div>
                             
+                            <div class="mb-3">
+                                <label for="userCpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="userCpf" placeholder="000.000.000-00">
+                            </div>
                             
                             <div class="d-flex justify-content-between p-0">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
@@ -264,10 +276,10 @@
                         </form>
                         <div id="formToast" class="toast align-items-center text-bg-danger border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="d-flex">
-                              <div class="toast-body">
+                            <div class="toast-body">
                                 Por favor, preencha todos os campos antes de salvar, incluindo a foto!
-                              </div>
-                              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                             </div>
                         </div>
                     </div>
@@ -275,6 +287,28 @@
             </div>
         </div>
     </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="loginRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto">Atenção</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Você precisa estar logado para acessar esta funcionalidade!
+            </div>
+        </div>
+    </div>   
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="cpfRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-primary text-white">
+                <strong id="toastTitle" class="me-auto">Notificação de registro</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="toastMessage" class="toast-body">
+                Esta é uma mensagem genérica. Altere o conteúdo dinamicamente.
+            </div>
+        </div>
+    </div>        
 </div>
 </body>
 </html>
