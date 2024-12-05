@@ -190,6 +190,10 @@ function alterarmodal(username) {
         `;
             document.getElementById("botaofechar").innerText = "Logout";
             document.getElementById("botaoEdicao").style.display = "";
+            if (!userInfo.cpf) {
+                showToastById("cpfRequiredToast", "Por favor, complete o campo CPF clicando em 'Editar Informações'.");
+            }
+            
         } else {
             modalBody.innerHTML = `
                 <h2 class="text-center text-danger">Erro ao carregar informações!</h2>
