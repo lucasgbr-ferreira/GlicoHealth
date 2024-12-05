@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UsuárioPaciente</title>
+    <title>UsuárioPaciente(Desenvolvido)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
@@ -192,9 +192,9 @@
      <!-- Cards funcionamentos -->
     <div class="container p-2">
         <div class="row">
-            <div class="col-md-3 p-4">
-                <div class="card" style="align-items: center; border-radius: 20px; height: 100%;; max-width: 100%;" id="card">
-                    <a href="../monitoramentoPaciente/calc_atv_fisicas/calculo_atividades_fisicas.html">
+            <div class="col-md-4 p-4">
+                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card2">
+                    <a href="#" onclick="handleCardClick(event, '../monitoramentoPaciente/calc_atv_fisicas/calculo_atividades_fisicas.html')">
                         <img src="Imagens/calculator (2) (1).png" class="card-img-top" style="max-width: 50%; padding: 10px; display: block; margin: 0 auto;">
                     </a>
                     <div class="card-body">
@@ -203,32 +203,25 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 p-4">
-                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card">
-                    <a href="../monitoramentoPaciente/calc_ind_glicemico/calculo_indice_glicemico.html">
+            <div class="col-md-4 p-4">
+                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card1">
+                    <a href="#" onclick="handleCardClick(event, '../monitoramentoPaciente/calc_ind_glicemico/calculo_indice_glicemico.html')">
                         <img src="Imagens/diet (1).png" class="card-img-top" style="max-width: 50%; padding: 10px; display: block; margin: 0 auto;">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title text-center">Acompanhamento de atividades físicas</h5>
-                        <p class="card-text text-center">Gerencie suas práticas de exércicio para um melhor controle de sua saúde</p>
+                        <p class="card-text text-center">Gerencie suas práticas de exercício para um melhor controle de sua saúde</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 p-4">
+            <div class="col-md-4 p-4">
                 <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card">
-                    <img src="Imagens/clipboard (1).png" class="card-img-top" style="max-width: 50%; padding: 10px;">
+                    <a href="#" onclick="handleCardClick(event, '../preenchimentoAgenda/agenda.html')">
+                        <img src="Imagens/clipboard (1).png" class="card-img-top" style="max-width: 50%; padding: 10px; display: block; margin: 0 auto;">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title text-center">Agendamento de consultas</h5>
                         <p class="card-text text-center">Organize seus agendamentos de maneiras rápida, fácil e prática, tudo no conforto de sua casa</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 p-4">
-                <div class="card" style="align-items: center; border-radius: 20px; height: 100%; max-width: 100%;" id="card">
-                    <img src="Imagens/chat (1).png" class="card-img-top" style="max-width: 50%; padding: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Chats interativos</h5>
-                        <p class="card-text text-center">Converse com seu médico, tire dúvidas e se organize melhor de maneira rápida, sem a necessidade de agendamentos</p>
                     </div>
                 </div>
             </div>
@@ -294,7 +287,7 @@
             </div>
         </div>
     </div>
-    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="loginRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-danger text-white">
                 <strong class="me-auto">Atenção</strong>
@@ -304,7 +297,7 @@
                 Você precisa estar logado para acessar esta funcionalidade!
             </div>
         </div>
-    </div>    
+    </div>      
 </div>
 </body>
 </html>

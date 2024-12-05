@@ -540,6 +540,23 @@ themeSwitchButton.addEventListener('click', function() {
     themeToast.show();
 });
 
+// Requerimento de login para funcionlidades
+function handleCardClick(event, targetUrl) {
+    event.preventDefault(); // Impede o redirecionamento padrão
+
+    const loggedIn = localStorage.getItem("loggedIn");
+
+    if (loggedIn) {
+        // Se o usuário estiver logado, redirecione para a página passada como argumento
+        window.location.href = targetUrl;
+    } else {
+        // Exibe o toast vermelho informando que é necessário login
+        showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
+    }
+}
+
+
+
 
 
 

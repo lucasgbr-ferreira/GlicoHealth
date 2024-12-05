@@ -1,4 +1,4 @@
-//Carregamento da página
+    //Carregamento da página
 window.onload = function() {
     const loggedIn = localStorage.getItem("loggedIn");
     const loggedUsername = localStorage.getItem("username");
