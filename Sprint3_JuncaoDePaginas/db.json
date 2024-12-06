@@ -75,17 +75,6 @@
       ]
     },
     {
-      "id": "a2d9",
-      "username": "xaapola ",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "prontuarios": []
-    },
-    {
       "id": "29e1",
       "username": "fernandin",
       "password": "1234",
@@ -314,6 +303,31 @@
       "nome": "Laranja",
       "indiceGlicemico": 43,
       "id": "343e"
+    }
+  ],
+  "requisicoes": [
+    {
+      "id": "00f1",
+      "username": "2",
+      "password": "2",
+      "comment": "2",
+      "role": "Administrador",
+      "status": "recusada"
+    },
+    {
+      "id": "6603",
+      "username": "4",
+      "password": "4",
+      "comment": "4",
+      "role": "Médico",
+      "status": "aceita"
+    },
+    {
+      "id": "4157",
+      "username": "9",
+      "comment": "9",
+      "status": "aceita",
+      "role": "Administrador"
     }
   ]
 }

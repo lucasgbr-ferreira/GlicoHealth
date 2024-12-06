@@ -364,75 +364,6 @@ function hideToastById(toastId) {
         console.error(`Toast com ID '${toastId}' não encontrado!`);
     }
 }
-
-function showUsersInDOM() {
-    // Exibe o toast de "Carregando..."
-    showToastById("loadingToast", "Carregando...");
-
-    fetch("http://localhost:3000/pacientes")
-        .then((response) => {
-            if (!response.ok) {
-                showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
-                throw new Error("Servidor fechado ou inacessível.");
-            }
-            return response.json();
-        })
-        .then((database) => {
-            const userCardsContainer = document.getElementById("userCardsContainer");
-            userCardsContainer.innerHTML = "";
-
-            if (database.length === 0) {
-                userCardsContainer.innerHTML = "<p class='text-center'>Nenhum usuário registrado.</p>";
-            } else {
-                database.forEach((user) => {
-                    const card = document.createElement("div");
-                    card.className = "col-12 col-md-4";
-                    card.innerHTML = `
-                        <div class="card d-flex flex-column" style="height: 100%; border-radius: 20px; max-width: 100%; ">
-                            <img src="${user.profilePicture || 'https://via.placeholder.com/100'}" alt="Foto do Usuário" style="max-width: 100px; height: 100px; object-fit: cover;" class="rounded-circle mb-2 mx-auto">
-                            <h5 class="text-center">${user.username}</h5>
-                            <p class="text-center"><strong>Nome:</strong> ${user.name || "Não informado"}</p>
-                            <p class="text-center"><strong>Email:</strong> ${user.email || "Não informado"}</p>
-                            <p class="text-center"><strong>Telefone:</strong> ${user.phone || "Não informado"}</p>
-                            <p class="text-center"><strong>Senha:</strong> ${user.password || "Não informado"}</p>
-                            <p class="text-center"><strong>CPF:</strong> ${user.cpf || "Não informado"}</p>
-                            <div class="d-flex justify-content-center mt-auto">
-                                <button class="btn btn-danger btn-sm" onclick="removeUser('${user.id}')">Remover</button>
-                            </div>
-                        </div>
-                    `;
-                    userCardsContainer.appendChild(card);
-                });
-            }
-            showToastById("loadingToast", "Usuários atualizados com sucesso!");
-            const toggleUsersButton = document.getElementById("toggleUsersButton");
-            if (toggleUsersButton) {
-                toggleUsersButton.innerHTML = "Atualizar Usuários";
-            }
-        })
-        .catch((error) => {
-            console.error("Erro ao acessar o servidor:", error);
-            showToastById("loadingToast", "Erro ao carregar usuários. Verifique sua conexão ou tente novamente.");
-        });
-}
-
-// Remove usuários
-function removeUser(userId) {
-    // Confirmação antes de remover
-    const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${userId}?`);
-    if (!confirmDelete) return;
-
-    // Requisição para remover o usuário
-    fetch(`http://localhost:3000/pacientes/${userId}`, {
-        method: 'DELETE',
-    }).then(() => {
-        // Atualiza a lista de usuários sem recarregar a página
-        showUsersInDOM();
-    }).catch((error) => {
-        console.error('Erro ao remover o usuário:', error);
-    });
-}
-
 // Editor de informações {SPRINT2}
 document.getElementById("profileEditForm").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -546,6 +477,8 @@ themeSwitchButton.addEventListener('click', function() {
 
     // Mostrar o toast de notificação
     themeToast.show();
+    hideToastById("toastIntroducao");
+    hideToastById("toastIntroducao");
 });
 
 // Requerimento de login para funcionlidades
@@ -560,8 +493,10 @@ function handleCardClick(event, targetUrl) {
     } else {
         // Exibe o toast vermelho informando que é necessário login
         showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
+        hideToastById("toastIntroducao");
     }
 }
+
 
 
 

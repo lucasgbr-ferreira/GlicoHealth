@@ -22,7 +22,7 @@
                     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0">
                         <div class="container-fluid" id="Nav">
                             <div class="col-md-8 d-flex" id="Linha1Nav">
-                                <a class="navbar-brand" href="Index.html"><img src="Imagens/Logo-GilcoHealth.png" id="Logo-GilcoHealth" style="max-width: 70px;"></a>
+                                <a class="navbar-brand" ><img src="Imagens/Logo-GilcoHealth.png" id="Logo-GilcoHealth" style="max-width: 70px;"></a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
@@ -98,7 +98,7 @@
                                                         <div>
                                                             <h6>Médico</h6>
                                                             <button type="button" class="btn" style="background-color: transparent; border: none"
-                                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRequest" id="openOffcanvasButton" onclick="fecharmodal()">
+                                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRequest" id="openOffcanvasButton" onclick="fecharmodal();setRole('Médico')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                                                     <path d="M13.468 12.37C12.758 11.226 11.324 10 8 10s-4.758 1.226-5.468 2.37A6.959 6.959 0 0 0 8 15a6.959 6.959 0 0 0 5.468-2.63zM8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 7a7 7 0 1 0 0-14 7 7 0 0 0 0 14z"/>
                                                                 </svg>
@@ -110,7 +110,7 @@
                                                         <div>
                                                             <h6>Administrador</h6>
                                                             <button type="button" class="btn" style="background-color: transparent; border: none"
-                                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRequest" id="openOffcanvasButton" onclick="fecharmodal()">
+                                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRequest" id="openOffcanvasButton" onclick="fecharmodal();setRole('Administrador')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                                                     <path d="M13.468 12.37C12.758 11.226 11.324 10 8 10s-4.758 1.226-5.468 2.37A6.959 6.959 0 0 0 8 15a6.959 6.959 0 0 0 5.468-2.63zM8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 7a7 7 0 1 0 0-14 7 7 0 0 0 0 14z"/>
                                                                 </svg>
@@ -123,20 +123,6 @@
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botaofechar">Fechar</button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <!-- Toast de Sucesso -->
-                                <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                                    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                                    <div class="toast-header">
-                                        <strong class="me-auto">Notificação</strong>
-                                        <small>Agora</small>
-                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                                    </div>
-                                    <div class="toast-body">
-                                        Cadastro realizado com sucesso! Você pode fazer login agora.
-                                        <a href="login.html" class="btn btn-primary btn-sm ms-2">Ir para o Login</a>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -188,37 +174,77 @@
             <div class="row justify-content-evenly mt-4" id="news-cards">
         </div>
 
-        <!-- OffCanvas -->
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRequest" aria-labelledby="offcanvasRequestLabel">
+<!-- OffCanvas -->
+<div class="offcanvas offcanvas-end custom-offcanvas" data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasRequest" aria-labelledby="offcanvasRequestLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasRequestLabel">Requisição de Registro</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form>
-        <!-- Campo de Usuário -->
-        <div class="mb-3">
-            <label for="offcanvasUsername" class="form-label">Usuário</label>
-            <input type="text" class="form-control" id="offcanvasUsername" required>
-        </div>
+        <form id="requestForm">
+            <!-- Campo de Usuário -->
+            <div class="mb-3">
+                <label for="offcanvasUsername" class="form-label">Usuário</label>
+                <input type="text" class="form-control" id="offcanvasUsername" required>
+            </div>
 
-        <!-- Campo de Senha -->
-        <div class="mb-3">
-            <label for="offcanvasPassword" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="offcanvasPassword" required>
-        </div>
+            <!-- Campo de Comentário -->
+            <div class="mb-3">
+                <label for="offcanvasComment" class="form-label">Comentário</label>
+                <textarea class="form-control" id="offcanvasComment" rows="3" required></textarea>
+            </div>
 
-        <!-- Campo de Comentário -->
-        <div class="mb-3">
-            <label for="offcanvasComment" class="form-label">Comentário</label>
-            <textarea class="form-control" id="offcanvasComment" rows="3" required></textarea>
-        </div>
-
-        <!-- Botão de envio -->
-        <button type="submit" class="btn btn-primary">Enviar Requisição</button>
+            <!-- Botões lado a lado -->
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary me-2">Enviar Requisição</button>
+                <button type="button" class="btn btn-info" id="checkRequestStatusButton">Verificar Status da Requisição</button>
+            </div>
         </form>
     </div>
+</div>
+
+
+
+<!-- Toasts -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastRequestAlert" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-primary text-white">
+            <strong class="me-auto">Atenção</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Para acessar esse tipo de usuário, é necessário fazer uma requisição ao sistema.
+        </div>
     </div>
+</div>
+
+<!-- Modal para visualizar requisição -->
+<div class="modal fade" id="viewRequestModal" tabindex="-1" aria-labelledby="viewRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="viewRequestModalLabel">Detalhes da Requisição</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Card da requisição -->
+          <div id="modalRequestCard" class="card">
+            <div class="card-header" id="modalCardHeader"></div>
+            <div class="card-body">
+              <p><strong>Username:</strong> <span id="modalUsername"></span></p>
+              <p><strong>Comentário:</strong> <span id="modalComment"></span></p>
+              <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+              <p><strong>Função:</strong> <span id="modalRole"></span></p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="modalFooter">
+          <!-- Os botões serão adicionados aqui dinamicamente -->
+        </div>
+      </div>
+    </div>
+  </div>  
+
 </main>
     <footer>
         <div class="container-fluid">
