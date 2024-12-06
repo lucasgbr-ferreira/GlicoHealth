@@ -248,6 +248,14 @@
                                                         <option value="outro">Outro</option>
                                                     </select>
                                                 </div>
+                                                <!-- Novo campo para CPF -->
+                                                <div class="col-md-6">
+                                                    <label for="cpfPaciente" class="form-label">CPF
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control border-dark" id="cpfPaciente"
+                                                        placeholder=" " required>
+                                                </div>
                                                 <div class="col-md-3">
                                                     <label for="alturaPaciente" class="form-label">Altura (cm)
                                                         <span class="text-danger">*</span>
@@ -289,9 +297,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="metaCaloriasQueimadas" class="form-label">Calorias a
-                                                        Serem
-                                                        Queimadas por Dia
-                                                        (kcal)
+                                                        Serem Queimadas por Dia (kcal)
                                                         <span class="text-danger">*</span>
                                                     </label>
                                                     <input type="number" class="form-control border-dark"
@@ -317,8 +323,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="glicemiaPosPrandial" class="form-label">Glicemia
-                                                        Pós-prandial
-                                                        (mg/dL)</label>
+                                                        Pós-prandial (mg/dL)</label>
                                                     <input type="number" class="form-control border-dark"
                                                         id="glicemiaPosPrandial">
                                                 </div>
@@ -363,6 +368,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -383,6 +389,10 @@
 
 
     <!-- Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/a5d5f4895e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

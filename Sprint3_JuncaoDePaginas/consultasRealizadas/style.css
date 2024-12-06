@@ -11,3 +11,9 @@
     justify-content: space-between;
     box-shadow: 0px 2px 4px black; 
 }
+.consulta-info.highlight {
+    background-color: #f0f8ff; /* Exemplo de fundo claro */
+    border: 2px solid #007bff;  /* Exemplo de borda azul */
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5); /* Sombras para dar ênfase */
+}
+
