@@ -3,19 +3,27 @@ window.onload = function() {
     const loggedIn = localStorage.getItem("loggedIn");
     const loggedUsername = localStorage.getItem("username");
 
+    // Se o usuário estiver logado
     if (loggedIn === "true" && loggedUsername) {
         logado(loggedUsername);
         alterarmodal(loggedUsername); 
+    } else {
+        const toast = new bootstrap.Toast(document.getElementById("toastIntroducao"), {
+            delay: 8000  // Define o tempo do toast para 8 segundos
+        });
+        toast.show();
     }
+    // Carrega a foto de perfil salva, caso exista
     const savedProfilePicture = localStorage.getItem("profilePicture");
-
     if (savedProfilePicture) {
         document.getElementById("currentProfilePicture").src = savedProfilePicture;
     } else {
         document.getElementById("currentProfilePicture").src = "https://via.placeholder.com/100";
     }
+    // Aplica o tema salvo (caso tenha)
     applySavedTheme();
 };
+
 
 // Funções de Login e Cadastro
 function toggleSection() {

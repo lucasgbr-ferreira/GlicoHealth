@@ -86,6 +86,15 @@ function truncateText(text, maxLength) {
     }
     return text || 'Texto não disponível.';
 }
-
 // Chama a função para buscar notícias quando a página carrega
 document.addEventListener("DOMContentLoaded", fetchNews);
+
+// {Js fora da API}
+function fecharmodal() {
+    // Obter a instância do modal
+    const modalElement = document.getElementById('exampleModal');
+    const modal = bootstrap.Modal.getInstance(modalElement); // Pega a instância ativa do modal
+    if (modal) {
+        modal.hide(); // Fecha o modal
+    }
+}
