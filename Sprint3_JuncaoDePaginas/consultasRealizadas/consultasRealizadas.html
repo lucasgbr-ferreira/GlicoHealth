@@ -208,7 +208,164 @@
                             </button>
                         </div>
 
-                        
+                        <div class="modal fade" id="modalPaciente" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="modalPacienteLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="modalPacienteLabel">Prontuário de Paciente -
+                                            Endocrinologia</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Fechar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <h5 class="mb-3">Dados Gerais do Paciente</h5>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="nomePaciente" class="form-label">Nome Completo
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control border-dark"
+                                                        id="nomePaciente" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="dataNascimentoPaciente" class="form-label">Data de
+                                                        Nascimento
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="date" class="form-control border-dark"
+                                                        id="dataNascimentoPaciente" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="sexoPaciente" class="form-label">Sexo
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select class="form-select border-dark" id="sexoPaciente" required>
+                                                        <option selected disabled value=" ">Selecione</option>
+                                                        <option value="masculino">Masculino</option>
+                                                        <option value="feminino">Feminino</option>
+                                                        <option value="outro">Outro</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Novo campo para CPF -->
+                                                <div class="col-md-6">
+                                                    <label for="cpfPaciente" class="form-label">CPF
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control border-dark" id="cpfPaciente"
+                                                        placeholder=" " required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="alturaPaciente" class="form-label">Altura (cm)
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="alturaPaciente" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="pesoPaciente" class="form-label">Peso Atual (kg)
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="pesoPaciente" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="dataConsulta" class="form-label">Data da Consulta
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="date" class="form-control border-dark"
+                                                        id="dataConsulta" required>
+                                                </div>
+                                            </div>
+                                            <h5 class="my-4">Parâmetros Médicos e Metas</h5>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="limiteCarboidratos" class="form-label">Limite Diário de
+                                                        Índice Glicêmico (mg/dl)
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="limiteCarboidratos" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="alimentosRestritos" class="form-label">Alimentos
+                                                        Restritos</label>
+                                                    <textarea class="form-control border-dark" id="alimentosRestritos"
+                                                        rows="3"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="metaCaloriasQueimadas" class="form-label">Calorias a
+                                                        Serem Queimadas por Dia (kcal)
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="metaCaloriasQueimadas" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="tempoAtividadeMinima" class="form-label">Diabetes
+                                                        Mellitus
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control border-dark"
+                                                        id="tempoAtividadeMinima" required>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mt-3">
+                                                <div class="col-md-4">
+                                                    <label for="glicemiaJejum" class="form-label">Glicemia em Jejum
+                                                        (mg/dL)
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="glicemiaJejum" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="glicemiaPosPrandial" class="form-label">Glicemia
+                                                        Pós-prandial (mg/dL)</label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="glicemiaPosPrandial">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="glicemiaNoturna" class="form-label">Glicemia Noturna
+                                                        (mg/dL)</label>
+                                                    <input type="number" class="form-control border-dark"
+                                                        id="glicemiaNoturna">
+                                                </div>
+                                            </div>
+                                            <h5 class="my-4">Observações e Recomendações</h5>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="observacoesGerais" class="form-label">Observações
+                                                        Gerais</label>
+                                                    <textarea class="form-control border-dark" id="observacoesGerais"
+                                                        rows="3"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="medicamentosPrescritos" class="form-label">Medicamentos
+                                                        Prescritos</label>
+                                                    <textarea class="form-control border-dark"
+                                                        id="medicamentosPrescritos" rows="3"></textarea>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="recomendacoes" class="form-label">Dicas e
+                                                        Recomendações</label>
+                                                    <textarea class="form-control border-dark" id="recomendacoes"
+                                                        rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end mt-4">
+                                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
