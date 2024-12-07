@@ -1,196 +1,107 @@
 {
   "pacientes": [
     {
-      "id": "3644",
-      "username": "gustin",
-      "password": "1234",
+      "id": "04a1",
+      "username": "carlos123",
+      "password": "5494",
       "role": "paciente",
-      "name": "Frois",
-      "email": "sjuao7729@gmail.com",
-      "phone": "38998828890",
+      "name": "Carlos Antônio Pereira",
+      "email": "carlos@gmail.com",
+      "phone": "31984639448",
       "profilePicture": "",
-      "cpf": "02300066610",
+      "cpf": "12345678901",
       "prontuarios": [
         {
-          "dataConsulta": "2024-12-20",
-          "nome": "Maria",
-          "nascimento": "2024-12-31",
+          "dataConsulta": "2024-12-04",
+          "nome": "Carlos Antonio Pereira",
+          "nascimento": "1978-05-06",
           "sexo": "masculino",
-          "altura": "12",
-          "peso": "21",
+          "altura": "178",
+          "peso": "90",
           "limites": {
-            "carboidratos": "1122",
-            "caloriasQueimadas": "12",
-            "atividadeMinima": "21"
+            "carboidratos": "190",
+            "caloriasQueimadas": "1200",
+            "atividadeMinima": "Tipo 1"
           },
           "glicemias": {
-            "jejum": "12",
-            "posPrandial": "21",
-            "noturna": "21"
+            "jejum": "135",
+            "posPrandial": "140",
+            "noturna": "125"
           },
-          "alimentosRestritos": "wq",
+          "alimentosRestritos": "Carboidratos",
           "observacoes": {
-            "gerais": "sa",
-            "medicamentos": "sa",
-            "recomendacoes": "sad"
+            "gerais": "Necessita de maior supervisionamento",
+            "medicamentos": "Degludeca e Aspart ",
+            "recomendacoes": "Praticar atividades físicas diariamente e ter alimentação regrada"
           }
         }
       ]
     },
     {
-      "id": "bf22",
-      "username": "luquetas",
+      "id": "c575",
+      "username": "fernando123",
       "password": "1234",
       "role": "paciente",
-      "name": "Xaulin",
-      "email": "sjuao7729@gmail.com",
-      "phone": "38998828890",
-      "profilePicture": "",
-      "cpf": "11111111111",
+      "name": "Fernando Dias Mattos",
+      "email": "fernando@gmail.com",
+      "phone": "31984639448",
+      "cpf": "09876543210",
       "prontuarios": [
         {
           "dataConsulta": "2024-12-06",
-          "nome": "Xaulin",
-          "nascimento": "2024-12-06",
+          "nome": "Fernando Dias Mattos",
+          "nascimento": "1983-06-06",
           "sexo": "masculino",
-          "altura": "160",
-          "peso": "50",
+          "altura": "180",
+          "peso": "83",
           "limites": {
-            "carboidratos": "1000",
-            "caloriasQueimadas": "1000",
-            "atividadeMinima": "2"
+            "carboidratos": "100",
+            "caloriasQueimadas": "1200",
+            "atividadeMinima": "Tipo 1"
           },
           "glicemias": {
-            "jejum": "1000",
-            "posPrandial": "1000",
-            "noturna": "1000"
+            "jejum": "131",
+            "posPrandial": "173",
+            "noturna": "137"
           },
-          "alimentosRestritos": "a",
+          "alimentosRestritos": "Pães",
           "observacoes": {
-            "gerais": "a",
-            "medicamentos": "a",
-            "recomendacoes": "a"
-          }
+            "gerais": "Piora desde a última consulta",
+            "medicamentos": "Glargina e Atorvastatina",
+            "recomendacoes": "Praticar no mínimo quarenta minutos de exercícios diariamente"
+          },
+          "alimentos": []
+        },
+        {
+          "dataConsulta": "2024-12-09",
+          "nome": "Fernando Dias Mattos",
+          "nascimento": "1983-06-06",
+          "sexo": "masculino",
+          "altura": "180",
+          "peso": "83",
+          "limites": {
+            "carboidratos": "100",
+            "caloriasQueimadas": "1000",
+            "atividadeMinima": "Tipo 1"
+          },
+          "glicemias": {
+            "jejum": "131",
+            "posPrandial": "173",
+            "noturna": "137"
+          },
+          "alimentosRestritos": "Pães",
+          "observacoes": {
+            "gerais": "Precisa de maior supervisionamento",
+            "medicamentos": "Glargina",
+            "recomendacoes": "Ter alimentação mais regrada, evitando carboidratos industrializados"
+          },
+          "alimentos": []
         }
       ]
     },
     {
-      "id": "29e1",
-      "username": "fernandin",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "7a7e",
+      "id": "03f9",
       "username": "lucas",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "46e2",
-      "username": "4444",
-      "password": "4444",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "376d",
-      "username": "44",
-      "password": "44",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "4c23",
-      "username": "33",
-      "password": "33",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "ef50",
-      "username": "luquetas",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "1d23",
-      "username": "gustin3",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "cpf": ""
-    },
-    {
-      "id": "08fb",
-      "username": "gustin32",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "cpf": ""
-    },
-    {
-      "id": "e571",
-      "username": "3333",
-      "password": "3333",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "cpf": ""
-    },
-    {
-      "id": "2f09",
-      "username": "9090",
-      "password": "1111",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": ""
-    },
-    {
-      "id": "a5fd",
-      "username": "felipe",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "cpf": ""
-    },
-    {
-      "id": "fe83",
-      "username": "kl",
       "password": "1234",
       "role": "paciente",
       "name": "",
@@ -202,49 +113,104 @@
   ],
   "atividadesFisicas": [
     {
-      "nome": "Caminhada",
-      "caloriasPorMinuto": 5,
-      "id": "1ccd"
+      "nome": "Caminhada (5 km/h)",
+      "caloriasPorMinuto": 4.5,
+      "id": "1"
     },
     {
-      "nome": "Corrida",
+      "nome": "Corrida (8 km/h)",
       "caloriasPorMinuto": 10,
-      "id": "0cd0"
+      "id": "2"
     },
     {
-      "nome": "Ciclismo",
-      "caloriasPorMinuto": 8,
-      "id": "870c"
+      "nome": "Natação (moderada)",
+      "caloriasPorMinuto": 7,
+      "id": "3"
     },
     {
-      "nome": "Natação",
+      "nome": "Ciclismo (moderado)",
+      "caloriasPorMinuto": 6,
+      "id": "4"
+    },
+    {
+      "nome": "Pular corda",
       "caloriasPorMinuto": 12,
-      "id": "558b"
+      "id": "5"
     },
     {
       "nome": "Yoga",
+      "caloriasPorMinuto": 3.5,
+      "id": "6"
+    },
+    {
+      "nome": "Pilates",
       "caloriasPorMinuto": 4,
-      "id": "f6e6"
-    },
-    {
-      "nome": "Pular Corda",
-      "caloriasPorMinuto": 13,
-      "id": "0323"
-    },
-    {
-      "nome": "Musculação",
-      "caloriasPorMinuto": 7,
-      "id": "d766"
+      "id": "7"
     },
     {
       "nome": "Dança",
-      "caloriasPorMinuto": 6,
-      "id": "8cac"
+      "caloriasPorMinuto": 6.5,
+      "id": "8"
     },
     {
-      "nome": "Futebol",
-      "caloriasPorMinuto": 11,
-      "id": "7d2a"
+      "nome": "Corrida intensa (12 km/h)",
+      "caloriasPorMinuto": 14,
+      "id": "9"
+    },
+    {
+      "nome": "Escalada",
+      "caloriasPorMinuto": 8,
+      "id": "10"
+    },
+    {
+      "nome": "Voleibol",
+      "caloriasPorMinuto": 5.5,
+      "id": "11"
+    },
+    {
+      "nome": "Basquete",
+      "caloriasPorMinuto": 8.5,
+      "id": "12"
+    },
+    {
+      "nome": "Andar de patins",
+      "caloriasPorMinuto": 7,
+      "id": "13"
+    },
+    {
+      "nome": "Levantar pesos (intenso)",
+      "caloriasPorMinuto": 6,
+      "id": "14"
+    },
+    {
+      "nome": "Jumping jacks",
+      "caloriasPorMinuto": 8,
+      "id": "15"
+    },
+    {
+      "nome": "Hiking",
+      "caloriasPorMinuto": 7,
+      "id": "16"
+    },
+    {
+      "nome": "Boxe",
+      "caloriasPorMinuto": 9,
+      "id": "17"
+    },
+    {
+      "nome": "Kickboxing",
+      "caloriasPorMinuto": 10,
+      "id": "18"
+    },
+    {
+      "nome": "Zumba",
+      "caloriasPorMinuto": 7.5,
+      "id": "19"
+    },
+    {
+      "nome": "Artes marciais",
+      "caloriasPorMinuto": 8.5,
+      "id": "20"
     }
   ],
   "alimentos": [

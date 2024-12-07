@@ -1,49 +1,158 @@
-// Função que exibe o dia da semana no HTML
-function exibirDiaDaSemana() {
-    const diasDaSemana = [
-        'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
-    ];
-    
-    // Obtém o dia da semana atual
-    const hoje = new Date();
-    const diaSemana = hoje.getDay(); // getDay() retorna o número do dia da semana (0-6)
+const apiUrl = 'http://localhost:3000';
+let caloriasIdeais = 1200; // Valor padrão caso não seja carregado do prontuário
+let totalCaloriasQueimadas = parseFloat(localStorage.getItem('totalCaloriasQueimadas')) || 0;
 
-    // Insere o dia da semana no elemento HTML com o id 'diaSemana'
+function exibirDiaDaSemana() {
+    const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+    const hoje = new Date();
+    const diaSemana = hoje.getDay();
     document.getElementById('diaSemana').textContent = `Hoje, ${diasDaSemana[diaSemana]}`;
 }
 
-// Chama a função para exibir o dia da semana quando a página for carregada
-window.onload = exibirDiaDaSemana;
+function atualizarBarraProgresso() {
+    const progresso = (totalCaloriasQueimadas / caloriasIdeais) * 100;
+    const progressBar = document.querySelector('.progress-bar');
+    progressBar.style.width = `${Math.min(progresso, 100)}%`;
+    progressBar.textContent = `${Math.min(progresso, 100).toFixed(2)}%`;
+}
+
+function showToast(message) {
+    const toastMessage = document.getElementById("toastMessage");
+    toastMessage.textContent = message;
+    const toastElement = new bootstrap.Toast(document.getElementById("loginToast"));
+    toastElement.show();
+}
+
+function displayWelcomeMessage(username) {
+    const welcomeMessage = document.getElementById("welcomeMessage");
+    if (welcomeMessage) {
+        welcomeMessage.textContent = `Bem-vindo, ${username}!`;
+    }
+}
+
+async function obterPacienteIdPorUsername(username) {
+    try {
+        const response = await fetch(`${apiUrl}/pacientes?username=${username}`);
+        if (!response.ok) throw new Error('Erro ao buscar ID do paciente.');
+        const pacientes = await response.json();
+        if (pacientes && pacientes.length > 0) return pacientes[0].id;
+        throw new Error('Paciente não encontrado.');
+    } catch (error) {
+        showToast('Erro ao obter informações do paciente. Verifique sua conexão ou tente novamente.');
+        console.error('Erro ao obter ID do paciente:', error.message);
+        return null;
+    }
+}
+
+async function carregarCaloriasIdeais(pacienteId) {
+    try {
+        const response = await fetch(`${apiUrl}/pacientes/${pacienteId}`);
+        if (!response.ok) throw new Error('Erro ao carregar dados do paciente.');
+
+        const paciente = await response.json();
+        if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
+            const prontuario = paciente.prontuarios[0];
+            const metaCalorias = prontuario.limites.caloriasQueimadas;
+
+            if (metaCalorias && !isNaN(metaCalorias)) {
+                caloriasIdeais = parseFloat(metaCalorias); // Define a meta ideal
+                atualizarBarraProgresso();
+                showToast(`Meta diária de calorias: ${caloriasIdeais} Kcal.`);
+                return true;
+            } else {
+                showToast('Meta diária de calorias não encontrada ou inválida.');
+                desabilitarCalculo();
+                return false;
+            }
+        } else {
+            showToast('Prontuário do paciente não encontrado.');
+            desabilitarCalculo();
+            return false;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar meta de calorias:', error.message);
+        showToast('Erro ao carregar informações do paciente.');
+        desabilitarCalculo();
+        return false;
+    }
+}
+
+function desabilitarCalculo() {
+    const buttons = document.querySelectorAll('.btn-outline-primary');
+    buttons.forEach(button => button.disabled = true);
+    showToast('Cálculo de calorias desabilitado. Prontuário necessário.');
+}
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    const limiteDiarioIdeal = 180; // Limite diário padrão para calorias queimadas
-    let totalCaloriasQueimadas = parseFloat(localStorage.getItem('totalCaloriasQueimadas')) || 0;
+function calcularCaloriasQueimadas(select, input, caloriasDiv, index) {
+    const atividade = select.options[select.selectedIndex];
+    const tempo = parseFloat(input.value);
+    const caloriasPorMinuto = parseFloat(atividade.dataset.caloriasPorMinuto);
 
-    // URL base do JSON Server
-    const apiUrl = 'http://localhost:3000';
-
-    function atualizarBarraProgresso() {
-        const progresso = (totalCaloriasQueimadas / limiteDiarioIdeal) * 100;
-        const progressBar = document.querySelector('.progress-bar');
-        progressBar.style.width = `${Math.min(progresso, 100)}%`;
-        progressBar.textContent = `${Math.min(progresso, 100).toFixed(2)}%`;
+    if (!tempo || !caloriasPorMinuto) {
+        alert("Selecione uma atividade e insira um tempo válido.");
+        return;
     }
 
-    // Carregar atividades físicas do JSON Server
+    const resultado = caloriasPorMinuto * tempo;
+    const caloriasAtuais = parseFloat(caloriasDiv.textContent) || 0;
+    const novasCaloriasQueimadas = caloriasAtuais + resultado;
+
+    caloriasDiv.innerHTML = `<b>${novasCaloriasQueimadas.toFixed(2)} Kcal</b>`;
+    totalCaloriasQueimadas += resultado;
+
+    localStorage.setItem('totalCaloriasQueimadas', totalCaloriasQueimadas);
+    localStorage.setItem(`caloriasQueimadasAtividade${index}`, novasCaloriasQueimadas);
+
+    atualizarBarraProgresso();
+}
+
+function zerarCaloriasQueimadas(caloriasDiv, index) {
+    const caloriasAtuais = parseFloat(caloriasDiv.textContent) || 0;
+    totalCaloriasQueimadas -= caloriasAtuais;
+
+    localStorage.setItem('totalCaloriasQueimadas', totalCaloriasQueimadas);
+    localStorage.setItem(`caloriasQueimadasAtividade${index}`, 0);
+    caloriasDiv.innerHTML = `<b>0 Kcal</b>`;
+
+    atualizarBarraProgresso();
+}
+
+async function checkLogin() {
+    const loggedIn = localStorage.getItem("loggedIn");
+    if (!loggedIn) {
+        window.location.href = "../../InterfaceUsuário/Index.html";
+        return;
+    }
+
+    const username = localStorage.getItem("username");
+    if (username) {
+        showToast(`Exibindo cálculo de calorias para: ${username}`);
+        displayWelcomeMessage(username);
+
+        const idPaciente = await obterPacienteIdPorUsername(username);
+        if (idPaciente) {
+            const metaCarregada = await carregarCaloriasIdeais(idPaciente);
+            if (!metaCarregada) {
+                showToast("O paciente não possui prontuário com meta de calorias. O cálculo foi desabilitado.");
+            }
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    exibirDiaDaSemana();
+
     fetch(`${apiUrl}/atividadesFisicas`)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar atividades físicas.');
-            }
+            if (!response.ok) throw new Error('Erro ao carregar atividades físicas.');
             return response.json();
         })
-        .then(atividadesFisicas => {
+        .then(atividades => {
             const selects = document.querySelectorAll('.form-select');
-
             selects.forEach((select, index) => {
-                atividadesFisicas.forEach(atividade => {
-                    if (!atividade.caloriasPorMinuto) return; // Ignora atividades sem calorias por minuto
+                atividades.forEach(atividade => {
+                    if (!atividade.caloriasPorMinuto) return;
                     const option = document.createElement('option');
                     option.value = atividade.nome;
                     option.dataset.caloriasPorMinuto = atividade.caloriasPorMinuto;
@@ -51,36 +160,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     select.appendChild(option);
                 });
 
-                // Recupera calorias salvas para esta atividade
                 const savedCalorias = parseFloat(localStorage.getItem(`caloriasQueimadasAtividade${index}`)) || 0;
                 const caloriasDiv = select.closest('.row').parentElement.querySelector('.alert');
                 caloriasDiv.innerHTML = `<b>${savedCalorias.toFixed(2)} Kcal</b>`;
             });
         })
-        .catch(error => console.error('Erro ao carregar dados das atividades físicas:', error));
-
-    function calcularCaloriasQueimadas(select, input, caloriasDiv, index) {
-        const atividade = select.options[select.selectedIndex];
-        const tempo = parseFloat(input.value);
-        const caloriasPorMinuto = parseFloat(atividade.dataset.caloriasPorMinuto);
-
-        if (!tempo || !caloriasPorMinuto) {
-            alert("Selecione uma atividade e insira um tempo válido.");
-            return;
-        }
-
-        const resultado = caloriasPorMinuto * tempo;
-        const caloriasAtuais = parseFloat(caloriasDiv.textContent) || 0;
-        const novasCaloriasQueimadas = caloriasAtuais + resultado;
-
-        caloriasDiv.innerHTML = `<b>${novasCaloriasQueimadas.toFixed(2)} Kcal</b>`;
-        totalCaloriasQueimadas += resultado;
-
-        localStorage.setItem('totalCaloriasQueimadas', totalCaloriasQueimadas);
-        localStorage.setItem(`caloriasQueimadasAtividade${index}`, novasCaloriasQueimadas);
-
-        atualizarBarraProgresso();
-    }
+        .catch(error => console.error('Erro ao carregar atividades:', error));
 
     document.querySelectorAll('.btn-outline-primary').forEach((button, index) => {
         button.addEventListener('click', () => {
@@ -93,17 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    function zerarCaloriasQueimadas(caloriasDiv, index) {
-        const caloriasAtuais = parseFloat(caloriasDiv.textContent) || 0;
-        totalCaloriasQueimadas -= caloriasAtuais;
-
-        localStorage.setItem('totalCaloriasQueimadas', totalCaloriasQueimadas);
-        localStorage.setItem(`caloriasQueimadasAtividade${index}`, 0);
-        caloriasDiv.innerHTML = `<b>0 Kcal</b>`;
-
-        atualizarBarraProgresso();
-    }
-
     document.querySelectorAll('#zerarIndice').forEach((button, index) => {
         button.addEventListener('click', () => {
             const inputGroup = button.closest('.row');
@@ -112,40 +186,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    atualizarBarraProgresso();
+    await checkLogin();
 });
-
-// Função para exibir o toast
-function showToast(message) {
-    const toastMessage = document.getElementById("toastMessage");
-    toastMessage.textContent = message;
-
-    const toastElement = new bootstrap.Toast(document.getElementById("loginToast"));
-    toastElement.show();
-}
-
-function checkLogin() {
-    const loggedIn = localStorage.getItem("loggedIn");
-
-    // Se o usuário não estiver logado, redireciona para a página de login
-    if (!loggedIn) {
-        window.location.href = "../../InterfaceUsuário/Index.html";
-    } else {
-        // Se o usuário estiver logado, exibe um toast informando o nome do usuário
-        const username = localStorage.getItem("username");
-        if (username) {
-            showToast(`Exibibindo atividades físicas para: ${username}`);  // Exibe o toast
-            displayWelcomeMessage(username);  // Exibe a mensagem de boas-vindas
-        }
-    }
-}
-
-function displayWelcomeMessage(username) {
-    const welcomeMessage = document.getElementById("welcomeMessage");
-    if (welcomeMessage) {
-        welcomeMessage.textContent = `Bem-vindo, ${username}!`;
-    }
-}
-
-// Chama a função checkLogin quando a página for carregada
-document.addEventListener("DOMContentLoaded", checkLogin);

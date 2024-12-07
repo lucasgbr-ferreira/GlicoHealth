@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Reseta o formulário
                 document.querySelector("#modalPaciente form").reset();
+                location.reload();
             } else {
                 alert("Erro ao salvar o prontuário.");
             }

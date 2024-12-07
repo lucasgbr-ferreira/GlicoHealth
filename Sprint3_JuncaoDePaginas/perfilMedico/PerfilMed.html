@@ -2,151 +2,287 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Do Médico</title>
-
-    <!-- Bootstrap CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AtvdFisc(Desenvolvido)</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="PerfilMed.css">
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <!-- Login Script -->
-    <script src="" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+    <script src="https://kit.fontawesome.com/a5d5f4895e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-    <!-- Header -->
-    <header class="bg-light">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
-            <div class="container">
-                <a class="navbar-brand" href="/Sprint1/InterfaceUsuário/Index.html">
-                    <img src="imgs header/Logo-GilcoHealth.png" alt="Logo" style="max-width: 70px;">
-                </a>
-                <button class="navbar-toggler col-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link glico-health" href="#"><strong>GlicoHealth</strong></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><strong>Notícias</strong></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false"><strong>Sobre nós</strong></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-center p-2" href="#">Nossa Equipe</a></li>
-                                <li><a class="dropdown-item text-center" href="#">Redes sociais</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-center" href="#">Clínica Parceira</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false"><strong>Atendimento ao cliente</strong></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-center p-2" href="#">Dúvidas frequentes</a></li>
-                                <li><a class="dropdown-item text-center" href="#">Funcionalidades</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-center" href="#">Suporte</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <button type="button" class="btn col-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img src="imgs header/User-nlogin.png" alt="Login" style="width: 50px;">
-                    </button>
+    <header class="d-flex">
+        <div class="container-fluid p-0">
+            <div class="row m-0" style="max-width: 100%">
+                <div class="col-md-12 p-0">
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0" id="navbar">
+                        <div class="container-fluid" id="Nav">
+                            <div class="col-md-8 d-flex" id="Linha1Nav">
+                                <a class="navbar-brand" href="Index.html"><img src="images/img-logo.png"
+                                        id="Logo-GilcoHealth" style="max-width: 70px;"></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item" id="ListaNav">
+                                            <a class="nav-link" href="#">Notícias</a>
+                                        </li>
+                                        <li class="nav-item dropdown" id="ListaNav">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Sobre Nós
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item text-center p-2" href="#">Nossa equipe</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-center" href="#">Redes sociais</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider text-center">
+                                                </li>
+                                                <li><a class="dropdown-item text-center" href="#">Clínica Parceira</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown" id="ListaNav">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Atendimento Ao Cliente
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item text-center p-2" href="#">Dúvidas
+                                                        frequentes</a></li>
+                                                <li><a class="dropdown-item text-center" href="#">Funcionalidades</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider text-center">
+                                                </li>
+                                                <li><a class="dropdown-item text-center" href="#">Chat com o suporte</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown" id="ListaNav">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Emergência
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item text-center p-2" href="#">O que fazer</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-center" href="#">Chat urgente</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider text-center">
+                                                </li>
+                                                <li><a class="dropdown-item text-center" href="#">Hospital mais
+                                                        próximo</a></li>
+                                            </ul>
+                                        </li>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end align-items-center p-2">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    style="width: 70px;">
+                                    <img src="images/User-nlogin.png" id="botaologin" style="width: 100%;">
+                                </button>
+
+                                <!-- Mudança de tema -->
+                                <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                                    <div id="theme-toast" class="toast" role="alert" aria-live="assertive"
+                                        aria-atomic="true">
+                                        <div class="toast-header" id="AlertaTemaH">
+                                            <strong class="me-auto">Notificação</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="toast-body text-center" style="color: black;" id="AlertaTemaB">
+                                            Tema alterado para <span id="theme-name">Claro</span>!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Para Exibição de perfil -->
+                            <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header" id="modalHeader">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">
+                                                Identificação de usuário</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" id="modalBody">
+                                            <div id="loginSection">
+                                                <h2 style="color: black; text-align: center;"><b>Login</b></h2>
+                                                <form id="loginForm">
+                                                    <div class="mb-3">
+                                                        <label for="loginUsername" class="form-label"
+                                                            style="color: black;">Usuário</label>
+                                                        <input type="text" class="form-control" id="loginUsername"
+                                                            required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="loginPassword" class="form-label"
+                                                            style="color: black;">Senha</label>
+                                                        <input type="password" class="form-control" id="loginPassword"
+                                                            required>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="login()">Entrar</button>
+                                                    <p id="loginError"
+                                                        style="color: red; display: none; text-align: center; margin-top: 10px;">
+                                                        Usuário ou senha incorretos</p>
+                                                    <a href="#" onclick="toggleSection()"><button type="button"
+                                                            class="btn btn-primary">Cadastro</button></a>
+                                                </form>
+                                            </div>
+                                            <div id="registerSection" style="display: none;">
+                                                <h2 style="color: black; text-align: center;"><b>Cadastro</b></h2>
+                                                <form id="registerForm">
+                                                    <div class="mb-3">
+                                                        <label for="registerUsername" class="form-label"
+                                                            style="color: black;">Usuário</label>
+                                                        <input type="text" class="form-control" id="registerUsername"
+                                                            required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="registerPassword" class="form-label"
+                                                            style="color: black;">Senha</label>
+                                                        <input type="password" class="form-control"
+                                                            id="registerPassword" required>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="register()">Cadastrar</button>
+                                                    <p id="registerSuccess"
+                                                        style="color: green; display: none; text-align: center; margin-top: 10px;">
+                                                        Cadastro realizado com sucesso!</p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" id="modalFooter">
+                                            <a href="Index.html"><button type="button" onclick="logout()"
+                                                    class="btn btn-secondary" data-bs-dismiss="modal"
+                                                    id="botaofechar">Fechar</button></a>
+                                            <button class="btn btn-primary" type="button" id="botaoEdicao"
+                                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                                                aria-controls="offcanvasWithBothOptions" style="display: none;"
+                                                onclick="fecharModal()">Editar informações</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
+                </nav>
             </div>
-        </nav>
+        </div>
+        </div>
     </header>
-
-    <!-- Login Modal -->
-    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Identificação de usuário</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="loginSection">
-                        <h2 class="text-center"><b>Login</b></h2>
-                        <form id="loginForm">
-                            <div class="mb-3">
-                                <label for="loginUsername" class="form-label">Usuário</label>
-                                <input type="text" class="form-control" id="loginUsername" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="loginPassword" required>
-                            </div>
-                            <button type="button" class="btn btn-primary w-100 mb-3" onclick="login()">Entrar</button>
-                            <p id="loginError" class="text-danger text-center d-none">Usuário ou senha incorretos</p>
-                            <button type="button" class="btn btn-secondary w-100" onclick="toggleSection()">Cadastro</button>
-                        </form>
+    <main>
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-12 col-md mb-4">
+                    <h1 class="fst-italic" id="diaSemana">Bem-vindo(a)</h1>
+                    <h3 class="text-primary text-opacity-50">O que você deseja realizar?</h3>
+                    <div class="col-12 mt-5">
+                        <button type="button"
+                            class="btn btn-primary p-3 bg-info bg-opacity-10 border border-info rounded-end" id="btn-agenda"><i
+                                class="fa-solid fa-calendar-days me-4 h3 text-dark"></i><span
+                                class="h3 text-dark">Visualizar Agenda</span></button>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="button"
+                            class="btn btn-primary p-3 bg-info bg-opacity-10 border border-info rounded-end" id="btn-prontuarios"><i
+                                class="fa-solid fa-list me-4 h3 text-dark"></i><span class="h3 text-dark">Preenchimento
+                                de Prontuários</span></button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <div class="col-12 col-md ms-3 d-none" id="col-invisivel">
+                    <h1 class="fst-italic mb-0" id="diaSemana">Orientações Médicas</h1>
+                    <h3 class="text-primary text-opacity-50">Exames Comuns</h3>
+                    <p class="lead">Antes de cada consulta, dedique um momento para revisar os resultados dos exames
+                        laboratoriais dos pacientes. Isso ajudará a tomar decisões mais precisas e a planejar o
+                        tratamento de forma eficiente.</p>
+                    <p class="mt-3 lead">Certifique-se de verificar os resultados de exames como glicemia, perfil
+                        lipídico,
+                        função hepática e renal, além dos exames hormonais como TSH e T4 livre para pacientes com
+                        distúrbios endócrinos.</p>
+                    <h3 class="text-primary text-opacity-50 mt-3">Lembre-se:</h3>
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item border-0"><i
+                                class="bi bi-check-circle me-2 text-success"></i>Glicemia em jejum e HbA1c para avaliar
+                            controle glicêmico.</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle me-2 text-success"></i>Perfil
+                            lipídico para monitorar risco cardiovascular em diabéticos.</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle me-2 text-success"></i>TSH e
+                            T4 livre para monitoramento de funções tireoidianas.</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md ms-3" id="col-visivel">
+                    <h1 class="fst-italic mb-0" id="diaSemana">Orientações Médicas</h1>
+                    <h3 class="text-primary text-opacity-50">Agendamento de Consultas</h3>
+                    <p class="lead">Mantenha sempre o fluxo de trabalho organizado ao acessar a agenda. Isso inclui
+                        verificar os horários de cada consulta, o status do paciente (presente, ausente, remarcado), e o
+                        tempo estimado para cada consulta.</p>
+                    <p class="mt-3 lead">Para melhorar a eficiência, considere o tempo de consulta para cada tipo de
+                        paciente. Exames de rotina podem ser mais rápidos, enquanto consultas para condições complexas
+                        podem exigir mais tempo.</p>
+                    <h3 class="text-primary text-opacity-50 mt-3">Lembre-se:</h3>
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle me-2 text-success"></i>Antes
+                            de cada consulta, envie lembretes de confirmação para os pacientes para reduzir faltas.</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle me-2 text-success"></i>Tente
+                            manter intervalos adequados entre as consultas para garantir que tenha tempo suficiente para
+                            cada paciente, especialmente em casos complexos.</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle me-2 text-success"></i>Agende
+                            as consultas de retorno de maneira eficiente, de preferência no final do expediente ou em
+                            dias com menor demanda</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <!-- Box 1 -->
-            <div class="col-lg-5 col-md-6 col-sm-12 mb-4">
-                <div class="box border-3 border-primary border-opacity-75">
-                    <h1 class="mb-3"><strong>Seja bem-vindo</strong><span id="profileUsername-1"></span>!</h1>
-                    <h3>O que você deseja realizar?</h3>
-                    <div class="mt-4">
-                        <button class="btn btn-primary w-100 mb-3">
-                            <img src="imgs - perfil medico/icon agenda - perfil do médico.png" alt="Agenda" class="me-2">
-                            Visualizar Agenda
-                        </button>
-                        <button class="btn btn-primary w-100">
-                            <img src="imgs - perfil medico/icone consultas realizadas - perfil do médico.png"
-                                alt="Consultas" class="me-2">
-                            Consultas Realizadas
-                        </button>
-                    </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="loginRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-danger text-white">
+                    <strong class="me-auto">Atenção</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
                 </div>
-            </div>
-
-            <!-- Box 2 -->
-            <div class="col-lg-5 col-md-6 col-sm-12 mb-4">
-                <div class="box border-3 border-primary border-opacity-75">
-                    <h1 class="mb-3"><strong>Perfil Do Médico(a)</strong></h1>
-                    <h2 class="mb-3 text-primary opacity-50">Informações de Perfil</h2>
-                    <p><strong>Nome:</strong> <span id="profileUsername-2"></span></p>
-                    <p><strong>Contato:</strong> <span></span></p>
-                    <p><strong>Data de Nascimento:</strong> <span></span></p>
-                    <h2 class="mt-3 mb-3 text-primary opacity-50">Pendências</h2>
-                    <p><strong>Consultas:</strong> <span></span></p>
+                <div class="toast-body">
+                    Você precisa estar logado para acessar esta funcionalidade!
                 </div>
             </div>
         </div>
-    </div>
-
-    <footer>
-        &copy; 2024 Perfil Médico. Todos os direitos reservados.
-    </footer>
+        </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="loginToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Notificação</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastMessage">
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+    <script src="calculo_atividades_fisicas.js"></script>
+    <script src="../CodsGeral.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

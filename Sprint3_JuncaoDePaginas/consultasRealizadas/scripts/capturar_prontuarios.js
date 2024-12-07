@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".consultas-container");
     const prontuarioContainer = document.querySelector(".prontuario-info");
 
+    let lastClickedPaciente = null; // Para armazenar o último paciente clicado
+
     // Função para criar os cartões de perfil para pacientes com prontuários
     const createProfileCard = (paciente) => {
         const profileCard = document.createElement("div");
@@ -10,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "row",
             "m-3",
             "p-2",
-            "justify-content-lg-between",
+            "justify-content-xlg-between",
+            "justify-content-evenly",
             "align-items-center",
             "alert",
             "alert-primary"
@@ -32,13 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
         pacienteNome.classList.add("col-auto", "d-block", "fw-bold", "fs-5");
         pacienteNome.textContent = paciente.prontuarios[0].nome;
 
-        const prontuarioLink = document.createElement("span");
-        prontuarioLink.classList.add("col-auto", "text-primary", "mt-2", "m-md-0");
+        const prontuarioLink = document.createElement("button");
+        prontuarioLink.classList.add("btn", "btn-primary", "col-auto", "text-white", "mt-2", "mt-sm-0");
         prontuarioLink.style.cursor = "pointer";
         prontuarioLink.textContent = "Ver Prontuário";
 
         prontuarioLink.addEventListener("click", () => {
-            displayProntuario(paciente, 0);  // Exibe o primeiro prontuário
+            // Destaca o nome do paciente clicado
+            highlightPaciente(pacienteNome);
+            displayProntuario(paciente, 0); // Exibe o primeiro prontuário
         });
 
         consultaInfo.appendChild(dataConsulta);
@@ -66,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h4 class="text-primary opacity-50">Limites e Metas</h4>
             <p><strong>Limite de Carboidratos:</strong> ${prontuario.limites.carboidratos} g</p>
             <p><strong>Calorias Queimadas:</strong> ${prontuario.limites.caloriasQueimadas} kcal</p>
-            <p><strong>Atividade Mínima:</strong> ${prontuario.limites.atividadeMinima} minutos</p>
+            <p><strong>Tipo de Diabetes:</strong> ${prontuario.limites.atividadeMinima || "Não especificado"}</p>
             <h4 class="text-primary opacity-50">Exames Realizados</h4>
             <p><strong>Glicemia em Jejum:</strong> ${prontuario.glicemias.jejum}</p>
             <p><strong>Glicemia Pós-Prandial:</strong> ${prontuario.glicemias.posPrandial || "Não especificado"}</p>
@@ -108,6 +113,20 @@ document.addEventListener("DOMContentLoaded", () => {
             prontuarioContainer.appendChild(prevButton);
             prontuarioContainer.appendChild(nextButton);
         }
+    };
+
+    // Função para destacar o nome do paciente clicado
+    const highlightPaciente = (pacienteNome) => {
+        // Se houver um paciente anteriormente clicado, remove o destaque
+        if (lastClickedPaciente) {
+            lastClickedPaciente.classList.remove("highlighted");
+        }
+
+        // Adiciona o destaque ao paciente atual
+        pacienteNome.classList.add("highlighted");
+
+        // Atualiza o último paciente clicado
+        lastClickedPaciente = pacienteNome;
     };
 
     // Função para carregar os pacientes com prontuários
@@ -156,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!updateResponse.ok) throw new Error("Erro ao excluir o prontuário.");
             alert("Prontuário excluído com sucesso!");
+            // Recarrega os pacientes e prontuários para refletir as mudanças
             loadPatientsWithProntuarios();
         } catch (error) {
             console.error("Erro ao excluir o prontuário:", error);
