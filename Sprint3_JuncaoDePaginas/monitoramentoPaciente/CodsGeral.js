@@ -157,7 +157,8 @@ function logout() {
     document.getElementById("botaologin").src = "Imagens/User.png"; 
     document.getElementById("botaofechar").innerText = "Login";
 
-    window.location.href = "Index.html"; 
+    window.location.href = "Index.html";
+    localStorage.clear(); 
 }
 
 // Funções de Alteração do Modal e Exibição de Informações do Usuário

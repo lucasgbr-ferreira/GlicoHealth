@@ -27,8 +27,9 @@
                     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0">
                         <div class="container-fluid" id="navbar">
                             <div class="col-md-8 d-flex" id="Linha1Nav">
-                                <a class="navbar-brand" href="../../InterfaceUsuário/Index.html"><img src="../images/Logo-GilcoHealth.png"
-                                        id="Logo-GilcoHealth" style="max-width: 70px;"></a>
+                                <a class="navbar-brand" href="../../InterfaceUsuário/Index.html"><img
+                                        src="../images/Logo-GilcoHealth.png" id="Logo-GilcoHealth"
+                                        style="max-width: 70px;"></a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                     aria-expanded="false" aria-label="Toggle navigation">
@@ -157,8 +158,8 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer" id="modalFooter">
-                                            <a href="../../InterfaceUsuário/Index.html"><button type="button" onclick="logout()"
-                                                    class="btn btn-secondary" data-bs-dismiss="modal"
+                                            <a href="../../InterfaceUsuário/Index.html"><button type="button"
+                                                    onclick="logout()" class="btn btn-secondary" data-bs-dismiss="modal"
                                                     id="botaofechar">Fechar</button>
                                             </a>
                                         </div>
@@ -308,6 +309,91 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-auto mt-3 text-end">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#alimentosCliente">
+                                Gerenciar Alimentos
+                            </button>
+
+                            <!-- Modal Principal -->
+                            <div class="modal fade" id="alimentosCliente" tabindex="-1"
+                                aria-labelledby="alimentosClienteLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="alimentosClienteLabel">Lista de Alimentos
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Lista de Alimentos -->
+                                            <ul class="list-group" id="listaAlimentos">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <button class="btn btn-danger btn-sm"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <button class="btn btn-danger btn-sm"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </li>
+                                            </ul>
+                                            <!-- Botão de Adicionar -->
+                                            <button type="button" class="btn btn-success w-100 mt-3"
+                                                data-bs-toggle="modal" data-bs-target="#adicionarAlimentoModal">
+                                                <i class="bi bi-plus-circle"></i> Adicionar Alimento
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Secundário para Adicionar Alimento -->
+                            <div class="modal fade" id="adicionarAlimentoModal" tabindex="-1"
+                                aria-labelledby="adicionarAlimentoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="adicionarAlimentoModalLabel">Adicionar
+                                                Alimento</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                            <form id="formAdicionarAlimento">
+                                                <div class="mb-3">
+                                                    <label for="nomeAlimento" class="form-label"><b>Nome do
+                                                        Alimento</b></label>
+                                                    <input type="text" class="form-control" id="nomeAlimento"
+                                                        placeholder="Ex.: Banana">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="indiceGlicemico" class="form-label"><b>Índice Glicêmico
+                                                        (por grama)</b></label>
+                                                    <input type="number" class="form-control" id="indiceGlicemico"
+                                                        placeholder="Ex.: 50">
+                                                    <p class="text-center"><small>Não sabe o índice glicêmico? Utilize o site <a href="https://glycemicindex.com/gi-search/" target="_blank">Glycemic Index</a> para auxiliá-lo.</small></p>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary"
+                                                id="salvarAlimento">Salvar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col align-content-center text-center ps-lg-5">
@@ -326,14 +412,15 @@
             <div id="loginRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-white">
                     <strong class="me-auto">Atenção</strong>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
                     Você precisa estar logado para acessar esta funcionalidade!
                 </div>
             </div>
-        </div>      
-    </div>
+        </div>
+        </div>
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
             <div id="loginToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
@@ -350,6 +437,7 @@
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
     <script src="calculo_indice_glicemico.js"></script>
-    <script src="../CodsGeral.js"></script>
+    <script src="../../InterfaceUsuário/CodsFontePaciente.js"></script>
 </body>
+
 </html>

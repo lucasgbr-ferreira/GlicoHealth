@@ -1,21 +1,68 @@
+document.getElementById("btn-prontuarios").addEventListener("mouseover", function() {
+    document.getElementById("col-visivel").classList.add("d-none");  // Esconde a coluna de agendamento
+    document.getElementById("col-invisivel").classList.remove("d-none");  // Exibe a coluna de orientações
+});
+
+document.getElementById("btn-prontuarios").addEventListener("mouseout", function() {
+    document.getElementById("col-visivel").classList.remove("d-none");  // Exibe a coluna de agendamento
+    document.getElementById("col-invisivel").classList.add("d-none");  // Esconde a coluna de orientações
+});
+function showToastById(toastId, message = "") {
+    const toastElement = document.getElementById(toastId);
+
+    if (toastElement) {
+        if (message) {
+            const toastBody = toastElement.querySelector(".toast-body");
+            if (toastBody) toastBody.textContent = message;
+        }
+
+        const toast = new bootstrap.Toast(toastElement, {
+            delay: 10000, 
+        });
+        toast.show();
+    } else {
+        console.error(`Toast com ID '${toastId}' não encontrado!`);
+    }
+}
+function hideToastById(toastId) {
+    const toastElement = document.getElementById(toastId);
+
+    if (toastElement) {
+        const toast = new bootstrap.Toast(toastElement);
+        toast.hide();
+    } else {
+        console.error(`Toast com ID '${toastId}' não encontrado!`);
+    }
+}
+
+//Registros {Médicos}
+
 // Carregamento da página
 window.onload = function() {
     const loggedIn = localStorage.getItem("loggedIn");
     const loggedUsername = localStorage.getItem("username");
 
+    // Se o usuário estiver logado
     if (loggedIn === "true" && loggedUsername) {
         logado(loggedUsername);
         alterarmodal(loggedUsername); 
+    } else {
+        const toast = new bootstrap.Toast(document.getElementById("toastIntroducao"), {
+            delay: 8000  // Define o tempo do toast para 8 segundos
+        });
+        toast.show();
     }
+    // Carrega a foto de perfil salva, caso exista
     const savedProfilePicture = localStorage.getItem("profilePicture");
-
     if (savedProfilePicture) {
         document.getElementById("currentProfilePicture").src = savedProfilePicture;
     } else {
         document.getElementById("currentProfilePicture").src = "https://via.placeholder.com/100";
     }
+    // Aplica o tema salvo (caso tenha)
     applySavedTheme();
 };
+
 
 // Funções de Login e Cadastro
 function toggleSection() {
@@ -26,12 +73,12 @@ function toggleSection() {
 }
 
 function getDatabase() {
-    return fetch('http://localhost:3000/pacientes')
+    return fetch('http://localhost:3000/medicos')
         .then(response => response.json());
 }
 
 function saveDatabase(database) {
-    return fetch('http://localhost:3000/pacientes', {
+    return fetch('http://localhost:3000/medicos', {
         method: 'PUT', // Altera os dados de forma geral
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(database),
@@ -40,13 +87,13 @@ function saveDatabase(database) {
 
 // Função para obter os dados do banco de dados
 function getDatabase() {
-    return fetch('http://localhost:3000/pacientes')
+    return fetch('http://localhost:3000/medicos')
         .then(response => response.json());
 }
 
 // Função para salvar dados no banco de dados
 function saveDatabase(newUser) {
-    return fetch('http://localhost:3000/pacientes', {
+    return fetch('http://localhost:3000/medicos', {
         method: 'POST', // Altera os dados no banco
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
@@ -78,12 +125,12 @@ function register() {
             const newUser = {
                 username,
                 password,
-                role: "paciente",
+                role: "medico",
                 name: "",
                 email: "",
                 phone: "",
                 profilePicture: "",
-                cpf:""
+                crm:""
             };
 
             // Salva o novo usuário no banco de dados (sem substituir os dados existentes)
@@ -176,7 +223,7 @@ function alterarmodal(username) {
                 <li class="list-group-item text-center">Nome: <strong>${userInfo.name}</strong></li>
                 <li class="list-group-item text-center">Telefone: <strong>${userInfo.phone}</strong></li>
                 <li class="list-group-item text-center">Email: <strong>${userInfo.email}</strong></li>
-                <li class="list-group-item text-center">CPF: <strong>${userInfo.cpf || ''}</strong></li>  <!-- Verificando se o CPF existe -->
+                <li class="list-group-item text-center">CRM: <strong>${userInfo.crm || ''}</strong></li> 
                 <li class="list-group-item text-center">
                 Senha: <strong id="passwordField" style="letter-spacing: 3px;">••••••••</strong>
                 <button id="togglePassword" class="btn btn-sm btn-outline-primary ms-2">Mostrar</button>
@@ -186,8 +233,8 @@ function alterarmodal(username) {
         `;
             document.getElementById("botaofechar").innerText = "Logout";
             document.getElementById("botaoEdicao").style.display = "";
-            if (!userInfo.cpf) {
-                showToastById("cpfRequiredToast", "Por favor, complete o campo CPF clicando em 'Editar Informações'.");
+            if (!userInfo.crm) {
+                showToastById("crmRequiredToast", "Por favor, complete o campo CRM clicando em 'Editar Informações'.");
             }
             
         } else {
@@ -240,204 +287,19 @@ document.addEventListener("click", function (event) {
         });
     }
 });
-
-// Atualização do Tema
-function applySavedTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('theme-name').textContent = 'Escuro';
-    } else {
-        document.body.classList.remove('dark-mode');
-        document.getElementById('theme-name').textContent = 'Claro';
-    }
-    updateThemeStyles();
-}
-
-function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-
-    document.getElementById('theme-name').textContent = isDarkMode ? 'Escuro' : 'Claro';
-    updateThemeStyles();
-}
-
-function updateThemeStyles() {
-    const themeLink = document.getElementById('theme-stylesheet');
-    if (document.body.classList.contains('dark-mode')) {
-        themeLink.href = 'styles-dark.css';
-    } else {
-        themeLink.href = 'styles.css';
-    }
-}
-// Função para atualizar o estilo do tema
-function updateThemeStyles() {
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    if (isDarkMode) {
-        // Tema Escuro
-        document.getElementById("Logo-GilcoHealth").src = 'Imagens/LogoHeader.png';
-        document.getElementById("Nav").style.backgroundColor = "#333";
-        document.getElementById("offcanvasWithBothOptions").className = "offcanvas offcanvas-start text-bg-dark w-50";
-        document.getElementById("modalHeader").style.backgroundColor = "#333";
-        document.getElementById("exampleModalLabel").style.color = "white";
-        document.getElementById("modalBody").style.backgroundColor = "#333";
-        document.getElementById("modalFooter").style.backgroundColor = "#333";
-        
-        const navItems = document.querySelectorAll('#ListaNav .nav-link');
-        navItems.forEach(item => {
-            item.style.color = "white";
-        });
-        document.getElementById("theme-switch").innerText = "Escuro";
-        document.getElementById("theme-switch").style.backgroundColor = "black";
-        document.getElementById("theme-switch").style.color = "white";
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.style.backgroundColor = '#333';
-            card.style.color = "white";
-        });
-        document.getElementById("AlertaTemaB").style.backgroundColor = "#333";
-        document.getElementById("AlertaTemaB").style.color = "white";
-        document.getElementById("AlertaTemaH").style.backgroundColor = "#333";
-        document.getElementById("AlertaTemaH").style.color = "white";
-    } else {
-        // Tema Claro
-        document.getElementById("Logo-GilcoHealth").src = 'Imagens/LogoHeader.png';
-        document.getElementById("Nav").style.backgroundColor = "aliceblue";
-        document.getElementById("offcanvasWithBothOptions").className = "offcanvas offcanvas-start w-50";
-        document.getElementById("modalHeader").style.backgroundColor = "white";
-        document.getElementById("exampleModalLabel").style.color = "black";
-        document.getElementById("modalBody").style.backgroundColor = "white";
-        document.getElementById("modalFooter").style.backgroundColor = "white";
-        const navItems = document.querySelectorAll('#ListaNav .nav-link');
-        navItems.forEach(item => {
-            item.style.color = "black";
-        });
-        document.getElementById("theme-switch").innerText = "Claro";
-        document.getElementById("theme-switch").style.backgroundColor = "white";
-        document.getElementById("theme-switch").style.color = "black";
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.style.backgroundColor = 'white';
-            card.style.color = "black";
-        });
-        document.getElementById("AlertaTemaB").style.backgroundColor = "white";
-        document.getElementById("AlertaTemaB").style.color = "black";
-        document.getElementById("AlertaTemaH").style.backgroundColor = "white";
-        document.getElementById("AlertaTemaH").style.color = "black";
-    }
-}
-document.querySelector('#theme-switch').addEventListener('click', toggleTheme);
-
-function showToastById(toastId, message = "") {
-    const toastElement = document.getElementById(toastId);
-
-    if (toastElement) {
-        if (message) {
-            const toastBody = toastElement.querySelector(".toast-body");
-            if (toastBody) toastBody.textContent = message;
-        }
-
-        const toast = new bootstrap.Toast(toastElement, {
-            delay: 10000, 
-        });
-        toast.show();
-    } else {
-        console.error(`Toast com ID '${toastId}' não encontrado!`);
-    }
-}
-function hideToastById(toastId) {
-    const toastElement = document.getElementById(toastId);
-
-    if (toastElement) {
-        const toast = new bootstrap.Toast(toastElement);
-        toast.hide();
-    } else {
-        console.error(`Toast com ID '${toastId}' não encontrado!`);
-    }
-}
-
-function showUsersInDOM() {
-    // Exibe o toast de "Carregando..."
-    showToastById("loadingToast", "Carregando...");
-
-    fetch("http://localhost:3000/pacientes")
-        .then((response) => {
-            if (!response.ok) {
-                showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
-                throw new Error("Servidor fechado ou inacessível.");
-            }
-            return response.json();
-        })
-        .then((database) => {
-            const userCardsContainer = document.getElementById("userCardsContainer");
-            userCardsContainer.innerHTML = "";
-
-            if (database.length === 0) {
-                userCardsContainer.innerHTML = "<p class='text-center'>Nenhum usuário registrado.</p>";
-            } else {
-                database.forEach((user) => {
-                    const card = document.createElement("div");
-                    card.className = "col-12 col-md-4";
-                    card.innerHTML = `
-                        <div class="card d-flex flex-column" style="height: 100%; border-radius: 20px; max-width: 100%; ">
-                            <img src="${user.profilePicture || 'https://via.placeholder.com/100'}" alt="Foto do Usuário" style="max-width: 100px; height: 100px; object-fit: cover;" class="rounded-circle mb-2 mx-auto">
-                            <h5 class="text-center">${user.username}</h5>
-                            <p class="text-center"><strong>Nome:</strong> ${user.name || "Não informado"}</p>
-                            <p class="text-center"><strong>Email:</strong> ${user.email || "Não informado"}</p>
-                            <p class="text-center"><strong>Telefone:</strong> ${user.phone || "Não informado"}</p>
-                            <p class="text-center"><strong>Senha:</strong> ${user.password || "Não informado"}</p>
-                            <p class="text-center"><strong>CPF:</strong> ${user.cpf || "Não informado"}</p>
-                            <div class="d-flex justify-content-center mt-auto">
-                                <button class="btn btn-danger btn-sm" onclick="removeUser('${user.id}')">Remover</button>
-                            </div>
-                        </div>
-                    `;
-                    userCardsContainer.appendChild(card);
-                });
-            }
-            showToastById("loadingToast", "Usuários atualizados com sucesso!");
-            const toggleUsersButton = document.getElementById("toggleUsersButton");
-            if (toggleUsersButton) {
-                toggleUsersButton.innerHTML = "Atualizar Usuários";
-            }
-        })
-        .catch((error) => {
-            console.error("Erro ao acessar o servidor:", error);
-            showToastById("loadingToast", "Erro ao carregar usuários. Verifique sua conexão ou tente novamente.");
-        });
-}
-
-// Remove usuários
-function removeUser(userId) {
-    // Confirmação antes de remover
-    const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${userId}?`);
-    if (!confirmDelete) return;
-
-    // Requisição para remover o usuário
-    fetch(`http://localhost:3000/pacientes/${userId}`, {
-        method: 'DELETE',
-    }).then(() => {
-        // Atualiza a lista de usuários sem recarregar a página
-        showUsersInDOM();
-    }).catch((error) => {
-        console.error('Erro ao remover o usuário:', error);
-    });
-}
-
-// Editor de informações {SPRINT2}
+// Editor de informações
 document.getElementById("profileEditForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
     const name = document.getElementById("userName").value;
     const email = document.getElementById("userEmail").value;
     const phone = document.getElementById("userPhone").value;
-    const cpf = document.getElementById("userCpf").value; 
+    const crm = document.getElementById("userCrm").value; 
     const picture = document.getElementById("profilePicture").files[0];
     
     const loggedUsername = localStorage.getItem("username");
 
-    fetch('http://localhost:3000/pacientes')
+    fetch('http://localhost:3000/medicos')
         .then(response => response.json())
         .then(database => {
             const userIndex = database.findIndex(user => user.username === loggedUsername);
@@ -452,11 +314,11 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
                         name,
                         email,
                         phone,
-                        cpf, 
+                        crm, 
                         profilePicture: profilePictureData
                     };
 
-                    fetch(`http://localhost:3000/pacientes/${database[userIndex].id}`, {
+                    fetch(`http://localhost:3000/medicos/${database[userIndex].id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -485,11 +347,11 @@ document.getElementById("profileEditForm").addEventListener("input", function ()
     const name = document.getElementById("userName").value;
     const email = document.getElementById("userEmail").value;
     const phone = document.getElementById("userPhone").value;
-    const cpf = document.getElementById("userCpf").value; 
+    const crm = document.getElementById("userCrm").value; 
     const picture = document.getElementById("profilePicture").files[0];
     const saveButton = document.getElementById("saveButton");
 
-    if (name && email && phone && cpf && picture) {
+    if (name && email && phone && crm && picture) {
         saveButton.disabled = false;
     } else {
         saveButton.disabled = true;
@@ -513,50 +375,3 @@ document.getElementById("profilePicture").addEventListener("change", function(ev
         reader.readAsDataURL(file);
     }
 });
-
-// Selecionando o botão de troca de tema e o toast
-const themeSwitchButton = document.getElementById('theme-switch');
-const themeToast = new bootstrap.Toast(document.getElementById('theme-toast'), {
-    delay: 8000 
-});
-
-// Função para alternar entre os temas
-themeSwitchButton.addEventListener('click', function() {
-    // Verifica se o tema atual é o 'claro' ou 'escuro'
-    if (document.body.classList.contains('dark-theme')) {
-        // Mudar para o tema claro
-        document.body.classList.remove('dark-theme');
-        themeSwitchButton.textContent = 'Claro';
-        document.getElementById('theme-name').textContent = 'Claro'; // Atualiza o texto no toast
-
-    } else {
-        // Mudar para o tema escuro
-        document.body.classList.add('dark-theme');
-        themeSwitchButton.textContent = 'Escuro';
-        document.getElementById('theme-name').textContent = 'Escuro'; // Atualiza o texto no toast
-    }
-
-    // Mostrar o toast de notificação
-    themeToast.show();
-});
-
-// Requerimento de login para funcionlidades
-function handleCardClick(event, targetUrl) {
-    event.preventDefault(); 
-
-    const loggedIn = localStorage.getItem("loggedIn");
-
-    if (loggedIn) {
-        // Se o usuário estiver logado, redirecione para a página passada como argumento
-        window.location.href = targetUrl;
-    } else {
-        // Exibe o toast vermelho informando que é necessário login
-        showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
-    }
-}
-
-
-
-
-
-
