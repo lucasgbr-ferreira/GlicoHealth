@@ -1,4 +1,4 @@
-const API_KEY = '2e72b508e5224b0c9d3018a84a951531'; // Substitua pela sua chave da News API
+const API_KEY = '2e72b508e5224b0c9d3018a84a951531'; 
 const API_URL = `https://newsapi.org/v2/everything?q=diabetes&language=pt&apiKey=${API_KEY}`;
 const newsContainer = document.getElementById('news-cards');
 const articleContainer = document.getElementById('article-card');
@@ -31,54 +31,54 @@ function renderNews(articles) {
     articles.slice(17, 22).forEach((article, index) => {
         // Verifica se a notícia tem as propriedades essenciais
         if (article.title && article.description && article.url) {
+            const card = document.createElement('div');
+            card.className = index === 0 ? 'col-12' : 'col-12 col-sm-6 col-md-3 mb-4';  // Define o estilo do card dependendo do índice
+
             if (index === 0) {
+                // Se for o primeiro artigo, exibe um card maior
                 const publishedDate = new Date(article.publishedAt).toLocaleDateString('pt-BR', {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric'
                 });
-            
-                const card = document.createElement('div');
-                card.className = 'col-12';
-            
-                card.innerHTML = `
-                <div class="card text-center" style:max-width: 80%;>
-                    <div class="card-body">
-                        <h4 class="card-title">${truncateText(article.title, 100)}</h4>
-                        <p class="card-text">${truncateText(article.description, 300)}</p>
-                        <a href="${article.url}" class="btn btn-secondary btn-sm px-5 opacity-75">Leia mais</a>
-                    </div>
-                    <div class="card-footer text-body-secondary">Publicado em: ${publishedDate}</div>
-                </div>
-            `;
-            
-                articleContainer.appendChild(card);
-            } else {
-                const card = document.createElement('div');
-                card.className = 'col-12 col-sm-6 col-md-3 mb-4';
 
-                // Row de cards
                 card.innerHTML = `
-                <div class="card" style="width: 18rem; height: 350px; display: flex; flex-direction: column;">
-                    <img src="${article.urlToImage || 'images/default-news.jpg'}" class="card-img-top" alt="Notícia" style="height: 150px; object-fit: cover; display: block; margin: 0 auto;">
-                    <div class="card-body" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 0.5rem;">
-                        <div>
-                            <h5 class="card-title" style="font-size: 1rem; height: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${truncateText(article.title, 50)}</h5>
-                            <p class="card-text" style="font-size: 0.9rem; height: 80px; overflow: hidden; text-overflow: ellipsis;">${truncateText(article.description, 120)}</p>
+                    <div class="card text-center" style="max-width: 80%;"> <!-- Corrigido o erro de sintaxe aqui -->
+                        <div class="card-body">
+                            <h4 class="card-title">${truncateText(article.title, 100)}</h4>
+                            <p class="card-text">${truncateText(article.description, 300)}</p>
+                            <a href="${article.url}" class="btn btn-secondary btn-sm px-5 opacity-75">Leia mais</a>
                         </div>
-                        <div style="margin-top: auto; text-align: center;">
-                            <a href="${article.url}" target="_blank" class="btn btn-primary btn-sm w-100">Leia mais</a>
+                        <div class="card-footer text-body-secondary">Publicado em: ${publishedDate}</div>
+                    </div>
+                `;
+            } else {
+                // Se não for o primeiro artigo, exibe os outros artigos menores em formato de grid
+                card.innerHTML = `
+                    <div class="card" style="width: 18rem; height: 350px; display: flex; flex-direction: column;">
+                        <img src="${article.urlToImage || 'images/default-news.jpg'}" class="card-img-top" alt="Notícia" style="height: 150px; object-fit: cover; display: block; margin: 0 auto;">
+                        <div class="card-body" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 0.5rem;">
+                            <div>
+                                <h5 class="card-title" style="font-size: 1rem; height: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${truncateText(article.title, 50)}</h5>
+                                <p class="card-text" style="font-size: 0.9rem; height: 80px; overflow: hidden; text-overflow: ellipsis;">${truncateText(article.description, 120)}</p>
+                            </div>
+                            <div style="margin-top: auto; text-align: center;">
+                                <a href="${article.url}" target="_blank" class="btn btn-primary btn-sm w-100">Leia mais</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;                      
-                newsContainer.appendChild(card);
+                `;
             }
+
+            // Adiciona o card ao newsContainer
+            newsContainer.appendChild(card);
         } else {
             console.warn('Notícia com dados inválidos, não será exibida:', article);
         }
     });
 }
+
+
 
 function truncateText(text, maxLength) {
     if (text && text.length > maxLength) {
@@ -183,6 +183,16 @@ document.getElementById('checkRequestStatusButton').addEventListener('click', fu
                     document.getElementById("modalStatus").textContent = request.status;
                     document.getElementById("modalRole").textContent = request.role;
 
+                    // Atualiza a cor do status com base no valor
+                    const statusElement = document.getElementById("modalStatus");
+                    if (request.status === 'aceita') {
+                        statusElement.style.color = 'green'; // Cor verde para 'aceita'
+                    } else if (request.status === 'pendente') {
+                        statusElement.style.color = 'yellow'; // Cor amarela para 'pendente'
+                    } else if (request.status === 'recusada') {
+                        statusElement.style.color = 'red'; // Cor vermelha para 'recusada'
+                    }
+
                     // Limpa o conteúdo de botão anterior (se houver)
                     const existingRedirectButton = document.getElementById("redirectButton");
                     if (existingRedirectButton) {
@@ -190,33 +200,36 @@ document.getElementById('checkRequestStatusButton').addEventListener('click', fu
                     }
 
                     // Verifica se o status é 'aceita' e adiciona o botão de redirecionamento
-                    const modalBody = document.getElementById("modalBody");
+                    const modalBody = document.getElementById("modalBodyReq");
 
                     console.log('Status da requisição:', request.status);
                     if (request.status === 'aceita') {
                         console.log("Status é 'aceita', entrando no if.");
 
+                        const button = document.createElement("button");
+                        button.id = "redirectButton"; // Definindo o ID do botão
+                        button.classList.add("btn"); // Adicionando a classe de botão
+                        button.textContent = "Ir para Página de ";
+
+                        // Verifica a função do usuário e define o botão correspondente
                         if (request.role === 'Administrador') {
                             console.log("Função é 'Administrador', criando botão para admin.");
-                            modalBody.innerHTML += `
-                                <button id="redirectButton" class="btn btn-danger">
-                                    Ir para Página de Administração
-                                </button>
-                            `;
-                            document.getElementById('redirectButton').onclick = function() {
-                                window.location.href = '../PaginaDeAdministrador.html';
+                            button.classList.add("btn-info"); 
+                            button.textContent += "Administração"; 
+                            button.onclick = function() {
+                                window.location.href = '../InterfaceAdm/Adm.html';
                             };
                         } else {
                             console.log("Função não é 'Administrador', criando botão para usuário.");
-                            modalBody.innerHTML += `
-                                <button id="redirectButton" class="btn btn-info">
-                                    Ir para Página de Usuário
-                                </button>
-                            `;
-                            document.getElementById('redirectButton').onclick = function() {
-                                window.location.href = '../PaginaDeUsuario.html';
+                            button.classList.add("btn-info"); 
+                            button.textContent += "Usuário"; 
+                            button.onclick = function() {
+                                window.location.href = '../perfilMedico/PerfilMed.html';
                             };
                         }
+
+                        // Adiciona o botão ao modal
+                        modalBody.appendChild(button);
                     } else {
                         console.log("Status não é 'aceita'.");
                     }
@@ -238,6 +251,8 @@ document.getElementById('checkRequestStatusButton').addEventListener('click', fu
         alert('Por favor, preencha o campo de usuário para verificar o status.');
     }
 });
+
+
 
 
 

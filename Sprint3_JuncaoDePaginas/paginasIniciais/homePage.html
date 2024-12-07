@@ -67,12 +67,12 @@
                                 </div>
                             </div>
                             <div class="col-md-4 d-flex justify-content-end align-items-center p-2">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="botaologin" style="max-width: 100%; background-color: #007bff; color: white; border-radius: 5px; padding: 10px 15px; font-size: 12px; text-align: center;">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" id="botaologin" style="max-width: 100%; background-color: #5bc0de; color: white; border-radius: 5px; padding: 10px 15px; font-size: 12px; text-align: center;">
                                     Começar Experiência
                                 </button>
                             </div>
                                 <!-- Modal Para Requisição-->
-                                <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header" id="modalHeader">
@@ -124,7 +124,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </nav>
@@ -142,38 +142,108 @@
                 </div>
             </div>
         </div>
+    
         <div class="container">
             <div class="col-12 text-center">
-                <h2>Somos uma rede especializada na gestão e melhoria de qualidade de vida de usuários com diabetes
-                </h2>
+                <h2>Somos uma rede especializada na gestão e melhoria de qualidade de vida de usuários com diabetes</h2>
             </div>
-            <div class="row justify-content-evenly mt-4 text-center">
-                <div class="col-12 col-sm-6 mb-4">
-                    <img src="images/image.png" class="img-fluid" alt="...">
-                    <h3 class="fw-bold mt-3">Acompanhamento de Dados</h3>
+            <div class="row justify-content-evenly mt-4">
+                <!-- Coluna 1 -->
+                <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/image.png" class="rounded-circle" alt="Acompanhamento de Dados" style="height: 200px; width: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="mt-3">Acompanhamento de Dados</h5>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                Mostrar Mais
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapse1">
+                            <div class="card card-body">
+                                Acompanhamento em tempo real dos dados dos usuários para garantir maior controle e precisão.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-sm-6 mb-4">
-                    <img src="images/image2.png" class="img-fluid" alt="...">
-                    <h3 class="fw-bold mt-3">Agendamento de Consultas</h3>
+        
+                <!-- Coluna 2 -->
+                <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/image2.png" class="rounded-circle" alt="Agendamento de Consultas" style="height: 200px; width: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="mt-3">Agendamento de Consultas</h5>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                Mostrar Mais
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapse2">
+                            <div class="card card-body">
+                                Plataforma para facilitar o agendamento de consultas médicas de forma rápida e prática.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-sm-6 mb-4">
-                    <img src="images/image3.png" class="img-fluid" alt="...">
-                    <h3 class="fw-bold mt-3">Dieta Personalizada</h3>
+        
+                <!-- Coluna 3 -->
+                <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/image3.png" class="rounded-circle" alt="Dieta Personalizada" style="height: 200px; width: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="mt-3">Dieta Personalizada</h5>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                Mostrar Mais
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapse3">
+                            <div class="card card-body">
+                                Sugestões de dieta personalizadas de acordo com as necessidades nutricionais e de saúde dos usuários.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-sm-6 mb-4">
-                    <img src="images/image4.png" class="img-fluid" alt="...">
-                    <h3 class="fw-bold mt-3">Metrificação de Atividades</h3>
+        
+                <!-- Coluna 4 -->
+                <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/image4.png" class="rounded-circle" alt="Metrificação de Atividades" style="height: 200px; width: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="mt-3">Metrificação de Atividades</h5>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                Mostrar Mais
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapse4">
+                            <div class="card card-body">
+                                Monitoramento das atividades físicas realizadas pelos usuários para otimizar os resultados de saúde.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </main>
+        
+                 
+        
         <div class="container">
             <div class="col-12">
                 <h4 class="m-0">Últimas Notícias</h4>
                 <p class="text-secondary">Atualizações e Pesquisas</p>
             </div>
+    
+            <!-- Contêiner onde as notícias/artigos serão inseridos -->
             <div class="row justify-content-evenly mt-4" id="news-cards">
+                <!-- Os artigos serão inseridos aqui dinamicamente -->
+            </div>
         </div>
-
 <!-- OffCanvas -->
 <div class="offcanvas offcanvas-end custom-offcanvas" data-bs-scroll="true" data-bs-backdrop="static" tabindex="-1" id="offcanvasRequest" aria-labelledby="offcanvasRequestLabel">
     <div class="offcanvas-header">
@@ -218,32 +288,33 @@
     </div>
 </div>
 
-<!-- Modal para visualizar requisição -->
+<!-- Modal de Exibição da Requisição -->
 <div class="modal fade" id="viewRequestModal" tabindex="-1" aria-labelledby="viewRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <!-- Cabeçalho do Modal -->
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="viewRequestModalLabel">Detalhes da Requisição</h1>
+          <h5 class="modal-title" id="modalCardHeader">Requisição de: </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id="modalBody">
-          <!-- Card da requisição -->
-          <div id="modalRequestCard" class="card">
-            <div class="card-header" id="modalCardHeader"></div>
-            <div class="card-body">
-              <p><strong>Username:</strong> <span id="modalUsername"></span></p>
-              <p><strong>Comentário:</strong> <span id="modalComment"></span></p>
-              <p><strong>Status:</strong> <span id="modalStatus"></span></p>
-              <p><strong>Função:</strong> <span id="modalRole"></span></p>
-            </div>
-          </div>
+        <!-- Corpo do Modal -->
+        <div class="modal-body">
+          <!-- Detalhes da requisição -->
+          <p><strong>Username:</strong> <span id="modalUsername"></span></p>
+          <p><strong>Comentário:</strong> <span id="modalComment"></span></p>
+          <p ><strong>Status:</strong> <span id="modalStatus"></span></p>
+          <p><strong>Função:</strong> <span id="modalRole"></span></p>
+  
         </div>
-        <div class="modal-footer" id="modalFooter">
-          <!-- Os botões serão adicionados aqui dinamicamente -->
+        <!-- Rodapé do Modal (Opcional) -->
+        <div class="modal-footer" id="modalBodyReq">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+
         </div>
       </div>
     </div>
-  </div>  
+</div>
+  
 
 </main>
     <footer>

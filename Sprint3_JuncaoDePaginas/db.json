@@ -189,17 +189,6 @@
       "cpf": ""
     },
     {
-      "id": "c57b",
-      "username": "fabin",
-      "password": "1234",
-      "role": "paciente",
-      "name": "",
-      "email": "",
-      "phone": "",
-      "profilePicture": "",
-      "cpf": ""
-    },
-    {
       "id": "fe83",
       "username": "kl",
       "password": "1234",
@@ -307,25 +296,37 @@
   ],
   "requisicoes": [
     {
-      "id": "00f1",
-      "username": "2",
-      "password": "2",
-      "comment": "2",
-      "role": "Administrador",
-      "status": "recusada"
+      "id": "67aa",
+      "username": "Adm1",
+      "comment": "PORFAVOR",
+      "status": "aceita",
+      "role": "Administrador"
     },
     {
-      "id": "6603",
-      "username": "4",
-      "password": "4",
-      "comment": "4",
-      "role": "Médico",
-      "status": "aceita"
+      "id": "10d7",
+      "username": "ADM2",
+      "comment": "p",
+      "status": "aceita",
+      "role": "Administrador"
     },
     {
-      "id": "4157",
-      "username": "9",
-      "comment": "9",
+      "id": "5122",
+      "username": "Medico1",
+      "comment": "a",
+      "status": "aceita",
+      "role": "Médico"
+    },
+    {
+      "id": "f021",
+      "username": "Médico2",
+      "comment": "Quero ser médico",
+      "status": "recusada",
+      "role": "Médico"
+    },
+    {
+      "id": "3e14",
+      "username": "AdmPrincipal",
+      "comment": "a",
       "status": "aceita",
       "role": "Administrador"
     }

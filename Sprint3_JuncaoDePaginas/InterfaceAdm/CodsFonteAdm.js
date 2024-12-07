@@ -1,5 +1,4 @@
 function showUsersInDOM() {
-    // Exibe o toast de "Carregando..."
     showToastById("loadingToast", "Carregando...");
 
     fetch("http://localhost:3000/pacientes")
@@ -65,7 +64,6 @@ function showToastById(toastId, message = "") {
         console.error(`Toast com ID '${toastId}' não encontrado!`);
     }
 }
-// Remove usuários
 function removeUser(userId) {
     // Confirmação antes de remover
     const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${userId}?`);
@@ -84,6 +82,8 @@ function removeUser(userId) {
 
 // Função para exibir as requisições na interface
 function displayRequestsInDOM() {
+    showToastById("loadingToast", "Carregando...");
+
     fetch('http://localhost:3000/requisicoes')
         .then(response => response.json())
         .then(data => {
@@ -150,8 +150,7 @@ function displayRequestsInDOM() {
             });
         })
         .catch(error => {
-            console.error('Erro ao carregar requisições:', error);
-            alert('Erro ao carregar as requisições.');
+            showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
         });
 }
 function acceptRequest(requestId) {
@@ -202,7 +201,5 @@ function removeRequest(requestId, cardElement) {
         }
     })
     .catch(error => {
-        console.error('Erro ao remover a requisição:', error);
-        alert('Erro ao remover a requisição.');
     });
 }
