@@ -49,7 +49,7 @@ async function fetchNews() {
 function renderNews(articles) {
     newsContainer.innerHTML = ''; // Limpa o conteúdo atual
 
-    articles.slice(17, 24).forEach((article, index) => {
+    articles.slice(21, 28).forEach((article, index) => {
         if (index === 0) {
             const publishedDate = new Date(article.publishedAt).toLocaleDateString('pt-BR', {
                 day: 'numeric',

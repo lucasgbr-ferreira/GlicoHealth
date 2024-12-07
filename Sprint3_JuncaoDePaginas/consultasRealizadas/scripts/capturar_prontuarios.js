@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         prontuarioLink.textContent = "Ver Prontuário";
 
         prontuarioLink.addEventListener("click", () => {
-            displayProntuario(paciente, 0);  // Exibe o primeiro prontuário
+            displayProntuario(paciente, 0); // Exibe o primeiro prontuário
         });
 
         consultaInfo.appendChild(dataConsulta);
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h4 class="text-primary opacity-50">Limites e Metas</h4>
             <p><strong>Limite de Carboidratos:</strong> ${prontuario.limites.carboidratos} g</p>
             <p><strong>Calorias Queimadas:</strong> ${prontuario.limites.caloriasQueimadas} kcal</p>
-            <p><strong>Atividade Mínima:</strong> ${prontuario.limites.atividadeMinima} minutos</p>
+            <p><strong>Tipo de Diabetes:</strong> ${prontuario.limites.atividadeMinima || "Não especificado"}</p>
             <h4 class="text-primary opacity-50">Exames Realizados</h4>
             <p><strong>Glicemia em Jejum:</strong> ${prontuario.glicemias.jejum}</p>
             <p><strong>Glicemia Pós-Prandial:</strong> ${prontuario.glicemias.posPrandial || "Não especificado"}</p>
@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!updateResponse.ok) throw new Error("Erro ao excluir o prontuário.");
             alert("Prontuário excluído com sucesso!");
+            // Recarrega os pacientes e prontuários para refletir as mudanças
             loadPatientsWithProntuarios();
         } catch (error) {
             console.error("Erro ao excluir o prontuário:", error);

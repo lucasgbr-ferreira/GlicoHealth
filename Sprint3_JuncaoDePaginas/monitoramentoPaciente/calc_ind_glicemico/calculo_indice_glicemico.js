@@ -16,6 +16,7 @@ function exibirDiaDaSemana() {
 // Variáveis globais
 let limiteDiarioIdeal = 180; // Limite padrão
 let totalIndiceGlicemico = parseFloat(localStorage.getItem('totalIndiceGlicemico')) || 0; // Inicializa a variável totalIndiceGlicemico
+let idPaciente = null; // Inicializa o idPaciente globalmente
 
 // Função para carregar o ID do paciente por username
 async function obterPacienteIdPorUsername(username) {
@@ -216,9 +217,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const username = localStorage.getItem("username");
     if (username) {
         try {
-            const pacienteId = await obterPacienteIdPorUsername(username);
-            if (pacienteId) {
-                const prontuarioCarregado = await carregarLimitePaciente(pacienteId);
+            idPaciente = await obterPacienteIdPorUsername(username); // Atribuição global
+            if (idPaciente) {
+                const prontuarioCarregado = await carregarLimitePaciente(idPaciente);
                 if (prontuarioCarregado) {
                     showToast(`Limite glicêmico do paciente: ${limiteDiarioIdeal} mg/dL`);
                 } else {
@@ -227,6 +228,255 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } catch (error) {
             console.error('Erro ao carregar paciente:', error.message);
+        }
+    }
+});
+
+/**
+ * Adiciona um alimento ao prontuário do paciente.
+ * @param {string} pacienteId - O ID do paciente.
+ * @param {Object} alimento - O objeto com as informações do alimento.
+ */
+
+function atualizarSelectRefeicoes(alimento) {
+    const selects = document.querySelectorAll('.form-select');
+    selects.forEach(select => {
+        const optionExistente = Array.from(select.options).some(option => option.value === alimento.nome);
+        if (!optionExistente) {
+            const option = document.createElement('option');
+            option.value = alimento.nome;
+            option.dataset.indiceGlicemico = alimento.indiceGlicemico;
+            option.textContent = alimento.nome;
+            select.appendChild(option);
+        }
+    });
+}
+
+async function adicionarAlimentoPaciente(pacienteId, alimento) {
+    try {
+        const response = await fetch(`${apiUrl}/pacientes/${pacienteId}`);
+        if (!response.ok) throw new Error('Erro ao obter os dados do paciente.');
+        const paciente = await response.json();
+
+        if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
+            const prontuario = paciente.prontuarios[0];
+
+            // Adiciona o alimento à lista de alimentos
+            prontuario.alimentos = prontuario.alimentos || [];
+            prontuario.alimentos.push(alimento);
+
+            // Envia atualização para a API
+            const updateResponse = await fetch(`${apiUrl}/pacientes/${pacienteId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prontuarios: paciente.prontuarios })
+            });
+
+            if (!updateResponse.ok) throw new Error('Erro ao atualizar o prontuário do paciente.');
+            showToast('Alimento adicionado com sucesso!');
+
+            // Atualiza a UI
+            atualizarListaAlimentosUI(alimento);
+            atualizarSelectRefeicoes(alimento); // Atualiza o select com o novo alimento
+        } else {
+            throw new Error('Prontuário do paciente não encontrado.');
+        }
+    } catch (error) {
+        showToast('Erro ao adicionar alimento.');
+        console.error(error.message);
+    }
+}
+
+/**
+ * Remove um alimento do prontuário do paciente.
+ * @param {string} pacienteId - O ID do paciente.
+ * @param {string} nomeAlimento - Nome do alimento a ser removido.
+ */
+async function removerAlimentoPaciente(pacienteId, nomeAlimento) {
+    try {
+        const response = await fetch(`${apiUrl}/pacientes/${pacienteId}`);
+        if (!response.ok) throw new Error('Erro ao obter os dados do paciente.');
+        const paciente = await response.json();
+
+        if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
+            const prontuario = paciente.prontuarios[0];
+
+            // Remove o alimento da lista
+            prontuario.alimentos = prontuario.alimentos || [];
+            const alimentosFiltrados = prontuario.alimentos.filter(alimento => alimento.nome !== nomeAlimento);
+
+            // Envia atualização para a API apenas se houve mudanças
+            if (alimentosFiltrados.length !== prontuario.alimentos.length) {
+                prontuario.alimentos = alimentosFiltrados;
+
+                const updateResponse = await fetch(`${apiUrl}/pacientes/${pacienteId}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prontuarios: paciente.prontuarios })
+                });
+
+                if (!updateResponse.ok) throw new Error('Erro ao atualizar o prontuário do paciente.');
+                showToast('Alimento removido com sucesso!');
+
+                // Atualiza a UI
+                removerAlimentoDaUI(nomeAlimento);
+                removerAlimentoDosSelects(nomeAlimento); // Remove o alimento dos selects
+            } else {
+                showToast('Alimento já removido.');
+            }
+        } else {
+            throw new Error('Prontuário do paciente não encontrado.');
+        }
+    } catch (error) {
+        showToast('Erro ao remover alimento.');
+        console.error(error.message);
+    }
+}
+
+/**
+ * Remove o alimento dos selects das refeições.
+ * @param {string} nomeAlimento - Nome do alimento a ser removido.
+ */
+function removerAlimentoDosSelects(nomeAlimento) {
+    const selects = document.querySelectorAll('.form-select');
+    selects.forEach(select => {
+        const optionToRemove = Array.from(select.options).find(option => option.value === nomeAlimento);
+        if (optionToRemove) {
+            select.removeChild(optionToRemove);
+        }
+    });
+}
+
+// Evento para o botão de remover alimentos
+document.getElementById('listaAlimentos').addEventListener('click', async (event) => {
+    if (event.target.classList.contains('remover-alimento')) {
+        const nomeAlimento = event.target.dataset.nome;
+        const username = localStorage.getItem('username');
+        if (username) {
+            const pacienteId = await obterPacienteIdPorUsername(username);
+            if (pacienteId) {
+                await removerAlimentoPaciente(pacienteId, nomeAlimento);
+            }
+        }
+    }
+});
+
+/**
+ * Atualiza a lista de alimentos na interface do modal.
+ * @param {Object} alimento - O objeto com as informações do alimento.
+ */
+function atualizarListaAlimentosUI(alimento) {
+    const listaAlimentos = document.getElementById('listaAlimentos');
+    if (listaAlimentos) {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+        listItem.dataset.nome = alimento.nome;
+        listItem.innerHTML = `
+            ${alimento.nome}
+            <button class="btn btn-danger btn-sm remover-alimento" data-nome="${alimento.nome}">
+                <i class="bi bi-trash"></i>
+            </button>
+        `;
+        listaAlimentos.appendChild(listItem);
+    }
+}
+
+/**
+ * Remove um alimento da interface do modal.
+ * @param {string} nomeAlimento - O nome do alimento a ser removido.
+ */
+function removerAlimentoDaUI(nomeAlimento) {
+    const listaAlimentos = document.getElementById('listaAlimentos');
+    const item = listaAlimentos.querySelector(`[data-nome="${nomeAlimento}"]`);
+    if (item) {
+        item.remove();
+    }
+}
+
+/**
+ * Carrega a lista de alimentos do paciente no modal.
+ * @param {string} pacienteId - O ID do paciente.
+ */
+async function carregarAlimentosPaciente(pacienteId) {
+    try {
+        const response = await fetch(`${apiUrl}/pacientes/${pacienteId}`);
+        if (!response.ok) throw new Error('Erro ao obter os dados do paciente.');
+        const paciente = await response.json();
+
+        if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
+            const prontuario = paciente.prontuarios[0];
+            const alimentos = prontuario.alimentos || [];
+
+            // Atualiza a lista de alimentos na UI
+            const listaAlimentos = document.getElementById('listaAlimentos');
+            listaAlimentos.innerHTML = ''; // Limpa a lista
+            alimentos.forEach(alimento => {
+                atualizarListaAlimentosUI(alimento);
+                atualizarSelectRefeicoes(alimento); // Atualiza o select com os alimentos do paciente
+            });
+        } else {
+            throw new Error('Prontuário do paciente não encontrado.');
+        }
+    } catch (error) {
+        showToast('Erro ao carregar alimentos do paciente.');
+        console.error(error.message);
+    }
+}
+
+// Manipulador de evento para salvar novo alimento
+document.getElementById('salvarAlimento').addEventListener('click', async () => {
+    const nomeAlimento = document.getElementById('nomeAlimento').value.trim();
+    const indiceGlicemico = parseFloat(document.getElementById('indiceGlicemico').value);
+
+    if (!nomeAlimento || isNaN(indiceGlicemico)) {
+        showToast('Preencha os campos corretamente antes de salvar.');
+        return;
+    }
+
+    const username = localStorage.getItem('username');
+    if (username) {
+        const pacienteId = await obterPacienteIdPorUsername(username);
+        if (pacienteId) {
+            const novoAlimento = { nome: nomeAlimento, indiceGlicemico };
+            await adicionarAlimentoPaciente(pacienteId, novoAlimento);
+
+            // Limpa os campos do modal
+            document.getElementById('formAdicionarAlimento').reset();
+        }
+    }
+});
+
+// Manipulador de eventos para remover alimento
+document.getElementById('listaAlimentos').addEventListener('click', async (event) => {
+    if (event.target.classList.contains('remover-alimento')) {
+        const nomeAlimento = event.target.dataset.nome;
+        const username = localStorage.getItem('username');
+        if (username) {
+            const pacienteId = await obterPacienteIdPorUsername(username);
+            if (pacienteId) {
+                await removerAlimentoPaciente(pacienteId, nomeAlimento);
+            }
+        }
+    }
+});
+
+// Carregar lista de alimentos ao abrir o modal
+document.getElementById('alimentosCliente').addEventListener('show.bs.modal', async () => {
+    const username = localStorage.getItem('username');
+    if (username) {
+        const pacienteId = await obterPacienteIdPorUsername(username);
+        if (pacienteId) {
+            await carregarAlimentosPaciente(pacienteId);
+        }
+    }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const username = localStorage.getItem('username');
+    if (username) {
+        const pacienteId = await obterPacienteIdPorUsername(username);
+        if (pacienteId) {
+            await carregarAlimentosPaciente(pacienteId);
         }
     }
 });

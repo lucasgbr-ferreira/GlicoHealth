@@ -1,0 +1,21 @@
+
+#navbar{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(228, 247, 255, 0.829) !important;
+    color: rgb(183, 220, 253) !important;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Efeito hover */
+button:hover {
+    background-color: rgba(83, 171, 206, 0.377) !important; /* Cor de fundo ao passar o mouse */
+}
+
+
+
+
