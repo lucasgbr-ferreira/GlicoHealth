@@ -72,6 +72,31 @@
             "recomendacoes": "Praticar no mínimo quarenta minutos de exercícios diariamente"
           },
           "alimentos": []
+        },
+        {
+          "dataConsulta": "2024-12-09",
+          "nome": "Fernando Dias Mattos",
+          "nascimento": "1983-06-06",
+          "sexo": "masculino",
+          "altura": "180",
+          "peso": "83",
+          "limites": {
+            "carboidratos": "100",
+            "caloriasQueimadas": "1000",
+            "atividadeMinima": "Tipo 1"
+          },
+          "glicemias": {
+            "jejum": "131",
+            "posPrandial": "173",
+            "noturna": "137"
+          },
+          "alimentosRestritos": "Pães",
+          "observacoes": {
+            "gerais": "Precisa de maior supervisionamento",
+            "medicamentos": "Glargina",
+            "recomendacoes": "Ter alimentação mais regrada, evitando carboidratos industrializados"
+          },
+          "alimentos": []
         }
       ]
     },
