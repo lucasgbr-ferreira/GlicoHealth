@@ -1,3 +1,4 @@
+// Função para exibir User:Pacientes
 function showUsersInDOM() {
     showToastById("loadingToast", "Carregando...");
 
@@ -203,3 +204,73 @@ function removeRequest(requestId, cardElement) {
     .catch(error => {
     });
 }
+
+//Função para mostrar Users:Médicos
+function showMedicsInDOM() {
+    showToastById("loadingToast", "Carregando...");
+
+    fetch("http://localhost:3000/medicos")
+        .then((response) => {
+            if (!response.ok) {
+                showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
+                throw new Error("Servidor fechado ou inacessível.");
+            }
+            return response.json();
+        })
+        .then((database) => {
+            const medicsCardsContainer = document.getElementById("medicsCardsContainer");
+            medicsCardsContainer.innerHTML = "";
+
+            if (database.length === 0) {
+                medicsCardsContainer.innerHTML = "<p class='text-center'>Nenhum médico registrado.</p>";
+            } else {
+                database.forEach((medic) => {
+                    const card = document.createElement("div");
+                    card.className = "col-12 col-md-4";
+                    card.innerHTML = `
+                        <div class="card d-flex flex-column" style="height: 100%; border-radius: 20px; max-width: 100%; ">
+                            <img src="${medic.profilePicture || 'https://via.placeholder.com/100'}" alt="Foto do Usuário" style="max-width: 100px; height: 100px; object-fit: cover;" class="rounded-circle mb-2 mx-auto">
+                            <h5 class="text-center">${medic.username}</h5>
+                            <p class="text-center"><strong>Nome:</strong> ${medic.name || "Não informado"}</p>
+                            <p class="text-center"><strong>Email:</strong> ${medic.email || "Não informado"}</p>
+                            <p class="text-center"><strong>Telefone:</strong> ${medic.phone || "Não informado"}</p>
+                            <p class="text-center"><strong>Senha:</strong> ${medic.password || "Não informado"}</p>
+                            <p class="text-center"><strong>CPF:</strong> ${medic.crm || "Não informado"}</p>
+                            <div class="d-flex justify-content-center mt-auto">
+                                <button class="btn btn-danger btn-sm" onclick="removeUser('${medic.id}')">Remover</button>
+                            </div>
+                        </div>
+                    `;
+                    medicsCardsContainer.appendChild(card);
+                });
+            }
+            showToastById("loadingToast", "Médicos atualizados com sucesso!");
+            const toggleMedicsButton = document.getElementById("toggleMedicsButton");
+            if (toggleMedicsButton) {
+                toggleMedicsButton.innerHTML = "Atualizar Médicos";
+            }
+        })
+        .catch((error) => {
+            console.error("Erro ao acessar o servidor:", error);
+            showToastById("loadingToast", "Erro ao carregar médicos. Verifique sua conexão ou tente novamente.");
+        });
+}
+function removeUser(medicID) {
+    // Confirmação antes de remover
+    const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${medicID}?`);
+    if (!confirmDelete) return;
+
+    // Requisição para remover o usuário
+    fetch(`http://localhost:3000/medicos/${medicID}`, {
+        method: 'DELETE',
+    }).then(() => {
+        // Atualiza a lista de usuários sem recarregar a página
+        showUsersInDOM();
+    }).catch((error) => {
+        console.error('Erro ao remover o usuário:', error);
+    });
+}
+
+
+
+  

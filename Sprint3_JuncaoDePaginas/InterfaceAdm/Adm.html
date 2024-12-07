@@ -14,32 +14,28 @@
 
 </head> 
 <body>
-    <div class="d-flex">
-      <!-- Sidebar -->
-      <div class="sidebar bg-dark text-white" style="width: 250px; height: 100vh; position: fixed;">
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white" style="width: 250px; height: 100vh; position: fixed; top: 0; left: 0; z-index: 999;">
         <div class="sidebar-header text-center py-4">
-          <h4>Administrador</h4>
+            <h4>Administrador</h4>
         </div>
         <div class="nav flex-column">
-          
-          <a class="nav-link text-white" href="../paginasIniciais/homePage.html" target="_blank">
-            <i class="bi bi-house-door"></i> Homepage
-          </a>
-          
-          <a class="nav-link text-white" href="../InterfaceUsuário/Index.html" target="_blank">
-            <i class="bi bi-person"></i> Usuários: Pacientes
-          </a>
-          
-          <a class="nav-link text-white" href="../perfilMedico/PerfilMed.html" target="_blank">
-            <i class="bi bi-person-lines-fill"></i> Usuários: Médicos
-          </a>
-        
+            <a class="nav-link text-white" href="../paginasIniciais/homePage.html" target="_blank">
+                <i class="bi bi-house-door"></i> Homepage
+            </a>
+            <a class="nav-link text-white" href="../InterfaceUsuário/Index.html" target="_blank">
+                <i class="bi bi-person"></i> Usuários: Pacientes
+            </a>
+            <a class="nav-link text-white" href="../perfilMedico/PerfilMed.html" target="_blank">
+                <i class="bi bi-person-lines-fill"></i> Usuários: Médicos
+            </a>
         </div>
-      </div>
-  
-      <!-- Main Content -->
-      <div class="content" style="margin-left: 250px; padding: 20px;">
-        <div class="card text-center">
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-fluid" style="margin-left: 250px; padding: 20px;">
+        <div class="card text-center w-100">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
@@ -57,34 +53,36 @@
                 <div class="tab-content">
                     <!-- Usuários: Pacientes -->
                     <div class="tab-pane fade show active" id="userContent">
-                          <h3 class="text-center mb-4">Usuários: Pacientes</h3>
-                          <div class="text-center mb-3">
-                              <button id="toggleUsersButtonPac" class="btn btn-primary" onclick="showUsersInDOM(); showToastById()">Exibir Usuários</button>
-                          </div>
-                          <div id="userCardsContainer" class="row gy-3">
-                          </div>
+                        <h3 class="text-center mb-4">Usuários: Pacientes</h3>
+                        <div class="text-center mb-3">
+                            <button id="toggleUsersButtonPac" class="btn btn-primary" onclick="showUsersInDOM(); showToastById()">Exibir Usuários</button>
+                        </div>
+                        <div id="userCardsContainer" class="row gy-3"></div>
                     </div>
+
                     <!-- Usuários: Médicos -->
                     <div class="tab-pane fade" id="medicsContent">
-                        <h5 class="card-title">Usuários: Médicos</h5>
-                        <p class="card-text">Aqui estão os usuários médicos registrados.<br>OBS:Ainda não desenvolvido</p>
+                        <h3 class="text-center mb-4">Usuários: Médicos</h3>
+                        <div class="text-center mb-3">
+                            <button class="btn btn-primary" id="toggleMedicsButton" onclick="showMedicsInDOM()">Exibir Médicos</button>
+                        </div>
+                        <div id="medicsCardsContainer" class="row gy-3"></div>
                     </div>
-                    
+
                     <!-- Requisições -->
                     <div class="tab-pane fade" id="requestsContent">
-                      <h3 class="text-center mb-4">Requisições</h3>
-                      <div class="text-center mb-3">
-                          <button id="toggleUsersButtonReq" class="btn btn-primary" onclick="displayRequestsInDOM()">Exibir Requisições</button>
-                      </div>
-                      <div id="requestsCardsContainer" class="row gy-3">
-                      </div>
-                  </div>
+                        <h3 class="text-center mb-4">Requisições</h3>
+                        <div class="text-center mb-3">
+                            <button id="toggleUsersButtonReq" class="btn btn-primary" onclick="displayRequestsInDOM()">Exibir Requisições</button>
+                        </div>
+                        <div id="requestsCardsContainer" class="row gy-3"></div>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
     </div>
-  
+</div>
+
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
       <!-- Toast de Carregando -->
       <div class="toast-container position-fixed bottom-0 end-0 p-3">

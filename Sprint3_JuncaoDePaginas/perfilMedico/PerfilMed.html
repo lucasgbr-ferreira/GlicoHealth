@@ -37,6 +37,9 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item" id="ListaNav">
+                                            <a class="nav-link" href="../paginasIniciais/HomePage.html">HomePage</a>
+                                        </li>
+                                        <li class="nav-item" id="ListaNav">
                                             <a class="nav-link" href="#">Notícias</a>
                                         </li>
                                         <li class="nav-item dropdown" id="ListaNav">
@@ -96,21 +99,6 @@
                                     <img src="images/User-nlogin.png" id="botaologin" style="width: 100%;">
                                 </button>
 
-                                <!-- Mudança de tema -->
-                                <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                                    <div id="theme-toast" class="toast" role="alert" aria-live="assertive"
-                                        aria-atomic="true">
-                                        <div class="toast-header" id="AlertaTemaH">
-                                            <strong class="me-auto">Notificação</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="toast"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="toast-body text-center" style="color: black;" id="AlertaTemaB">
-                                            Tema alterado para <span id="theme-name">Claro</span>!
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Modal Para Exibição de perfil -->
                             <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -171,13 +159,13 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer" id="modalFooter">
-                                            <a href="Index.html"><button type="button" onclick="logout()"
+                                            <a href="PerfilMed.html"><button type="button" onclick="logout()"
                                                     class="btn btn-secondary" data-bs-dismiss="modal"
                                                     id="botaofechar">Fechar</button></a>
                                             <button class="btn btn-primary" type="button" id="botaoEdicao"
                                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
                                                 aria-controls="offcanvasWithBothOptions" style="display: none;"
-                                                onclick="fecharModal()">Editar informações</button>
+                                                onclick="fecharModal();hideToastById(crmRequiredToast)">Editar informações</button>
                                         </div>
                                     </div>
                                 </div>
@@ -252,37 +240,106 @@
                 </div>
             </div>
         </div>
+        <!-- OffCanvas -->
+        <div class="container">
+            <div class="row">
+                <div class="cold-md-12">
+                    <div class="offcanvas offcanvas-start" style="width: 500px;" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Editar Perfil</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <form id="profileEditForm">
+                                
+                                <div class="mb-3 text-center p-2">
+                                    <label for="profilePicture" class="form-label">Foto de Perfil</label>
+                                    <div>
+                                        <img src="https://via.placeholder.com/100" class="rounded-circle mb-2" alt="Foto de Perfil" id="currentProfilePicture"
+                                        style="max-width: 100px; height: 100px;object-fit: cover;">
+                                    </div>
+                                    <input type="file" class="form-control" id="profilePicture">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="userName" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="userName" placeholder="Seu nome">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="userEmail" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="userEmail" placeholder="seuemail@exemplo.com">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="userPhone" class="form-label">Celular</label>
+                                    <input type="tel" class="form-control" id="userPhone" placeholder="(00) 00000-0000">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="userCrm" class="form-label">CRM</label>
+                                    <input type="text" class="form-control" id="userCrm" placeholder="123456-SP">
+                                </div>
+                                
+                                <div class="d-flex justify-content-between p-0">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary" id="saveButton" onclick="saveChangesAndReload()" disabled>Salvar Alterações</button>
+                                </div>
+                            </form>
+                            <div id="formToast" class="toast align-items-center text-bg-danger border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                <div class="toast-body">
+                                    Por favor, preencha todos os campos antes de salvar, incluindo a foto!
+                                </div>
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Toasts -->
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
             <div id="loginRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-danger text-white">
                     <strong class="me-auto">Atenção</strong>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
                     Você precisa estar logado para acessar esta funcionalidade!
                 </div>
             </div>
-        </div>
-        </div>
+        </div>   
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="loginToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Notificação</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <div id="toastIntroducao" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-primary text-white">
+                    <strong class="me-auto">Bem Vindo</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="toast-body" id="toastMessage">
+                <div class="toast-body">
+                    Dê os seus primeiros passos terminando de fazer o seu cadastro/login e editando suas informações!
                 </div>
             </div>
         </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="crmRequiredToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-primary text-white">
+                    <strong id="toastTitle" class="me-auto">Notificação de registro</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div id="toastMessage" class="toast-body">
+                    Esta é uma mensagem genérica. Altere o conteúdo dinamicamente.
+                </div>
+            </div>
+        </div> 
     </main>
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
     <script src="calculo_atividades_fisicas.js"></script>
-    <script src="../CodsGeral.js"></script>
-    <script src="script.js"></script>
+    <script src="CodFonteMed.js"></script>
 </body>
 
 </html>
