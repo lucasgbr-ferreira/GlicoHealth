@@ -155,9 +155,7 @@ function logado(username) {
 function logout() {
     document.body.classList.remove("dark-mode");  
     localStorage.setItem("theme", "light");  
-    localStorage.removeItem("loggedIn"); 
-    localStorage.removeItem("username"); 
-
+    localStorage.clear();
     document.getElementById("botaologin").src = "Imagens/User.png"; 
     document.getElementById("botaofechar").innerText = "Login";
 

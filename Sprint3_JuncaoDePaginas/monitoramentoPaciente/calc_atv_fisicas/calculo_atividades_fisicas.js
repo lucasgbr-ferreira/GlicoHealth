@@ -51,7 +51,7 @@ async function carregarCaloriasIdeais(pacienteId) {
 
         const paciente = await response.json();
         if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
-            const prontuario = paciente.prontuarios[0];
+            const prontuario = paciente.prontuarios[paciente.prontuarios.length - 1];
             const metaCalorias = prontuario.limites.caloriasQueimadas;
 
             if (metaCalorias && !isNaN(metaCalorias)) {

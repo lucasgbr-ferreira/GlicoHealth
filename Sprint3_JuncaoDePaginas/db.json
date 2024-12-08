@@ -70,7 +70,12 @@
             "medicamentos": "Glargina e Atorvastatina",
             "recomendacoes": "Praticar no mínimo quarenta minutos de exercícios diariamente"
           },
-          "alimentos": []
+          "alimentos": [
+            {
+              "nome": "Banana",
+              "indiceGlicemico": 50
+            }
+          ]
         },
         {
           "dataConsulta": "2024-12-09",
@@ -96,14 +101,6 @@
             "recomendacoes": "Ter alimentação mais regrada, evitando carboidratos industrializados"
           },
           "alimentos": []
-        },
-        {
-          "dataConsulta": "2024-12-10",
-          "nome": "21",
-          "horario": "18:59",
-          "medico": "2121",
-          "especialidade": "2112",
-          "observacoes": "1221"
         }
       ],
       "agendamentos": [

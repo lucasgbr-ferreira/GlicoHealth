@@ -47,7 +47,7 @@ async function carregarLimitePaciente(pacienteId) {
         }
         const paciente = await response.json();
         if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
-            const prontuario = paciente.prontuarios[0]; // Considerando o primeiro prontuário do paciente
+            const prontuario = paciente.prontuarios[paciente.prontuarios.length - 1];
             const limite = prontuario.limites.carboidratos;
 
             if (limite && !isNaN(limite)) {
