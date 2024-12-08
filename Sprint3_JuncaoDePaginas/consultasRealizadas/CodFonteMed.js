@@ -1,132 +1,8 @@
-// {SCRIPT DE AGENDAMENTO}
-function mostraagendamento() {
-    vnome=document.getElementById("idnome");
-    vdata=document.getElementById("iddata");
-    vhorario=document.getElementById("idhorario");
-    vmedico=document.getElementById("idmedico");
-    vespecialidade=document.getElementById("idespecialidade");
-    alert ("Consulta agendada para o dia: "+ vdata.value + " às " + vhorario.value + ", com o Doutor " + vmedico.value + "." + " paciente: " + vnome.value);
-    gravadados();
-  }
-  
-  function fecharPopup(event) {
-      if (event) event.preventDefault(); 
-      const popup = document.querySelector('.popup');
-      if (popup) {
-          popup.style.display = 'none';
-      }
-  }
-  
-  function abrirpopup(event) {
-      if (event) event.preventDefault(); 
-      const popup = document.querySelector('.popup');
-      if (popup) {
-          popup.style.display = 'flex';
-      }
-  }
-  
-  
-  function gravadados() {
-      const vnome = document.getElementById('idnome').value;
-      const vdata = document.getElementById('iddata').value;
-      const vhora = document.getElementById('idhorario').value;
-      const vespeci = document.getElementById('idespecialidade').value;
-      const vmedico = document.getElementById('idmedico').value;
-  
-      localStorage.setItem('ag_nome', vnome);
-      localStorage.setItem('ag_data', vdata);
-      localStorage.setItem('ag_hora', vhora);
-      localStorage.setItem('ag_especialidade', vespeci);
-      localStorage.setItem('ag_medico', vmedico);
-  
-      const savedInfo = document.getElementById('savedInfo');
-      savedInfo.textContent = `Paciente: ${vnome}, Data: ${vdata}, Hora: ${vhora}, Especialidade: ${vespeci}, Médico: ${vmedico}`;
-  
-      const form = document.getElementById('formconsulta');
-      form.reset();
-  
-  }
-  
-  window.onload = function() {
-      checkLogin();
-      const vnome = localStorage.getItem('ag_nome');
-      const vdata = localStorage.getItem('ag_data');
-      const vhora = localStorage.getItem('ag_hora');
-      const vmedico = localStorage.getItem('ag_medico');
-      const vespeci = localStorage.getItem('ag_especialidade');
-  
-      const savedInfo = document.getElementById('savedInfo');
-      if (vnome) {
-          //savedInfo.textContent = `Paciente: ${vnome}, Data: ${vdata}, Hora: ${vhora}, Especialidade: ${vespeci}, Médico: ${vmedico}`;
-      };
-     fecharPopup();
-     
-  };
-  
-  
-  let consultas = JSON.parse(localStorage.getItem("consultas")) || [];
-  
-  
-  function exibirConsultas() {
-      const localCards = document.getElementById("localondevem");
-      localCards.innerHTML = ""; 
-  
-      consultas.forEach((consulta) => {
-          const card = `
-              <div class="card mb-3" style="width: 18rem;">
-                  <div class="card-body">
-                      <h5 class="card-title">Consulta</h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">${consulta.especialidade}</h6>
-                      <p class="card-text">Médico: ${consulta.medico}</p>
-                      <p class="card-text">Data: ${consulta.data}</p>
-                      <p class="card-text">Hora: ${consulta.horario}</p>
-                      <p class="card-text">Paciente: ${consulta.nome}</p>
-                  </div>
-              </div>`;
-          localCards.innerHTML += card;
-      });
-  }
-  
-  
-  function gravadados() {
-      const vnome = document.getElementById('idnome').value;
-      const vdata = document.getElementById('iddata').value;
-      const vhora = document.getElementById('idhorario').value;
-      const vespeci = document.getElementById('idespecialidade').value;
-      const vmedico = document.getElementById('idmedico').value;
-  
-      if (vnome && vdata && vhora && vespeci && vmedico) {
-          const novaConsulta = {
-              nome: vnome,
-              data: vdata,
-              horario: vhora,
-              especialidade: vespeci,
-              medico: vmedico,
-          };
-  
-          consultas.push(novaConsulta);
-          localStorage.setItem("consultas", JSON.stringify(consultas)); 
-          exibirConsultas(); 
-  
-          fecharPopup();
-  
-          
-          const form = document.getElementById('formconsulta');
-          form.reset();
-      } else {
-          alert("Por favor, preencha todos os campos.");
-      }
-  }
-  
-  //------------------------------------------------------------------------------------------------------------------
-  
   // {SCRIPT FONTE}
   // Carregamento da página
   window.onload = function() {
       const loggedIn = localStorage.getItem("loggedIn");
       const loggedUsername = localStorage.getItem("username");
-      exibirConsultas();
-      fecharPopup();
   
       if (loggedIn === "true" && loggedUsername) {
           logado(loggedUsername);
@@ -151,12 +27,12 @@ function mostraagendamento() {
   }
   
   function getDatabase() {
-      return fetch('http://localhost:3000/pacientes')
+      return fetch('http://localhost:3000/medicos')
           .then(response => response.json());
   }
   
   function saveDatabase(database) {
-      return fetch('http://localhost:3000/pacientes', {
+      return fetch('http://localhost:3000/medicos', {
           method: 'PUT', // Altera os dados de forma geral
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(database),
@@ -166,13 +42,13 @@ function mostraagendamento() {
   // Função de registro
   // Função para obter os dados do banco de dados
   function getDatabase() {
-      return fetch('http://localhost:3000/pacientes')
+      return fetch('http://localhost:3000/medicos')
           .then(response => response.json());
   }
   
   // Função para salvar dados no banco de dados
   function saveDatabase(newUser) {
-      return fetch('http://localhost:3000/pacientes', {
+      return fetch('http://localhost:3000/medicos', {
           method: 'POST', // Altera os dados no banco
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newUser),
@@ -282,7 +158,7 @@ function mostraagendamento() {
       document.getElementById("botaologin").src = "images/User.png"; 
       document.getElementById("botaofechar").innerText = "Login";
   
-      window.location.href = "../InterfaceUsuário/Index.html"; 
+      window.location.href = "Index.html"; 
   }
   
   // Funções de Alteração do Modal e Exibição de Informações do Usuário
@@ -305,7 +181,7 @@ function mostraagendamento() {
                   <li class="list-group-item text-center">Nome: <strong>${userInfo.name}</strong></li>
                   <li class="list-group-item text-center">Telefone: <strong>${userInfo.phone}</strong></li>
                   <li class="list-group-item text-center">Email: <strong>${userInfo.email}</strong></li>
-                  <li class="list-group-item text-center">CPF: <strong>${userInfo.cpf || ''}</strong></li>  <!-- Verificando se o CPF existe -->
+                  <li class="list-group-item text-center">CRM: <strong>${userInfo.crm || ''}</strong></li>  <!-- Verificando se o CPF existe -->
                   <li class="list-group-item text-center">
                   Senha: <strong id="passwordField" style="letter-spacing: 3px;">••••••••</strong>
                   <button id="togglePassword" class="btn btn-sm btn-outline-primary ms-2">Mostrar</button>
@@ -485,7 +361,7 @@ function mostraagendamento() {
       // Exibe o toast de "Carregando..."
       showToastById("loadingToast", "Carregando...");
   
-      fetch("http://localhost:3000/pacientes")
+      fetch("http://localhost:3000/medicos")
           .then((response) => {
               if (!response.ok) {
                   showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
@@ -539,7 +415,7 @@ function mostraagendamento() {
       if (!confirmDelete) return;
   
       // Requisição para remover o usuário
-      fetch(`http://localhost:3000/pacientes/${userId}`, {
+      fetch(`http://localhost:3000/medicos/${userId}`, {
           method: 'DELETE',
       }).then(() => {
           // Atualiza a lista de usuários sem recarregar a página
@@ -561,7 +437,7 @@ function mostraagendamento() {
       
       const loggedUsername = localStorage.getItem("username");
   
-      fetch('http://localhost:3000/pacientes')
+      fetch('http://localhost:3000/medicos')
           .then(response => response.json())
           .then(database => {
               const userIndex = database.findIndex(user => user.username === loggedUsername);
@@ -580,7 +456,7 @@ function mostraagendamento() {
                           profilePicture: profilePictureData
                       };
   
-                      fetch(`http://localhost:3000/pacientes/${database[userIndex].id}`, {
+                      fetch(`http://localhost:3000/medicos/${database[userIndex].id}`, {
                           method: 'PUT',
                           headers: {
                               'Content-Type': 'application/json',
