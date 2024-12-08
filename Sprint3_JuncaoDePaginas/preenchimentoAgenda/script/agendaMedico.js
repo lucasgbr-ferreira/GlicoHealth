@@ -118,8 +118,7 @@ function gravadados() {
     }
 }
 
-
-
+//------------------------------------------------------------------------------------------------------------------
 
 // {SCRIPT FONTE}
 // Carregamento da página
@@ -152,12 +151,12 @@ function toggleSection() {
 }
 
 function getDatabase() {
-    return fetch('http://localhost:3000/pacientes')
+    return fetch('http://localhost:3000/medicos')
         .then(response => response.json());
 }
 
 function saveDatabase(database) {
-    return fetch('http://localhost:3000/pacientes', {
+    return fetch('http://localhost:3000/medicos', {
         method: 'PUT', // Altera os dados de forma geral
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(database),
@@ -167,13 +166,13 @@ function saveDatabase(database) {
 // Função de registro
 // Função para obter os dados do banco de dados
 function getDatabase() {
-    return fetch('http://localhost:3000/pacientes')
+    return fetch('http://localhost:3000/medicos')
         .then(response => response.json());
 }
 
 // Função para salvar dados no banco de dados
 function saveDatabase(newUser) {
-    return fetch('http://localhost:3000/pacientes', {
+    return fetch('http://localhost:3000/medicos', {
         method: 'POST', // Altera os dados no banco
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
@@ -486,7 +485,7 @@ function showUsersInDOM() {
     // Exibe o toast de "Carregando..."
     showToastById("loadingToast", "Carregando...");
 
-    fetch("http://localhost:3000/pacientes")
+    fetch("http://localhost:3000/medicos")
         .then((response) => {
             if (!response.ok) {
                 showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
@@ -540,7 +539,7 @@ function removeUser(userId) {
     if (!confirmDelete) return;
 
     // Requisição para remover o usuário
-    fetch(`http://localhost:3000/pacientes/${userId}`, {
+    fetch(`http://localhost:3000/medicos/${userId}`, {
         method: 'DELETE',
     }).then(() => {
         // Atualiza a lista de usuários sem recarregar a página
@@ -562,7 +561,7 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
     
     const loggedUsername = localStorage.getItem("username");
 
-    fetch('http://localhost:3000/pacientes')
+    fetch('http://localhost:3000/medicos')
         .then(response => response.json())
         .then(database => {
             const userIndex = database.findIndex(user => user.username === loggedUsername);
@@ -581,7 +580,7 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
                         profilePicture: profilePictureData
                     };
 
-                    fetch(`http://localhost:3000/pacientes/${database[userIndex].id}`, {
+                    fetch(`http://localhost:3000/medicos/${database[userIndex].id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',

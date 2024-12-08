@@ -1,4 +1,5 @@
-const API_KEY = '2e72b508e5224b0c9d3018a84a951531'; 
+// Configuração para consumir a API
+const API_KEY = 'e29949184b5f463aabefc1ecafd13681'; // Substitua pela sua chave da News API
 const API_URL = `https://newsapi.org/v2/everything?q=diabetes&language=pt&apiKey=${API_KEY}`;
 const newsContainer = document.getElementById('news-cards');
 const articleContainer = document.getElementById('article-card');
@@ -6,12 +7,6 @@ const articleContainer = document.getElementById('article-card');
 async function fetchNews() {
     try {
         const response = await fetch(API_URL);
-
-        // Verifica se a resposta da API foi bem-sucedida
-        if (!response.ok) {
-            throw new Error('Erro na requisição à API');
-        }
-
         const data = await response.json();
 
         if (data.articles && data.articles.length > 0) {
@@ -28,57 +23,59 @@ async function fetchNews() {
 function renderNews(articles) {
     newsContainer.innerHTML = ''; // Limpa o conteúdo atual
 
-    articles.slice(17, 22).forEach((article, index) => {
-        // Verifica se a notícia tem as propriedades essenciais
-        if (article.title && article.description && article.url) {
+    articles.slice(21, 28).forEach((article, index) => {
+        if (index === 0) {
+            const publishedDate = new Date(article.publishedAt).toLocaleDateString('pt-BR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        
             const card = document.createElement('div');
-            card.className = index === 0 ? 'col-12' : 'col-12 col-sm-6 col-md-3 mb-4';  // Define o estilo do card dependendo do índice
-
-            if (index === 0) {
-                // Se for o primeiro artigo, exibe um card maior
-                const publishedDate = new Date(article.publishedAt).toLocaleDateString('pt-BR', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                });
-
-                card.innerHTML = `
-                    <div class="card text-center" style="max-width: 80%;"> <!-- Corrigido o erro de sintaxe aqui -->
-                        <div class="card-body">
-                            <h4 class="card-title">${truncateText(article.title, 100)}</h4>
-                            <p class="card-text">${truncateText(article.description, 300)}</p>
-                            <a href="${article.url}" class="btn btn-secondary btn-sm px-5 opacity-75">Leia mais</a>
-                        </div>
-                        <div class="card-footer text-body-secondary">Publicado em: ${publishedDate}</div>
+            card.className = 'col-12';
+        
+            card.innerHTML = `
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">${truncateText(article.title, 100)}</h4>
+                        <p class="card-text">${truncateText(article.description, 300)}</p>
+                        <a href="${article.url}" class="btn btn-secondary btn-sm px-5 opacity-75">Leia mais</a>
                     </div>
-                `;
-            } else {
-                // Se não for o primeiro artigo, exibe os outros artigos menores em formato de grid
-                card.innerHTML = `
-                    <div class="card" style="width: 18rem; height: 350px; display: flex; flex-direction: column;">
-                        <img src="${article.urlToImage || 'images/default-news.jpg'}" class="card-img-top" alt="Notícia" style="height: 150px; object-fit: cover; display: block; margin: 0 auto;">
-                        <div class="card-body" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 0.5rem;">
-                            <div>
-                                <h5 class="card-title" style="font-size: 1rem; height: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${truncateText(article.title, 50)}</h5>
-                                <p class="card-text" style="font-size: 0.9rem; height: 80px; overflow: hidden; text-overflow: ellipsis;">${truncateText(article.description, 120)}</p>
-                            </div>
-                            <div style="margin-top: auto; text-align: center;">
-                                <a href="${article.url}" target="_blank" class="btn btn-primary btn-sm w-100">Leia mais</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
+                    <div class="card-footer text-body-secondary">Publicado em: ${publishedDate}</div>
+                </div>
+            `;
+        
+            articleContainer.appendChild(card);
+        }
+        
 
-            // Adiciona o card ao newsContainer
+        else {
+            const card = document.createElement('div');
+            card.className = 'col-12 col-sm-6 col-md-4 mb-4';
+
+            card.innerHTML = `
+            <div class="card">
+                <img src="${article.urlToImage || 'images/default-news.jpg'}" class="card-img-top" alt="Notícia" style="height:200px; object-fit:cover;">
+                <div class="card-body">
+                    <h5 class="card-title">${truncateText(article.title, 50)}</h5>
+                    <p class="card-text">${truncateText(article.description, 120)}</p>
+                    <a href="${article.url}" target="_blank" class="btn btn-primary">Leia mais</a>
+                </div>
+            </div>
+        `;
+
             newsContainer.appendChild(card);
-        } else {
-            console.warn('Notícia com dados inválidos, não será exibida:', article);
         }
     });
 }
+function truncateText(text, maxLength) {
+    if (text && text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    }
+    return text || 'Texto não disponível.';
+}
 
-
+document.addEventListener("DOMContentLoaded", fetchNews);
 
 function truncateText(text, maxLength) {
     if (text && text.length > maxLength) {

@@ -1,12 +1,41 @@
-document.getElementById("btn-prontuarios").addEventListener("mouseover", function() {
-    document.getElementById("col-visivel").classList.add("d-none");  // Esconde a coluna de agendamento
-    document.getElementById("col-invisivel").classList.remove("d-none");  // Exibe a coluna de orientações
+document.getElementById("btn-agenda").addEventListener("click", function() {
+    checkLogin("btn-agenda");
 });
 
-document.getElementById("btn-prontuarios").addEventListener("mouseout", function() {
-    document.getElementById("col-visivel").classList.remove("d-none");  // Exibe a coluna de agendamento
-    document.getElementById("col-invisivel").classList.add("d-none");  // Esconde a coluna de orientações
+document.getElementById("btn-prontuarios").addEventListener("click", function() {
+    checkLogin("btn-prontuarios");
 });
+
+function checkLogin(btn) {
+    const loggedIn = localStorage.getItem("loggedIn");
+
+    // Se o usuário não estiver logado, exibe o toast de erro
+    if (!loggedIn) {
+        showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
+    }
+    // Se o usuário estiver logado e for o botão de prontuários
+    else if (btn === "btn-prontuarios") {
+        window.location.href = "../consultasRealizadas/consultasRealizadas.html";
+    }
+    // Se o usuário estiver logado e for o botão de agenda
+    else if (btn === "btn-agenda") {
+        window.location.href = "../preenchimentoAgenda/agendaMedico.html";
+    }
+}
+
+document.getElementById("btn-prontuarios").addEventListener("mouseover", function () {
+    // Esconde a coluna de agendamento com uma transição suave
+    document.getElementById("col-visivel").style.opacity = "0";
+    document.getElementById("col-invisivel").style.opacity = "1";  // Opacidade 1 para exibir
+});
+
+document.getElementById("btn-prontuarios").addEventListener("mouseout", function () {
+    // Exibe a coluna de agendamento com uma transição suave
+    document.getElementById("col-visivel").style.opacity = "1";
+    document.getElementById("col-invisivel").style.opacity = "0";
+});
+
+
 function showToastById(toastId, message = "") {
     const toastElement = document.getElementById(toastId);
 
@@ -17,7 +46,7 @@ function showToastById(toastId, message = "") {
         }
 
         const toast = new bootstrap.Toast(toastElement, {
-            delay: 10000, 
+            delay: 10000,
         });
         toast.show();
     } else {
@@ -38,14 +67,14 @@ function hideToastById(toastId) {
 //Registros {Médicos}
 
 // Carregamento da página
-window.onload = function() {
+window.onload = function () {
     const loggedIn = localStorage.getItem("loggedIn");
     const loggedUsername = localStorage.getItem("username");
 
     // Se o usuário estiver logado
     if (loggedIn === "true" && loggedUsername) {
         logado(loggedUsername);
-        alterarmodal(loggedUsername); 
+        alterarmodal(loggedUsername);
     } else {
         const toast = new bootstrap.Toast(document.getElementById("toastIntroducao"), {
             delay: 8000  // Define o tempo do toast para 8 segundos
@@ -130,7 +159,7 @@ function register() {
                 email: "",
                 phone: "",
                 profilePicture: "",
-                crm:""
+                crm: ""
             };
 
             // Salva o novo usuário no banco de dados (sem substituir os dados existentes)
@@ -139,7 +168,7 @@ function register() {
                     console.log("Usuário registrado:", newUser);
 
                     // Exibe o sucesso do cadastro
-                    document.getElementById("registerSuccess").style.display = "block"; 
+                    document.getElementById("registerSuccess").style.display = "block";
 
                     // Alerta notificando o novo cadastro
                     alert(`Novo usuário cadastrado: ${username}`);
@@ -151,7 +180,7 @@ function register() {
                     // Após 2 segundos, alterna para a seção de login
                     setTimeout(() => {
                         toggleSection();
-                        document.getElementById("registerSuccess").style.display = "none"; 
+                        document.getElementById("registerSuccess").style.display = "none";
                     }, 2000);
                 })
                 .catch(error => {
@@ -175,10 +204,10 @@ function login() {
         if (user) {
             alert("Login bem-sucedido!");
             document.getElementById("loginError").style.display = "none";
-            logado(username); 
-            alterarmodal(username); 
+            logado(username);
+            alterarmodal(username);
             localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("username", username); 
+            localStorage.setItem("username", username);
         } else {
             document.getElementById("loginError").style.display = "block";
         }
@@ -188,19 +217,19 @@ function login() {
 function logado(username) {
     document.getElementById("botaologin").src = "Imagens/User-logado.png";
     document.getElementById("botaofechar").addEventListener("click", logout);
-    alterarmodal(username); 
+    alterarmodal(username);
 }
 
 function logout() {
-    document.body.classList.remove("dark-mode");  
-    localStorage.setItem("theme", "light");  
-    localStorage.removeItem("loggedIn"); 
-    localStorage.removeItem("username"); 
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("username");
 
-    document.getElementById("botaologin").src = "Imagens/User.png"; 
+    document.getElementById("botaologin").src = "Imagens/User.png";
     document.getElementById("botaofechar").innerText = "Login";
 
-    window.location.href = "Index.html"; 
+    window.location.href = "Index.html";
 }
 
 // Funções de Alteração do Modal e Exibição de Informações do Usuário
@@ -236,12 +265,12 @@ function alterarmodal(username) {
             if (!userInfo.crm) {
                 showToastById("crmRequiredToast", "Por favor, complete o campo CRM clicando em 'Editar Informações'.");
             }
-            
+
         } else {
             modalBody.innerHTML = `
                 <h2 class="text-center text-danger">Erro ao carregar informações!</h2>
                 <p class="text-danger text-center">Usuário não encontrado no banco de dados.</p>`;
-                document.getElementById("botaofechar").innerText = "Logout"; 
+            document.getElementById("botaofechar").innerText = "Logout";
         }
     });
 }
@@ -253,8 +282,8 @@ function fecharModal() {
     });
     toast.show();
     const themeToastElement = document.getElementById('theme-toast');
-        const themeToast = new bootstrap.Toast(themeToastElement);
-        themeToast.hide();
+    const themeToast = new bootstrap.Toast(themeToastElement);
+    themeToast.hide();
 }
 
 // Ocultador de senha
@@ -294,9 +323,9 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
     const name = document.getElementById("userName").value;
     const email = document.getElementById("userEmail").value;
     const phone = document.getElementById("userPhone").value;
-    const crm = document.getElementById("userCrm").value; 
+    const crm = document.getElementById("userCrm").value;
     const picture = document.getElementById("profilePicture").files[0];
-    
+
     const loggedUsername = localStorage.getItem("username");
 
     fetch('http://localhost:3000/medicos')
@@ -314,7 +343,7 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
                         name,
                         email,
                         phone,
-                        crm, 
+                        crm,
                         profilePicture: profilePictureData
                     };
 
@@ -347,7 +376,7 @@ document.getElementById("profileEditForm").addEventListener("input", function ()
     const name = document.getElementById("userName").value;
     const email = document.getElementById("userEmail").value;
     const phone = document.getElementById("userPhone").value;
-    const crm = document.getElementById("userCrm").value; 
+    const crm = document.getElementById("userCrm").value;
     const picture = document.getElementById("profilePicture").files[0];
     const saveButton = document.getElementById("saveButton");
 
@@ -358,13 +387,13 @@ document.getElementById("profileEditForm").addEventListener("input", function ()
     }
 });
 
-document.getElementById("profilePicture").addEventListener("change", function(event) {
+document.getElementById("profilePicture").addEventListener("change", function (event) {
     const file = event.target.files[0];
 
     if (file) {
         const reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             document.getElementById("currentProfilePicture").src = e.target.result;
             const modalProfilePicture = document.getElementById("userProfilePicture");
             if (modalProfilePicture) {

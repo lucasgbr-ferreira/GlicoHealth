@@ -2,6 +2,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveButton = document.querySelector("#modalPaciente button[type='submit']");
     const modalPaciente = document.getElementById("modalPaciente");
 
+    function checkLogin() {
+        const loggedIn = localStorage.getItem("loggedIn");
+
+        if (!loggedIn) {
+            window.location.href = "../paginasIniciais/homePage.html";
+        }
+    }
+    checkLogin();
+
     // Armazenar os CPFs em um array (inicialmente vazio ou preenchido com dados do servidor)
     let cpfs = [];
 
@@ -21,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
             cpfs = pacientes.map(paciente => paciente.cpf); // Extrai todos os CPFs
         } catch (error) {
             console.error("Erro ao carregar CPFs:", error);
-            alert("Erro ao carregar os dados dos pacientes.");
         }
     }
 
