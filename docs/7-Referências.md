@@ -1,8 +1,6 @@
 ✔️ Terminado
 
 # Referências
-
-> 
-> **Links Úteis**:
-> - [Formato ABNT](https://www.normastecnicas.com/abnt/trabalhos-academicos/referencias/)
-> - [Referências Bibliográficas da ABNT](https://comunidade.rockcontent.com/referencia-bibliografica-abnt/)
+Sociedade Brasileira de Diabetes: https://www.diabetes.org.br
+Ministério da Saúde: https://www.gov.br/saude/pt-br/assuntos/diabetes
+Hospital Albert Einstein: https://www.einstein.br

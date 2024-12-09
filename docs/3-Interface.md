@@ -3,19 +3,26 @@
 Wireframe completo.
 
 ## UserFlow e Wireframes
-- Página principal do site com artigos, curiosidades, informações e opção de login ao clicar no ícone de perfil.
-![Telas](imagens/TelasInterfacePC/home.png)
+Os wireframes estão na pasta Imagens.
 
-- Página de Login e cadastro do nosso cliente, especificando o mesmo como paciente, tipo de condição ou médico.
-tela dentro de todas as páginas.
+> Wireframe ADM:
+1. Serve para ter o controle dos usuários do site, podendo excluir ou adicionar novos usuários e exibir todos os usuários.
+2. Também tem um local onde consegue aceitar ou negar a requisição de um cadastro de médico, para ter acesso às funcionalidades disponíveis para os medicos.
 
-- Página de interação do paciente para registro alimentar e de atividades físicas, junto ao cálculo de seus índices e recomendações.
-inserido na home/landing page.
+> Wireframe Agenda:
+1. Possuí um header, com opção de login, e outras informações.
+2. Tem uma mensagem de bem vindo e dois campos logo abaixo.
+3. O primeiro campo serve para marcar um agendamento de consulta.
+4. O segundo ponto serve para mostrar as consultas realizadas.
 
-- Página de interação do paciente com acesso a suas colsultas agendadas e agendamento de novas consultas.
-(imagens/TelaInterfacePC/agenda.png)
+> Wireframe Área Do Medico:
+1. A área do médico possuí um header semelhante com as outras páginas do site.
+2. Nessa página você tem o bloco agendamentos, que quando clicado você é redirecionado para outra página, contendo os seus agendamentos de consulta.
+3. Na parte de preenchimento de prontário você consegue preencher o prontuário de um usuário e colocar informações sobre a consulta realiazda, depois as informaões são puxadas para um bloco ao lado, assim você tendo o prontuário de cada um dos seus clientes registrados.
 
+> Wireframe HomePage / LandingPage:
+1. Nessas duas telas você tem a interligação do site todo, você consegue ir para basicamente todas as páginas por meio dessas tela, nelas também contém alguns artigos e informações interessantes.
 
-- Página de interação do médico para acompanhamento de seus pacientes, consultas e prontuários.
-![Telas](images/TelasInterfacePC/areadomed.png)
-
+> Wireframe de Glicemia:
+1. Nesse wireframe você pode medir a sua glicemia diária, seguindo as instruções da página.
+2. Também tem a parte do exercício físico, que tem a sua meta pra cada tipo de pessoa.
