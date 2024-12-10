@@ -1,26 +1,19 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: GlicoHealth
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-
-  - name-suffix: Professor
-    affiliation: PUC Minas
-    family-names: 
-    given-names: 
-
-    keywords:
-    - 
-repository-code: 
+  - family-names: Soares Souza
+    given-names: João Victor
+  - family-names: Ferreira Da SIlva
+    given-names: Lucas Gabriel
+  - family-names: Silva Souza
+    given-names: Guilherme Henrique
+  - family-names: Canuto
+    given-names: Pedro Henrique
+  - Saúde
+  - Diabétes
+  - Práticas físicas
+repository-code: Sem hospedagem
 license: CC-BY-4.0
 version: 1.0.0
-date-released:
+date-released: 2024-12-10
