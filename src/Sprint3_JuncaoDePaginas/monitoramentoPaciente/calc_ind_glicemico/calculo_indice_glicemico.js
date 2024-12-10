@@ -1,24 +1,20 @@
 // Definindo o URL da API globalmente
 const apiUrl = 'http://localhost:3000';
-
-// Função que exibe o dia da semana no HTML
 function exibirDiaDaSemana() {
     const diasDaSemana = [
         'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
     ];
 
     const hoje = new Date();
-    const diaSemana = hoje.getDay(); // getDay() retorna o número do dia da semana (0-6)
+    const diaSemana = hoje.getDay();
 
     document.getElementById('diaSemana').textContent = `Hoje, ${diasDaSemana[diaSemana]}`;
 }
 
-// Variáveis globais
-let limiteDiarioIdeal = 180; // Limite padrão
-let totalIndiceGlicemico = parseFloat(localStorage.getItem('totalIndiceGlicemico')) || 0; // Inicializa a variável totalIndiceGlicemico
-let idPaciente = null; // Inicializa o idPaciente globalmente
 
-// Função para carregar o ID do paciente por username
+let limiteDiarioIdeal = 180; 
+let totalIndiceGlicemico = parseFloat(localStorage.getItem('totalIndiceGlicemico')) || 0; 
+let idPaciente = null; 
 async function obterPacienteIdPorUsername(username) {
     try {
         const response = await fetch(`${apiUrl}/pacientes?username=${username}`);
@@ -51,9 +47,9 @@ async function carregarLimitePaciente(pacienteId) {
             const limite = prontuario.limites.carboidratos;
 
             if (limite && !isNaN(limite)) {
-                limiteDiarioIdeal = parseFloat(limite); // Atualiza o limite glicêmico
+                limiteDiarioIdeal = parseFloat(limite); 
                 atualizarBarraProgresso();
-                return true; // Indica que o paciente tem limite válido
+                return true;
             } else {
                 desabilitarCalculo();
                 showToast('Limite glicêmico não encontrado ou inválido.');
@@ -217,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const username = localStorage.getItem("username");
     if (username) {
         try {
-            idPaciente = await obterPacienteIdPorUsername(username); // Atribuição global
+            idPaciente = await obterPacienteIdPorUsername(username); 
             if (idPaciente) {
                 const prontuarioCarregado = await carregarLimitePaciente(idPaciente);
                 if (prontuarioCarregado) {
@@ -260,12 +256,8 @@ async function adicionarAlimentoPaciente(pacienteId, alimento) {
 
         if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
             const prontuario = paciente.prontuarios[0];
-
-            // Adiciona o alimento à lista de alimentos
             prontuario.alimentos = prontuario.alimentos || [];
             prontuario.alimentos.push(alimento);
-
-            // Envia atualização para a API
             const updateResponse = await fetch(`${apiUrl}/pacientes/${pacienteId}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
@@ -274,10 +266,8 @@ async function adicionarAlimentoPaciente(pacienteId, alimento) {
 
             if (!updateResponse.ok) throw new Error('Erro ao atualizar o prontuário do paciente.');
             showToast('Alimento adicionado com sucesso!');
-
-            // Atualiza a UI
             atualizarListaAlimentosUI(alimento);
-            atualizarSelectRefeicoes(alimento); // Atualiza o select com o novo alimento
+            atualizarSelectRefeicoes(alimento);
         } else {
             throw new Error('Prontuário do paciente não encontrado.');
         }
@@ -300,12 +290,9 @@ async function removerAlimentoPaciente(pacienteId, nomeAlimento) {
 
         if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
             const prontuario = paciente.prontuarios[0];
-
-            // Remove o alimento da lista
             prontuario.alimentos = prontuario.alimentos || [];
             const alimentosFiltrados = prontuario.alimentos.filter(alimento => alimento.nome !== nomeAlimento);
 
-            // Envia atualização para a API apenas se houve mudanças
             if (alimentosFiltrados.length !== prontuario.alimentos.length) {
                 prontuario.alimentos = alimentosFiltrados;
 
@@ -317,10 +304,8 @@ async function removerAlimentoPaciente(pacienteId, nomeAlimento) {
 
                 if (!updateResponse.ok) throw new Error('Erro ao atualizar o prontuário do paciente.');
                 showToast('Alimento removido com sucesso!');
-
-                // Atualiza a UI
                 removerAlimentoDaUI(nomeAlimento);
-                removerAlimentoDosSelects(nomeAlimento); // Remove o alimento dos selects
+                removerAlimentoDosSelects(nomeAlimento);
             } else {
                 showToast('Alimento já removido.');
             }
@@ -406,13 +391,11 @@ async function carregarAlimentosPaciente(pacienteId) {
         if (paciente && paciente.prontuarios && paciente.prontuarios.length > 0) {
             const prontuario = paciente.prontuarios[0];
             const alimentos = prontuario.alimentos || [];
-
-            // Atualiza a lista de alimentos na UI
             const listaAlimentos = document.getElementById('listaAlimentos');
-            listaAlimentos.innerHTML = ''; // Limpa a lista
+            listaAlimentos.innerHTML = ''; 
             alimentos.forEach(alimento => {
                 atualizarListaAlimentosUI(alimento);
-                atualizarSelectRefeicoes(alimento); // Atualiza o select com os alimentos do paciente
+                atualizarSelectRefeicoes(alimento); 
             });
         } else {
             throw new Error('Prontuário do paciente não encontrado.');
@@ -439,8 +422,6 @@ document.getElementById('salvarAlimento').addEventListener('click', async () => 
         if (pacienteId) {
             const novoAlimento = { nome: nomeAlimento, indiceGlicemico };
             await adicionarAlimentoPaciente(pacienteId, novoAlimento);
-
-            // Limpa os campos do modal
             document.getElementById('formAdicionarAlimento').reset();
         }
     }

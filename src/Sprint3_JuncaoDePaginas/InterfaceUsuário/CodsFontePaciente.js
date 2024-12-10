@@ -2,13 +2,16 @@
 window.onload = function() {
     const loggedIn = localStorage.getItem("loggedIn");
     const loggedUsername = localStorage.getItem("username");
-
     if (loggedIn === "true" && loggedUsername) {
         logado(loggedUsername);
         alterarmodal(loggedUsername); 
+    } else {
+        const toast = new bootstrap.Toast(document.getElementById("toastIntroducao"), {
+            delay: 8000 
+        });
+        toast.show();
     }
     const savedProfilePicture = localStorage.getItem("profilePicture");
-
     if (savedProfilePicture) {
         document.getElementById("currentProfilePicture").src = savedProfilePicture;
     } else {
@@ -16,6 +19,7 @@ window.onload = function() {
     }
     applySavedTheme();
 };
+
 
 // Funções de Login e Cadastro
 function toggleSection() {
@@ -32,13 +36,12 @@ function getDatabase() {
 
 function saveDatabase(database) {
     return fetch('http://localhost:3000/pacientes', {
-        method: 'PUT', // Altera os dados de forma geral
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(database),
     });
 }
 
-// Função de registro
 // Função para obter os dados do banco de dados
 function getDatabase() {
     return fetch('http://localhost:3000/pacientes')
@@ -48,7 +51,7 @@ function getDatabase() {
 // Função para salvar dados no banco de dados
 function saveDatabase(newUser) {
     return fetch('http://localhost:3000/pacientes', {
-        method: 'POST', // Altera os dados no banco
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
     });
@@ -58,24 +61,17 @@ function saveDatabase(newUser) {
 function register() {
     const username = document.getElementById("registerUsername").value;
     const password = document.getElementById("registerPassword").value;
-
-    // Verifica se os campos foram preenchidos
     if (!username || !password) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-
-    // Obter o banco de dados de usuários
     getDatabase()
         .then(database => {
-            // Verifica se o usuário já existe
             const userExists = database.some(user => user.username === username);
             if (userExists) {
                 alert("Usuário já registrado!");
                 return;
             }
-
-            // Adicionando novo usuário ao banco de dados
             const newUser = {
                 username,
                 password,
@@ -86,29 +82,17 @@ function register() {
                 profilePicture: "",
                 cpf:""
             };
-
-            // Salva o novo usuário no banco de dados (sem substituir os dados existentes)
             saveDatabase(newUser)
                 .then(() => {
                     console.log("Usuário registrado:", newUser);
-
-                    // Exibe o sucesso do cadastro
                     document.getElementById("registerSuccess").style.display = "block"; 
-
-                    // Alerta notificando o novo cadastro
                     alert(`Novo usuário cadastrado: ${username}`);
-
-                    // Limpar campos após o sucesso do registro
                     document.getElementById("registerUsername").value = '';
                     document.getElementById("registerPassword").value = '';
 
-                    // O modal não será fechado automaticamente
-                    // Não invocar qualquer código que feche o modal.
-
-                    // Após 2 segundos, alterna para a seção de login
                     setTimeout(() => {
-                        toggleSection(); // Alterna para a seção de login
-                        document.getElementById("registerSuccess").style.display = "none"; // Oculta a mensagem de sucesso
+                        toggleSection();
+                        document.getElementById("registerSuccess").style.display = "none"; 
                     }, 2000);
                 })
                 .catch(error => {
@@ -151,13 +135,11 @@ function logado(username) {
 function logout() {
     document.body.classList.remove("dark-mode");  
     localStorage.setItem("theme", "light");  
-    localStorage.removeItem("loggedIn"); 
-    localStorage.removeItem("username"); 
-
+    localStorage.clear();
     document.getElementById("botaologin").src = "Imagens/User.png"; 
     document.getElementById("botaofechar").innerText = "Login";
-    localStorage.clear();
-    window.location.href = "../InterfaceUsuário/Index.html";
+
+    window.location.href = "Index.html"; 
 }
 
 // Funções de Alteração do Modal e Exibição de Informações do Usuário
@@ -190,6 +172,10 @@ function alterarmodal(username) {
         `;
             document.getElementById("botaofechar").innerText = "Logout";
             document.getElementById("botaoEdicao").style.display = "";
+            if (!userInfo.cpf) {
+                showToastById("cpfRequiredToast", "Por favor, complete o campo CPF clicando em 'Editar Informações'.");
+            }
+            
         } else {
             modalBody.innerHTML = `
                 <h2 class="text-center text-danger">Erro ao carregar informações!</h2>
@@ -356,75 +342,6 @@ function hideToastById(toastId) {
         console.error(`Toast com ID '${toastId}' não encontrado!`);
     }
 }
-
-function showUsersInDOM() {
-    // Exibe o toast de "Carregando..."
-    showToastById("loadingToast", "Carregando...");
-
-    fetch("http://localhost:3000/pacientes")
-        .then((response) => {
-            if (!response.ok) {
-                showToastById("loadingToast", "Servidor fechado ou inacessível. Tente novamente mais tarde.");
-                throw new Error("Servidor fechado ou inacessível.");
-            }
-            return response.json();
-        })
-        .then((database) => {
-            const userCardsContainer = document.getElementById("userCardsContainer");
-            userCardsContainer.innerHTML = "";
-
-            if (database.length === 0) {
-                userCardsContainer.innerHTML = "<p class='text-center'>Nenhum usuário registrado.</p>";
-            } else {
-                database.forEach((user) => {
-                    const card = document.createElement("div");
-                    card.className = "col-12 col-md-4";
-                    card.innerHTML = `
-                        <div class="card d-flex flex-column" style="height: 100%; border-radius: 20px; max-width: 100%; ">
-                            <img src="${user.profilePicture || 'https://via.placeholder.com/100'}" alt="Foto do Usuário" style="max-width: 100px; height: 100px; object-fit: cover;" class="rounded-circle mb-2 mx-auto">
-                            <h5 class="text-center">${user.username}</h5>
-                            <p class="text-center"><strong>Nome:</strong> ${user.name || "Não informado"}</p>
-                            <p class="text-center"><strong>Email:</strong> ${user.email || "Não informado"}</p>
-                            <p class="text-center"><strong>Telefone:</strong> ${user.phone || "Não informado"}</p>
-                            <p class="text-center"><strong>Senha:</strong> ${user.password || "Não informado"}</p>
-                            <p class="text-center"><strong>CPF:</strong> ${user.cpf || "Não informado"}</p>
-                            <div class="d-flex justify-content-center mt-auto">
-                                <button class="btn btn-danger btn-sm" onclick="removeUser('${user.id}')">Remover</button>
-                            </div>
-                        </div>
-                    `;
-                    userCardsContainer.appendChild(card);
-                });
-            }
-            showToastById("loadingToast", "Usuários atualizados com sucesso!");
-            const toggleUsersButton = document.getElementById("toggleUsersButton");
-            if (toggleUsersButton) {
-                toggleUsersButton.innerHTML = "Atualizar Usuários";
-            }
-        })
-        .catch((error) => {
-            console.error("Erro ao acessar o servidor:", error);
-            showToastById("loadingToast", "Erro ao carregar usuários. Verifique sua conexão ou tente novamente.");
-        });
-}
-
-// Remove usuários
-function removeUser(userId) {
-    // Confirmação antes de remover
-    const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${userId}?`);
-    if (!confirmDelete) return;
-
-    // Requisição para remover o usuário
-    fetch(`http://localhost:3000/pacientes/${userId}`, {
-        method: 'DELETE',
-    }).then(() => {
-        // Atualiza a lista de usuários sem recarregar a página
-        showUsersInDOM();
-    }).catch((error) => {
-        console.error('Erro ao remover o usuário:', error);
-    });
-}
-
 // Editor de informações {SPRINT2}
 document.getElementById("profileEditForm").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -432,7 +349,7 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
     const name = document.getElementById("userName").value;
     const email = document.getElementById("userEmail").value;
     const phone = document.getElementById("userPhone").value;
-    const cpf = document.getElementById("userCpf").value;  // Novo campo de CPF
+    const cpf = document.getElementById("userCpf").value; 
     const picture = document.getElementById("profilePicture").files[0];
     
     const loggedUsername = localStorage.getItem("username");
@@ -452,7 +369,7 @@ document.getElementById("profileEditForm").addEventListener("submit", function (
                         name,
                         email,
                         phone,
-                        cpf,  // Adicionando CPF
+                        cpf, 
                         profilePicture: profilePictureData
                     };
 
@@ -485,7 +402,7 @@ document.getElementById("profileEditForm").addEventListener("input", function ()
     const name = document.getElementById("userName").value;
     const email = document.getElementById("userEmail").value;
     const phone = document.getElementById("userPhone").value;
-    const cpf = document.getElementById("userCpf").value;  // Verificando CPF também
+    const cpf = document.getElementById("userCpf").value; 
     const picture = document.getElementById("profilePicture").files[0];
     const saveButton = document.getElementById("saveButton");
 
@@ -513,32 +430,44 @@ document.getElementById("profilePicture").addEventListener("change", function(ev
         reader.readAsDataURL(file);
     }
 });
-
-// Selecionando o botão de troca de tema e o toast
 const themeSwitchButton = document.getElementById('theme-switch');
 const themeToast = new bootstrap.Toast(document.getElementById('theme-toast'), {
-    delay: 8000 // Ajustando o delay para 8 segundos (8000 milissegundos)
+    delay: 8000 
 });
 
 // Função para alternar entre os temas
 themeSwitchButton.addEventListener('click', function() {
-    // Verifica se o tema atual é o 'claro' ou 'escuro'
     if (document.body.classList.contains('dark-theme')) {
-        // Mudar para o tema claro
         document.body.classList.remove('dark-theme');
         themeSwitchButton.textContent = 'Claro';
-        document.getElementById('theme-name').textContent = 'Claro'; // Atualiza o texto no toast
+        document.getElementById('theme-name').textContent = 'Claro'; 
 
     } else {
-        // Mudar para o tema escuro
         document.body.classList.add('dark-theme');
         themeSwitchButton.textContent = 'Escuro';
-        document.getElementById('theme-name').textContent = 'Escuro'; // Atualiza o texto no toast
+        document.getElementById('theme-name').textContent = 'Escuro';
     }
-
-    // Mostrar o toast de notificação
     themeToast.show();
+    hideToastById("toastIntroducao");
+    hideToastById("toastIntroducao");
 });
+
+// Requerimento de login para funcionlidades
+function handleCardClick(event, targetUrl) {
+    event.preventDefault(); 
+
+    const loggedIn = localStorage.getItem("loggedIn");
+
+    if (loggedIn) {
+        window.location.href = targetUrl;
+    } else {
+        showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
+        hideToastById("toastIntroducao");
+    }
+}
+
+
+
 
 
 

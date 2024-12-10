@@ -1,5 +1,5 @@
 // Configuração para consumir a API
-const API_KEY = 'e29949184b5f463aabefc1ecafd13681'; // Substitua pela sua chave da News API
+const API_KEY = 'e29949184b5f463aabefc1ecafd13681';
 const API_URL = `https://newsapi.org/v2/everything?q=diabetes&language=pt&apiKey=${API_KEY}`;
 const newsContainer = document.getElementById('news-cards');
 const articleContainer = document.getElementById('article-card');
@@ -21,7 +21,7 @@ async function fetchNews() {
 }
 
 function renderNews(articles) {
-    newsContainer.innerHTML = ''; // Limpa o conteúdo atual
+    newsContainer.innerHTML = '';
 
     articles.slice(21, 28).forEach((article, index) => {
         if (index === 0) {
@@ -83,49 +83,39 @@ function truncateText(text, maxLength) {
     }
     return text || 'Texto não disponível.';
 }
-// Chama a função para buscar notícias quando a página carrega
 document.addEventListener("DOMContentLoaded", fetchNews);
 
 // {Js fora da API}
 function fecharmodal() {
-    // Obter a instância do modal
+
     const modalElement = document.getElementById('exampleModal');
-    const modal = bootstrap.Modal.getInstance(modalElement); // Pega a instância ativa do modal
+    const modal = bootstrap.Modal.getInstance(modalElement);
     if (modal) {
-        modal.hide(); // Fecha o modal
+        modal.hide(); 
     }
     var toast = new bootstrap.Toast(document.getElementById('toastRequestAlert'));
     toast.show();
 }
-let userRole = ''; // Variável para armazenar a role selecionada
+let userRole = ''; 
 
-// Função para definir a role
 function setRole(role) {
-    userRole = role; // Atribui a role do botão clicado
+    userRole = role; 
 }
-
-// Listener para o envio do formulário
 document.getElementById('requestForm').addEventListener('submit', function(event) {
-    event.preventDefault();  // Impede o envio padrão do formulário
+    event.preventDefault();  
 
     const username = document.getElementById('offcanvasUsername').value;
     const comment = document.getElementById('offcanvasComment').value;
-
-    // Verifique se o campo de username e comentário estão preenchidos
     if (!username || !comment) {
         alert('Por favor, preencha todos os campos obrigatórios.');
         return;
     }
-
-    // Verifique se o username já existe no sistema
     fetch(`http://localhost:3000/requisicoes?username=${username}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
-                // Se já existe uma requisição com esse username, avise o usuário
                 alert('Este username já está em uso. Escolha outro.');
             } else {
-                // Se não houver requisição com esse username, envie o formulário
                 const requestData = {
                     username: username,
                     comment: comment,
@@ -145,7 +135,6 @@ document.getElementById('requestForm').addEventListener('submit', function(event
                     alert('Requisição enviada com sucesso!');
                     document.getElementById('offcanvasUsername').value = '';
                     document.getElementById('offcanvasComment').value = '';
-                    // Fechar o offcanvas
                     const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasRequest'));
                     offcanvas.hide();
                 })
@@ -164,39 +153,29 @@ document.getElementById('requestForm').addEventListener('submit', function(event
 // Função para verificar o status da requisição
 document.getElementById('checkRequestStatusButton').addEventListener('click', function() {
     const username = document.getElementById('offcanvasUsername').value;
-
-    // Verifique se o campo de usuário foi preenchido
     if (username) {
         fetch(`http://localhost:3000/requisicoes?username=${username}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
-                    const request = data[0]; // Supondo que a requisição será a primeira encontrada
-
-                    // Atualiza os campos do modal com os dados da requisição
+                    const request = data[0];
                     document.getElementById("modalCardHeader").textContent = `Requisição de: ${request.username}`;
                     document.getElementById("modalUsername").textContent = request.username;
                     document.getElementById("modalComment").textContent = request.comment;
                     document.getElementById("modalStatus").textContent = request.status;
                     document.getElementById("modalRole").textContent = request.role;
-
-                    // Atualiza a cor do status com base no valor
                     const statusElement = document.getElementById("modalStatus");
                     if (request.status === 'aceita') {
-                        statusElement.style.color = 'green'; // Cor verde para 'aceita'
+                        statusElement.style.color = 'green'; 
                     } else if (request.status === 'pendente') {
-                        statusElement.style.color = 'yellow'; // Cor amarela para 'pendente'
+                        statusElement.style.color = 'yellow'; 
                     } else if (request.status === 'recusada') {
-                        statusElement.style.color = 'red'; // Cor vermelha para 'recusada'
+                        statusElement.style.color = 'red';
                     }
-
-                    // Limpa o conteúdo de botão anterior (se houver)
                     const existingRedirectButton = document.getElementById("redirectButton");
                     if (existingRedirectButton) {
                         existingRedirectButton.remove();
                     }
-
-                    // Verifica se o status é 'aceita' e adiciona o botão de redirecionamento
                     const modalBody = document.getElementById("modalBodyReq");
 
                     console.log('Status da requisição:', request.status);
@@ -204,11 +183,9 @@ document.getElementById('checkRequestStatusButton').addEventListener('click', fu
                         console.log("Status é 'aceita', entrando no if.");
 
                         const button = document.createElement("button");
-                        button.id = "redirectButton"; // Definindo o ID do botão
-                        button.classList.add("btn"); // Adicionando a classe de botão
+                        button.id = "redirectButton"; 
+                        button.classList.add("btn"); 
                         button.textContent = "Ir para Página de ";
-
-                        // Verifica a função do usuário e define o botão correspondente
                         if (request.role === 'Administrador') {
                             console.log("Função é 'Administrador', criando botão para admin.");
                             button.classList.add("btn-info"); 
@@ -224,19 +201,14 @@ document.getElementById('checkRequestStatusButton').addEventListener('click', fu
                                 window.location.href = '../perfilMedico/PerfilMed.html';
                             };
                         }
-
-                        // Adiciona o botão ao modal
                         modalBody.appendChild(button);
                     } else {
                         console.log("Status não é 'aceita'.");
                     }
-
-                    // Exibe o modal após atualizar o conteúdo
                     const requestModal = new bootstrap.Modal(document.getElementById('viewRequestModal'));
                     requestModal.show();
 
                 } else {
-                    // Caso contrário, informa que a requisição não foi encontrada
                     alert('Nenhuma requisição encontrada para esse usuário.');
                 }
             })

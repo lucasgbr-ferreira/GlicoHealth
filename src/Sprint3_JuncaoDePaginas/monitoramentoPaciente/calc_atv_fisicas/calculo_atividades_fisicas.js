@@ -1,5 +1,5 @@
 const apiUrl = 'http://localhost:3000';
-let caloriasIdeais = 1200; // Valor padrão caso não seja carregado do prontuário
+let caloriasIdeais = 1200;
 let totalCaloriasQueimadas = parseFloat(localStorage.getItem('totalCaloriasQueimadas')) || 0;
 
 function exibirDiaDaSemana() {
@@ -55,7 +55,7 @@ async function carregarCaloriasIdeais(pacienteId) {
             const metaCalorias = prontuario.limites.caloriasQueimadas;
 
             if (metaCalorias && !isNaN(metaCalorias)) {
-                caloriasIdeais = parseFloat(metaCalorias); // Define a meta ideal
+                caloriasIdeais = parseFloat(metaCalorias); 
                 atualizarBarraProgresso();
                 showToast(`Meta diária de calorias: ${caloriasIdeais} Kcal.`);
                 return true;

@@ -17,7 +17,6 @@
       }
       applySavedTheme();
   };
-  
   // Funções de Login e Cadastro
   function toggleSection() {
       const loginSection = document.getElementById("loginSection");
@@ -33,23 +32,21 @@
   
   function saveDatabase(database) {
       return fetch('http://localhost:3000/medicos', {
-          method: 'PUT', // Altera os dados de forma geral
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(database),
       });
   }
   
-  // Função de registro
-  // Função para obter os dados do banco de dados
+  // Função para salvar dados no banco de dados
   function getDatabase() {
       return fetch('http://localhost:3000/medicos')
           .then(response => response.json());
   }
   
-  // Função para salvar dados no banco de dados
   function saveDatabase(newUser) {
       return fetch('http://localhost:3000/medicos', {
-          method: 'POST', // Altera os dados no banco
+          method: 'POST', 
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newUser),
       });
@@ -59,24 +56,19 @@
   function register() {
       const username = document.getElementById("registerUsername").value;
       const password = document.getElementById("registerPassword").value;
-  
-      // Verifica se os campos foram preenchidos
+
       if (!username || !password) {
           alert("Por favor, preencha todos os campos.");
           return;
       }
   
-      // Obter o banco de dados de usuários
       getDatabase()
           .then(database => {
-              // Verifica se o usuário já existe
               const userExists = database.some(user => user.username === username);
               if (userExists) {
                   alert("Usuário já registrado!");
                   return;
               }
-  
-              // Adicionando novo usuário ao banco de dados
               const newUser = {
                   username,
                   password,
@@ -87,29 +79,19 @@
                   profilePicture: "",
                   cpf:""
               };
-  
-              // Salva o novo usuário no banco de dados (sem substituir os dados existentes)
               saveDatabase(newUser)
                   .then(() => {
                       console.log("Usuário registrado:", newUser);
   
-                      // Exibe o sucesso do cadastro
                       document.getElementById("registerSuccess").style.display = "block"; 
-  
-                      // Alerta notificando o novo cadastro
                       alert(`Novo usuário cadastrado: ${username}`);
-  
-                      // Limpar campos após o sucesso do registro
+
                       document.getElementById("registerUsername").value = '';
                       document.getElementById("registerPassword").value = '';
-  
-                      // O modal não será fechado automaticamente
-                      // Não invocar qualquer código que feche o modal.
-  
-                      // Após 2 segundos, alterna para a seção de login
+
                       setTimeout(() => {
-                          toggleSection(); // Alterna para a seção de login
-                          document.getElementById("registerSuccess").style.display = "none"; // Oculta a mensagem de sucesso
+                          toggleSection(); 
+                          document.getElementById("registerSuccess").style.display = "none"; 
                       }, 2000);
                   })
                   .catch(error => {
@@ -410,15 +392,12 @@
   
   // Remove usuários
   function removeUser(userId) {
-      // Confirmação antes de remover
       const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${userId}?`);
       if (!confirmDelete) return;
   
-      // Requisição para remover o usuário
       fetch(`http://localhost:3000/medicos/${userId}`, {
           method: 'DELETE',
       }).then(() => {
-          // Atualiza a lista de usuários sem recarregar a página
           showUsersInDOM();
       }).catch((error) => {
           console.error('Erro ao remover o usuário:', error);
@@ -432,7 +411,7 @@
       const name = document.getElementById("userName").value;
       const email = document.getElementById("userEmail").value;
       const phone = document.getElementById("userPhone").value;
-      const cpf = document.getElementById("userCpf").value;  // Novo campo de CPF
+      const cpf = document.getElementById("userCpf").value;  
       const picture = document.getElementById("profilePicture").files[0];
       
       const loggedUsername = localStorage.getItem("username");
@@ -452,7 +431,7 @@
                           name,
                           email,
                           phone,
-                          cpf,  // Adicionando CPF
+                          cpf,  
                           profilePicture: profilePictureData
                       };
   
@@ -485,7 +464,7 @@
       const name = document.getElementById("userName").value;
       const email = document.getElementById("userEmail").value;
       const phone = document.getElementById("userPhone").value;
-      const cpf = document.getElementById("userCpf").value;  // Verificando CPF também
+      const cpf = document.getElementById("userCpf").value; 
       const picture = document.getElementById("profilePicture").files[0];
       const saveButton = document.getElementById("saveButton");
   
@@ -517,57 +496,46 @@
   // Selecionando o botão de troca de tema e o toast
   const themeSwitchButton = document.getElementById('theme-switch');
   const themeToast = new bootstrap.Toast(document.getElementById('theme-toast'), {
-      delay: 8000 // Ajustando o delay para 8 segundos (8000 milissegundos)
+      delay: 8000
   });
   
   // Função para alternar entre os temas
   themeSwitchButton.addEventListener('click', function() {
-      // Verifica se o tema atual é o 'claro' ou 'escuro'
       if (document.body.classList.contains('dark-theme')) {
-          // Mudar para o tema claro
           document.body.classList.remove('dark-theme');
           themeSwitchButton.textContent = 'Claro';
-          document.getElementById('theme-name').textContent = 'Claro'; // Atualiza o texto no toast
+          document.getElementById('theme-name').textContent = 'Claro';
   
       } else {
-          // Mudar para o tema escuro
           document.body.classList.add('dark-theme');
           themeSwitchButton.textContent = 'Escuro';
-          document.getElementById('theme-name').textContent = 'Escuro'; // Atualiza o texto no toast
+          document.getElementById('theme-name').textContent = 'Escuro'; 
       }
-  
-      // Mostrar o toast de notificação
       themeToast.show();
   });
   
   // Requerimento de login para funcionlidades
   function handleCardClick(event, targetUrl) {
-      event.preventDefault(); // Impede o redirecionamento padrão
+      event.preventDefault();
   
       const loggedIn = localStorage.getItem("loggedIn");
   
       if (loggedIn) {
-          // Se o usuário estiver logado, redirecione para a página passada como argumento
           window.location.href = targetUrl;
       } else {
-          // Exibe o toast vermelho informando que é necessário login
           showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
       }
   }
   function checkLogin() {
       const loggedIn = localStorage.getItem("loggedIn");
-  
-      // Se o usuário não estiver logado, redireciona para a página de login
       if (!loggedIn) {
           window.location.href = "../../InterfaceUsuário/Index.html";
       } else {
-          // Se o usuário estiver logado, exibe um toast informando o nome do usuário
           const username = localStorage.getItem("username");
           if (username) {
-              showToast(`Exibibindo cálculo glicêmico para: ${username}`);  // Exibe o toast
-              displayWelcomeMessage(username);  // Exibe a mensagem de boas-vindas
+              showToast(`Exibibindo cálculo glicêmico para: ${username}`);  
+              displayWelcomeMessage(username);  
           }
       }
   }
-  // Chama a função checkLogin quando a página for carregada
   document.addEventListener("DOMContentLoaded", checkLogin);

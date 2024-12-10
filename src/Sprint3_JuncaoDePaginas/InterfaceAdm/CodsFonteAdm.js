@@ -30,7 +30,7 @@ function showUsersInDOM() {
                             <p class="text-center"><strong>Senha:</strong> ${user.password || "Não informado"}</p>
                             <p class="text-center"><strong>CPF:</strong> ${user.cpf || "Não informado"}</p>
                             <div class="d-flex justify-content-center mt-auto">
-                                <button class="btn btn-danger btn-sm" onclick="removeUser('${user.id}')">Remover</button>
+                                <button class="btn btn-danger btn-sm" onclick="removePac('${user.id}')">Remover</button>
                             </div>
                         </div>
                     `;
@@ -65,16 +65,12 @@ function showToastById(toastId, message = "") {
         console.error(`Toast com ID '${toastId}' não encontrado!`);
     }
 }
-function removeUser(userId) {
-    // Confirmação antes de remover
+function removePac(userId) {
     const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${userId}?`);
     if (!confirmDelete) return;
-
-    // Requisição para remover o usuário
     fetch(`http://localhost:3000/pacientes/${userId}`, {
         method: 'DELETE',
     }).then(() => {
-        // Atualiza a lista de usuários sem recarregar a página
         showUsersInDOM();
     }).catch((error) => {
         console.error('Erro ao remover o usuário:', error);
@@ -89,9 +85,7 @@ function displayRequestsInDOM() {
         .then(response => response.json())
         .then(data => {
             const requestsContainer = document.getElementById('requestsCardsContainer');
-            requestsContainer.innerHTML = ''; // Limpa o contêiner antes de adicionar novos cards
-
-            // Loop para criar um card para cada requisição
+            requestsContainer.innerHTML = '';
             data.forEach(request => {
                 const card = document.createElement('div');
                 card.classList.add('col-md-4');
@@ -101,17 +95,17 @@ function displayRequestsInDOM() {
                 let headerColor = '';
                 let statusText = '';
                 if (request.status === 'aceita') {
-                    headerColor = 'bg-success'; // Cor verde para aceito
-                    statusText = 'Aceita'; // Texto do status
+                    headerColor = 'bg-success'; 
+                    statusText = 'Aceita'; 
                 } else if (request.status === 'recusada') {
-                    headerColor = 'bg-danger'; // Cor vermelha para recusado
-                    statusText = 'Recusada'; // Texto do status
+                    headerColor = 'bg-danger'; 
+                    statusText = 'Recusada'; 
                 } else {
-                    headerColor = 'bg-warning'; // Cor amarela para pendente
-                    statusText = 'Pendente'; // Texto do status
+                    headerColor = 'bg-warning'; 
+                    statusText = 'Pendente'; 
                 }
 
-                // Cria o HTML para o card da requisição
+                // Criando HTML para o card da requisição
                 card.innerHTML = `
                     <div class="card">
                         <div class="card-header ${headerColor}">
@@ -160,13 +154,13 @@ function acceptRequest(requestId) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ status: 'aceita' }) // Status como "aceita"
+        body: JSON.stringify({ status: 'aceita' })
     })
     .then(response => response.json())
     .then(data => {
         console.log('Requisição aceita:', data);
         alert('Requisição aceita!');
-        displayRequestsInDOM();  // Atualiza a lista de requisições e a cor do card
+        displayRequestsInDOM();
     })
     .catch(error => {
     });
@@ -177,13 +171,13 @@ function rejectRequest(requestId) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ status: 'recusada' }) // Status como "recusada"
+        body: JSON.stringify({ status: 'recusada' })
     })
     .then(response => response.json())
     .then(data => {
         console.log('Requisição recusada:', data);
         alert('Requisição recusada!');
-        displayRequestsInDOM();  // Atualiza a lista de requisições e a cor do card
+        displayRequestsInDOM(); 
     })
     .catch(error => {
     });
@@ -194,7 +188,6 @@ function removeRequest(requestId, cardElement) {
     })
     .then(response => {
         if (response.ok) {
-            // Se a requisição foi bem-sucedida, removemos o card da interface
             cardElement.remove();
             alert('Requisição removida com sucesso!');
         } else {
@@ -256,15 +249,12 @@ function showMedicsInDOM() {
         });
 }
 function removeUser(medicID) {
-    // Confirmação antes de remover
     const confirmDelete = confirm(`Deseja realmente remover o usuário com ID ${medicID}?`);
     if (!confirmDelete) return;
 
-    // Requisição para remover o usuário
     fetch(`http://localhost:3000/medicos/${medicID}`, {
         method: 'DELETE',
     }).then(() => {
-        // Atualiza a lista de usuários sem recarregar a página
         showUsersInDOM();
     }).catch((error) => {
         console.error('Erro ao remover o usuário:', error);

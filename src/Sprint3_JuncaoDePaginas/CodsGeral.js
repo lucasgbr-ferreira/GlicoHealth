@@ -522,21 +522,16 @@ const themeToast = new bootstrap.Toast(document.getElementById('theme-toast'), {
 
 // Função para alternar entre os temas
 themeSwitchButton.addEventListener('click', function() {
-    // Verifica se o tema atual é o 'claro' ou 'escuro'
     if (document.body.classList.contains('dark-theme')) {
-        // Mudar para o tema claro
         document.body.classList.remove('dark-theme');
         themeSwitchButton.textContent = 'Claro';
-        document.getElementById('theme-name').textContent = 'Claro'; // Atualiza o texto no toast
+        document.getElementById('theme-name').textContent = 'Claro';
 
     } else {
-        // Mudar para o tema escuro
         document.body.classList.add('dark-theme');
         themeSwitchButton.textContent = 'Escuro';
-        document.getElementById('theme-name').textContent = 'Escuro'; // Atualiza o texto no toast
+        document.getElementById('theme-name').textContent = 'Escuro';
     }
-
-    // Mostrar o toast de notificação
     themeToast.show();
 });
 
@@ -547,10 +542,8 @@ function handleCardClick(event, targetUrl) {
     const loggedIn = localStorage.getItem("loggedIn");
 
     if (loggedIn) {
-        // Se o usuário estiver logado, redirecione para a página passada como argumento
         window.location.href = targetUrl;
     } else {
-        // Exibe o toast vermelho informando que é necessário login
         showToastById("loginRequiredToast", "Você precisa estar logado para acessar esta funcionalidade!");
     }
 }
