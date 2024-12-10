@@ -8,14 +8,12 @@
 ## Objetivos
 
 > O objetivo principal do nosso projeto é fazer com que uma pessoa diabética consiga levar a vida de maneira mais leve, longe de complicações devido ao controle da glicose. Através do aplicativo, será possível controlar sua dieta, sua taxa glicêmica, entre outros aspectos.
-> 
 
 
 ## Justificativa
 
 > A importância de montar um software designado à saúde dos diabéticos é fazer com que eles consigam ter uma melhor qualidade de vida, ajudando-os a viver de forma mais saúdavel e a minimizar os riscos associados à doenças. 
 > A razão pela qual os objetivos específicos foram escolhidos é a melhoria do bem-estar, como o controle da dieta e da taxa glicêmica. Se os usuários da aplicação seguirem as instruções fornecidas, isso poderá levar a uma melhor qualidade de vida.
->
 
 
 ## Público-Alvo

@@ -1,12 +1,12 @@
 ✔️ Terminado
 # Apresentação
+https://www.canva.com/design/DAGYv21diOo/n-g5F_ONfnhW3YLCeNWY6A/edit?utm_content=DAGYv21diOo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
 
 ## Slides
 
-[Slides Da Apresentação](https://www.canva.com/design/DAGRhj23zcc/aQrwzIZ5fYa6ER62LbQu6w/edit?utm_content=DAGRhj23zcc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+https://www.canva.com/design/DAGYv21diOo/n-g5F_ONfnhW3YLCeNWY6A/edit?utm_content=DAGYv21diOo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
 
-[PDF](<../Slides/grupo 3.pdf>)
+[PDF](apresentação glico-health) - está dentro da pasta de apresentação.
 
 ## Vídeo
-
-- Ainda não possuímos uma apresentação em vídeo.
+Está dentro da pasta de apresentação.
