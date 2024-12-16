@@ -26,7 +26,7 @@ const saveDatabase = (data) => {
 
 // Redirecionar rota base "/" para "Index.html"
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'InterfaceUsuario', 'Index.html'));
+    res.sendFile(path.join(__dirname, 'paginasIniciais', 'homePage.html'));
 });
 
 // Rota para registrar usuários
