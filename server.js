@@ -7,7 +7,11 @@ const app = express();
 const PORT = 3000;
 const dbFile = path.join(__dirname, 'db.json');
 
+// Middleware para processar JSON
 app.use(bodyParser.json());
+
+// Middleware para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'InterfaceUsuario')));
 
 const getDatabase = () => {
     if (!fs.existsSync(dbFile)) {
@@ -20,6 +24,12 @@ const saveDatabase = (data) => {
     fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
 };
 
+// Redirecionar rota base "/" para "Index.html"
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'InterfaceUsuario', 'Index.html'));
+});
+
+// Rota para registrar usuários
 app.post('/users', (req, res) => {
     const { username, password } = req.body;
 
@@ -40,7 +50,7 @@ app.post('/users', (req, res) => {
     res.status(201).json({ message: 'Usuário registrado com sucesso!', username });
 });
 
+// Iniciar o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
-
