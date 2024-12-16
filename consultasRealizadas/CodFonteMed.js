@@ -533,7 +533,7 @@ function handleCardClick(event, targetUrl) {
 function checkLogin() {
     const loggedIn = localStorage.getItem("loggedIn");
     if (!loggedIn) {
-        window.location.href = "../../InterfaceUsuário/Index.html";
+        window.location.href = "../../InterfaceUsuario/Index.html";
     } else {
         const username = localStorage.getItem("username");
         if (username) {

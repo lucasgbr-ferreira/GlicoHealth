@@ -274,7 +274,7 @@ function logout() {
     document.getElementById("botaologin").src = "images/User.png";
     document.getElementById("botaofechar").innerText = "Login";
 
-    window.location.href = "../InterfaceUsuário/Index.html";
+    window.location.href = "../InterfaceUsuario/Index.html";
 }
 
 // Funções de Alteração do Modal e Exibição de Informações do Usuário
@@ -666,7 +666,7 @@ function checkLogin() {
     const loggedIn = localStorage.getItem("loggedIn");
 
     if (!loggedIn) {
-        window.location.href = "../../InterfaceUsuário/Index.html";
+        window.location.href = "../../InterfaceUsuario/Index.html";
     } else {
         const username = localStorage.getItem("username");
         if (username) {
