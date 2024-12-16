@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 // Rota para carregar especificamente 'HomePage.html' de 'paginasIniciais'
 app.get('/paginasIniciais/HomePage.html', (req, res) => {
-    const filePath = path.join(__dirname, 'Sprint3', 'paginasIniciais', 'HomePage.html');
+    const filePath = path.join(__dirname, 'Sprint3', 'paginasIniciais', 'homePage.html');
     console.log('Caminho do arquivo:', filePath);
     res.sendFile(filePath);
 });
