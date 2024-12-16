@@ -1,0 +1,25 @@
+
+#navbar{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(228, 247, 255, 0.829) !important;
+    color: rgb(183, 220, 253) !important;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.consulta-info.highlight {
+    background-color: #f0f8ff; /* Exemplo de fundo claro */
+    border: 2px solid #007bff;  /* Exemplo de borda azul */
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5); /* Sombras para dar ênfase */
+}
+.highlighted {
+    background-color: #f0f8ff;
+    padding:5px;
+    border-radius: 2vh; /* Cor de fundo suave */
+    transition: background-color 0.5s ease; /* Suaviza a transição de cor */
+}
+
+
