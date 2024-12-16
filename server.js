@@ -3,13 +3,15 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process'); // Importa a função exec para rodar comandos
+const cors = require('cors'); // Importando o CORS
 
 const app = express();
-const PORT = 3001; // Express rodando na porta 3001
+const PORT = process.env.PORT || 3001; // Porta dinâmica para hospedagem
 const dbFile = path.join(__dirname, 'db.json');
 
 // Middleware para processar JSON
 app.use(bodyParser.json());
+app.use(cors()); // Permite requisições de diferentes origens
 
 // Middleware para servir arquivos estáticos de todas as pastas dentro de 'Sprint3'
 app.use(express.static(path.join(__dirname, 'Sprint3')));
@@ -62,7 +64,8 @@ app.post('/users', (req, res) => {
 
 // Rodar o comando 'json-server --watch db.json' na porta 3000
 const startJsonServer = () => {
-    exec('json-server --watch db.json --port 3000', (error, stdout, stderr) => {
+    const jsonServerPort = process.env.PORT_JSON_SERVER || 3000;
+    exec(`json-server --watch db.json --port ${jsonServerPort}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Erro ao executar o json-server: ${error.message}`);
             return;
@@ -75,7 +78,7 @@ const startJsonServer = () => {
     });
 };
 
-// Iniciar o servidor Express na porta 3001
+// Iniciar o servidor Express na porta dinâmica
 app.listen(PORT, () => {
     console.log(`Servidor Express rodando na porta ${PORT}`);
     
