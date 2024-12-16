@@ -143,7 +143,7 @@ function logout() {
     document.getElementById("botaologin").src = "images/User.png";
     document.getElementById("botaofechar").innerText = "Login";
 
-    window.location.href = "Index.html";
+    window.location.href = "../perfilMedico/PerfilMed.html";
 }
 
 // Funções de Alteração do Modal e Exibição de Informações do Usuário

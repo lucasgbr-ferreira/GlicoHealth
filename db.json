@@ -176,6 +176,17 @@
         "horarioFim": "23:12",
         "intervaloConsulta": 30
       }
+    },
+    {
+      "id": "8242",
+      "username": "lucas1212",
+      "password": "1234",
+      "role": "medico",
+      "name": "",
+      "email": "",
+      "phone": "",
+      "profilePicture": "",
+      "crm": ""
     }
   ],
   "atividadesFisicas": [
