@@ -42,6 +42,5 @@ imagens utilizadas para a elaboração do documento.
 ## Pasta src
 
 Este diretório armazena o código fonte do projeto e adota uma hierarquia
-básica de projetos Web simples, que utilizam as tecnologias HTML, CSS e
-JavaScript.
+básica de projetos Web simples, que utilizam as tecnologias HTML, CSS, JavaScript e JSON-Server.
 
